@@ -189,9 +189,8 @@
                             </div>
                             <!-- footer -->
                             <div class="box-footer">
-                                <button  class="btn btn-flat btn-primary">Submit</button>
+                                <button  class="btn btn-flat btn-primary" id="btn1" value="{{url('admin/user/'.$user->id)}}">Submit</button>
                             </div>
-
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -200,10 +199,10 @@
                 <!--/.col (right) -->
             </form>
         </div>
-
         <!-- /.row -->
     </section>
 @endsection
 @section('js')
     <script src="{{ config("app.url") . "/js/sweetswal.js" }}"></script>
 @endsection
+
