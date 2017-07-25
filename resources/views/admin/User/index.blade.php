@@ -7,14 +7,18 @@
 @endsection
 
 @section('content')
-    <div class="box box-primary">
-        <div class="box-header ui-sortable-handle">
-            <i class="ion ion-clipboard"></i>
-            <h3 class="box-title">User List</h3>
-        </div>
-        <div class="content">
-            <div class="user-table"></div>
-        </div>
+    <section class="content-header">
+        <h1>
+            User List
+            <small>用户列表</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{url('/admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">User List</li>
+        </ol>
+    </section>
+    <div class="content">
+        <div class="user-table"></div>
     </div>
 @endsection
 @section('js')

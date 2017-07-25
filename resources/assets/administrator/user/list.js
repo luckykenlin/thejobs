@@ -15,7 +15,7 @@ if (el) {
     ReactDOM.render(
         <DataTableComponent url={"/admin/user"}
                             defCol={defCol}
-                            resourceUrl={"admin/user"}
+                            resourceUrl={"/admin/user"}
                             showEditBtn={true}
                             title={"List User"}
                             showCreateBtn={true}

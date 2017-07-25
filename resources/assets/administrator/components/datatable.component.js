@@ -283,7 +283,7 @@ class DataTableComponent extends React.Component {
                         resolve(response);
                     }).catch((error) => {
                         console.log("destroy error", error);
-                        reject("Some wrong.");
+                        reject("Adminitrator:Failed! Or Some Wrong!");
                     });
                 })
             }

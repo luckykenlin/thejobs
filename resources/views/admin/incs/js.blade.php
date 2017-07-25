@@ -1,5 +1,5 @@
 <!-- jQuery 2.2.3 -->
-
+<script src="{{ config("app.url") . "/js/app.js" }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- Select2 -->
@@ -27,12 +27,13 @@
 <script src="{{asset('dist/js/app.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
+
+
 <!-- Countries selector -->
 <script src="http://js.nicdn.de/bootstrap/formhelpers/docs/assets/js/bootstrap-formhelpers-countries.en_US.js"></script>
 <script src="http://js.nicdn.de/bootstrap/formhelpers/docs/assets/js/bootstrap-formhelpers-selectbox.js"></script>
 <script src="http://js.nicdn.de/bootstrap/formhelpers/docs/assets/js/bootstrap-formhelpers-countries.js"></script>
 <!-- Page script -->
-
 <script>
     $(function () {
         //Initialize Select2 Elements
@@ -101,37 +102,6 @@
 
     });
 
-</script>
-
-{{-- checkAll  javascript--}}
-<script>
-    $(function() {
-     $("#btncheck").click(function () {
-         $("input[name='cboxid[]']").each(function() {
-             $(this).prop("checked", true);
-         });
-         $("#checkAll").each(function() {
-             $(this).prop("checked", true);
-         });
-         $("#btncheck").hide();
-         $("#cancelcheck").show();
-     });
-        $("#cancelcheck").click(function () {
-            $("input[name='cboxid[]']").each(function() {
-                $(this).prop("checked", false);
-            });
-            $("#checkAll").each(function() {
-                $(this).prop("checked", false);
-            });
-            $("#btncheck").show();
-            $("#cancelcheck").hide();
-        });
-    });
-</script>
-<script>
-    $("#checkAll").change(function () {
-        $("input:checkbox").prop('checked', $(this).prop("checked"));
-    });
 </script>
 
 <script>
