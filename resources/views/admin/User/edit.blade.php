@@ -189,7 +189,7 @@
                             </div>
                             <!-- footer -->
                             <div class="box-footer">
-                                <button  class="btn btn-flat btn-primary" id="btn1" value="{{url('admin/user/'.$user->id)}}">Submit</button>
+                                <button  class="btn btn-flat btn-primary" id="btn1" data-stuff='[{"posturl":"{{url("admin/user").'/'.$user->id}}","title":"updated", "type":"POST"}]'>Submit</button>
                             </div>
                         </div>
                         <!-- /.box-body -->

@@ -204,4 +204,9 @@ class BaseRepository implements BaseRepositoryImpl
              $this->model->where('id' , $item)->delete();
         }
     }
+
+    public function validator(array $data)
+    {
+
+    }
 }

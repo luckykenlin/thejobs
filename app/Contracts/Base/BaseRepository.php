@@ -74,4 +74,11 @@ interface BaseRepository
      * @return bool
      */
     public function deleteGroup(array $data);
+
+    /**
+     * Validate User create .
+     * @param array $data
+     * @return void
+     */
+    public function validator(array $data);
 }

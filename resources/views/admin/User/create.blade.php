@@ -26,7 +26,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" class="editForm" action="{{url('admin/user')}}"
+                        <form role="form" class="editForm" id="myForm" action="{{url('admin/user')}}"
                               method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <!-- text input -->
@@ -74,7 +74,7 @@
                             </div>
                             <!-- footer -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-flat btn-primary">Submit</button>
+                                <button type="submit" id="btn1" data-stuff='[{"posturl":"{{url("admin/user")}}","title":"create", "type":"POST"}]' class="btn btn-flat btn-primary">Submit</button>
                             </div>
                         </form>
                     </div>
