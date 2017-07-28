@@ -14,6 +14,9 @@ mix.autoload({});
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
-
+// data
 mix.react("resources/assets/administrator/user/list.js", "public/administrator/user/list.js");
+mix.react("resources/assets/administrator/job/list.js", "public/administrator/job/list.js");
+mix.react("resources/assets/administrator/role/list.js", "public/administrator/role/list.js");
+
 mix.js('resources/assets/js/sweetswal.js', 'public/js')

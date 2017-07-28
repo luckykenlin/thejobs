@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,9 @@ class DatabaseSeeder extends Seeder
     {
          $this->call(RolesTableSeeder::class);
          $this->call(UsersTableSeeder::class);
+         Category::create(['name' => 'Root category'])->children()->create(['name' => 'restaurant']);
+         $this->call(JobsTableSeeder::class);
+
 
     }
 }

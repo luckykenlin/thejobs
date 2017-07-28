@@ -173,7 +173,7 @@ class BaseRepository implements BaseRepositoryImpl
      */
     public function save($data)
     {
-    ///
+        $this->model->create($data);
     }
     /** Delete User
      * @param $id

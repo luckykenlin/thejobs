@@ -164,6 +164,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         App\Providers\BaseServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -178,7 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
-
+        Baum\Providers\BaumServiceProvider::class,
     ],
 
     /*

@@ -44,6 +44,14 @@
                     </a>
                 </li>
                 <li class="treeview">
+                    <a href="{{route('job.index')}}">
+                        <i class="fa fa-edit"></i> <span>Job List</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="treeview">
                     <a href="{{route('role.index')}}">
                         <i class="fa fa-edit"></i> <span>Role-Permission</span>
                         <span class="pull-right-container">
@@ -108,6 +116,14 @@
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="{{route('user.edit',Auth::user()->id)}}">
+                        <i class="fa fa-edit"></i> <span>About me</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                 </li>
                 <li class="treeview">

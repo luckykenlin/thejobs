@@ -12,11 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main');
 });
-Route::get('/home', function () {
-    return view('welcome');
-});
+
+//**     front    ---job---*/
+Route::resource('job' , 'Pages\JobController');
+//**        ---/job---*/
+
 // auth
 Auth::routes();
 
@@ -30,6 +32,8 @@ Route::group(["middleware" => ['auth'], 'prefix' => 'admin'] , function () {
     Route::resource('/user' , 'Admin\\UserController');
     //--------------role-----------//
     Route::resource('/role' , 'Admin\\RoleController');
+    //--------------job---------------//
+    Route::resource('/job' , 'Admin\\JobController');
 
 
 });

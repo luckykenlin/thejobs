@@ -21,6 +21,7 @@ class JobRepository extends BaseRepository implements JobRepositoryImpl
     {
         parent::__construct($model);
     }
+
     /**
      * Validate
      * @param array $data

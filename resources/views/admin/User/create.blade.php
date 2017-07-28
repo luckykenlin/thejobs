@@ -74,7 +74,7 @@
                             </div>
                             <!-- footer -->
                             <div class="box-footer">
-                                <button type="submit" id="btn1" data-stuff='[{"posturl":"{{url("admin/user")}}","title":"create", "type":"POST"}]' class="btn btn-flat btn-primary">Submit</button>
+                                <button type="submit" id="btn1" class="btn btn-flat btn-primary">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -87,6 +87,4 @@
         <!-- /.row -->
     </section>
 @endsection
-@section('js')
-    <script src="{{ config("app.url") . "/js/sweetswal.js" }}"></script>
-@endsection
+

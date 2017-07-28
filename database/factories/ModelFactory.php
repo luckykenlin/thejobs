@@ -48,7 +48,7 @@ $factory->define(App\Models\Job::class , function (Faker\Generator $faker) {
         'job_desc' => $faker->paragraph() ,
         'job_category' => 'restaurant' ,
         'job_level' => '3-5 years' ,
-        'model_id' => 2 ,
+        'category_id' => 2 ,
     ];
     return $info;
 });
