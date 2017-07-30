@@ -62,9 +62,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-1">
-                    <a href="index.html" class="logo">
-                        <img alt="Porto Website Template" class="img-responsive" src="img/logo-footer.png">
-                    </a>
                 </div>
                 <div class="col-md-7">
                     <p>© Copyright 2017. All Rights Reserved.</p>

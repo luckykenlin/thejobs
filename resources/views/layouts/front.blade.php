@@ -16,8 +16,7 @@
 
     @include('front.incs.footer')
 </div>
-
 @include('front.incs.js')
-
+@yield('js')
 </body>
 </html>
