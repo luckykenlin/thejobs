@@ -1,45 +1,26 @@
 <head>
-
-    <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="Porto - Responsive HTML5 Template">
-    <meta name="author" content="okler.net">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Post a job position or create your online resume!">
+    <meta name="keywords" content="">
+    <meta id="path" name="path" content="{{ url('/') }}">
+    <meta id="ctx" name='ctx' content="{{ url('/') }}">
+    <meta id="token" name="token" content="{{ csrf_token() }}">
+    <meta id="cdn_url" name="token" content="{{ url("/") }}">
+    <meta id="version" name="version" content="{{ config("app.version") }}">
+    <meta id="app_name" name="version" content="{{ config("app.name") }}">
+    <title>TheJobs</title>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
+    <!-- Styles -->
+    <link href="{{asset("assets/css/app.min.css")}}" rel="stylesheet">
+    <link href="{{asset("assets/css/custom.css")}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Oswald:100,300,400,500,600,800%7COpen+Sans:300,400,500,600,700,800%7CMontserrat:400,700" rel="stylesheet" type="text/css">
 
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <!-- Web Fonts  -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
-
-    <!-- Vendor CSS -->
-
-    <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/font-awesome/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/animate/animate.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/simple-line-icons/css/simple-line-icons.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/owl.carousel/assets/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/owl.carousel/assets/owl.theme.default.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/magnific-popup/magnific-popup.min.css')}}">
-
-    <!-- Theme CSS -->
-    <link rel="stylesheet" href="{{asset('css/theme.css')}}">
-    <link rel="stylesheet" href="{{asset('css/theme-elements.css')}}">
-    <link rel="stylesheet" href="{{asset('css/theme-blog.css')}}">
-    <link rel="stylesheet" href="{{asset('css/theme-shop.css')}}">
-
-    <!-- Skin CSS -->
-    <link rel="stylesheet" href="{{asset('css/skins/default.css')}}">
-
-    <!-- Theme Custom CSS -->
-    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
-
-    <!-- Head Libs -->
-    <script src="{{asset('vendor/modernizr/modernizr.min.js')}}"></script>
-
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="{{asset('assets/img/favicon.ico')}}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>

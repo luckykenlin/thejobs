@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.local') }}">
 <head>
+    {{--Site head--}}
     @include('front.incs.head')
+    {{--End Site head--}}
+    {{--Title--}}
     @yield('title')
-    <script>
-        window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};
-    </script>
+    {{--End title--}}
 </head>
-<body>
-<div class="body">
-
-    @include('front.incs.header')
-
-    @yield('content')
-
-    @include('front.incs.footer')
-</div>
+<body class="nav-on-header smart-nav">
+<!-- Navigation bar -->
+@include('front.incs.navigation')
+<!-- END Navigation bar -->
+<!-- Site header -->
+@include('front.incs.header')
+<!-- END Site header -->
+<!-- Main container -->
+@yield('content')
+<!-- END Main container -->
+{{--Site footer--}}
+@include('front.incs.footer')
+{{--End Site footer--}}
+<!-- Back to top button -->
+@include('front.incs.btt')
+<!-- END Back to top button -->
+{{--Site javascript--}}
 @include('front.incs.js')
+{{--End Site javascript--}}
+{{--Page javascript--}}
 @yield('js')
+{{--End Page javascript--}}
 </body>
 </html>

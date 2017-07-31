@@ -1,81 +1,58 @@
-<footer id="footer">
+<footer class="site-footer">
+
+    <!-- Top section -->
     <div class="container">
         <div class="row">
-            <div class="footer-ribbon">
-                <span>Get in Touch</span>
+            <div class="col-sm-12 col-md-6">
+                <h6>About</h6>
+                <p class="text-justify">An employment website is a web site that deals specifically with employment or careers. Many employment websites are designed to allow employers to post job requirements for a position to be filled and are commonly known as job boards. Other employment sites offer employer reviews, career and job-search advice, and describe different job descriptions or employers. Through a job website a prospective employee can locate and fill out a job application.</p>
             </div>
-            <div class="col-md-3">
-                <div class="newsletter">
-                    <h4>Newsletter</h4>
-                    <p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe
-                        to our newsletter.</p>
 
-                    <div class="alert alert-success hidden" id="newsletterSuccess">
-                        <strong>Success!</strong> You've been added to our email list.
-                    </div>
+            <div class="col-xs-6 col-md-3">
+                <h6>Company</h6>
+                <ul class="footer-links">
+                    <li><a href="page-about.html">About us</a></li>
+                    <li><a href="page-typography.html">How it works</a></li>
+                    <li><a href="page-faq.html">Help center</a></li>
+                    <li><a href="page-typography.html">Privacy policy</a></li>
+                    <li><a href="page-contact.html">Contact us</a></li>
+                </ul>
+            </div>
 
-                    <div class="alert alert-danger hidden" id="newsletterError"></div>
+            <div class="col-xs-6 col-md-3">
+                <h6>Trendeing jobs</h6>
+                <ul class="footer-links">
+                    <li><a href="job-list.html">Front-end developer</a></li>
+                    <li><a href="job-list.html">Android developer</a></li>
+                    <li><a href="job-list.html">iOS developer</a></li>
+                    <li><a href="job-list.html">Full stack developer</a></li>
+                    <li><a href="job-list.html">Project administrator</a></li>
+                </ul>
+            </div>
+        </div>
 
-                    <form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
-                        <div class="input-group">
-                            <input class="form-control" placeholder="Email Address" name="newsletterEmail"
-                                   id="newsletterEmail" type="text">
-                            <span class="input-group-btn">
-											<button class="btn btn-default" type="submit">Go!</button>
-										</span>
-                        </div>
-                    </form>
-                </div>
+        <hr>
+    </div>
+    <!-- END Top section -->
+
+    <!-- Bottom section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">Copyrights © 2016 All Rights Reserved by <a href="http://themeforest.net/user/shamsoft">ShaMSofT</a>.</p>
             </div>
-            <div class="col-md-3">
-                <h4>Latest Tweets</h4>
-                <div id="tweet" class="twitter" data-plugin-tweets data-plugin-options="{'username': '', 'count': 2}">
-                    <p>Please wait...</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="contact-details">
-                    <h4>Contact Us</h4>
-                    <ul class="contact">
-                        <li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 1234 Street Name, City Name,
-                                United States</p></li>
-                        <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-789</p></li>
-                        <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example
-                                    .com</a></p></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <h4>Follow Us</h4>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
                 <ul class="social-icons">
-                    <li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank"
-                                                         title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                    <li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank"
-                                                        title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                    <li class="social-icons-linkedin"><a href="http://www.linkedin.com/" target="_blank"
-                                                         title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="footer-copyright">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-7">
-                    <p>© Copyright 2017. All Rights Reserved.</p>
-                </div>
-                <div class="col-md-4">
-                    <nav id="sub-menu">
-                        <ul>
-                            <li><a href="page-faq.html">FAQ's</a></li>
-                            <li><a href="sitemap.html">Sitemap</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- END Bottom section -->
+
 </footer>

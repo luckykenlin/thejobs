@@ -12,11 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('main');
+    return view('front.home');
 });
 
 //**     front    ---job---*/
-Route::resource('job' , 'Pages\JobController');
+//Route::resource('job' , 'Pages\JobController');
 //**        ---/job---*/
 
 // auth
@@ -24,7 +24,10 @@ Auth::routes();
 
 //----
 //--------------------admin
-Route::group(["middleware" => ['auth'], 'prefix' => 'admin'] , function () {
+Route::group(/**
+ *    CRUD
+ */
+    ["middleware" => ['auth'], 'prefix' => 'admin'] , function () {
     Route::get('/' , 'HomeController@index')->name('home');
     Route::get('/home' , 'HomeController@index')->name('home');
 
@@ -34,6 +37,6 @@ Route::group(["middleware" => ['auth'], 'prefix' => 'admin'] , function () {
     Route::resource('/role' , 'Admin\\RoleController');
     //--------------job---------------//
     Route::resource('/job' , 'Admin\\JobController');
-
-
+    //--------------comment----------------//
+    Route::resource('comment' , 'Admin\\CommentsController');
 });
