@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.local') }}">
+<html lang="{{ config('app.lang') }}" xml:lang="{{ config('app.lang') }}">
 <head>
     {{--Site head--}}
     @include('front.incs.head')
@@ -13,7 +13,8 @@
 @include('front.incs.navigation')
 <!-- END Navigation bar -->
 <!-- Site header -->
-@include('front.incs.header')
+{{--@include('front.incs.header')--}}
+@yield('header')
 <!-- END Site header -->
 <!-- Main container -->
 @yield('content')

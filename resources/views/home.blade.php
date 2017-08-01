@@ -2,6 +2,9 @@
 @section("title")
     <title> Home </title>
 @endsection
+@section('headerContainer')
+    @include('front.home.headerContainer')
+@endsection
 @section('content')
     <section class="content-header">
         <h1>

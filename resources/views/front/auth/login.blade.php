@@ -1,8 +1,8 @@
-<ul id="login-dp" class="dropdown-menu">
+<ul id="login-dp" class="dropdown-menu clear" aria-labelledby="dropdownMenu1">
     <li>
         <div class="row">
             <div class="col-md-12">
-                Login via
+                Login
                 <div class="social-buttons">
                     <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
                     <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>

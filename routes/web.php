@@ -10,15 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//** ------------------------------ ----------------------------------   front
 Route::get('/', function () {
-    return view('front.home');
+    return view('front.home.index');
 });
+Route::resource('job' , 'Pages\JobController');
 
-//**     front    ---job---*/
-//Route::resource('job' , 'Pages\JobController');
-//**        ---/job---*/
 
+//-------------------------------------------------------------------------
 // auth
 Auth::routes();
 

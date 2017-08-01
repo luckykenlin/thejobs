@@ -14,10 +14,16 @@
         <!-- END Logo -->
 
         <!-- User account -->
-        <div class="dropdown pull-right">
-            <button  class="btn  btn-primary btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Login <span class="caret"></span></button>  or
-            <button  class="btn  btn-primary btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Register <span class="caret"></span></button>
+        <div class="pull-right user-login-custom ">
+        <div class="dropdown pull-left">
+            <button  class="btn  btn-primary btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></button>
             @include('front.auth.login')
+        </div>
+        <div class="dropdown pull-right">
+              &nbsp; or &nbsp;&nbsp;
+            <button  class="btn  btn-primary btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Register <span class="caret"></span></button>
+            @include('front.auth.register')
+        </div>
         </div>
         <!-- END User account -->
 

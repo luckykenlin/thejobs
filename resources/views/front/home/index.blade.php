@@ -3,7 +3,9 @@
 @section('title')
     <title> Home </title>
 @endsection
-
+@section('header')
+    @include('front.home.header')
+@endsection
 @section('content')
     <main>
 
