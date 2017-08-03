@@ -11,10 +11,15 @@
 |
 */
 //** ------------------------------ ----------------------------------   front
-Route::get('/', function () {
-    return view('front.home.index');
+Route::group(/**
+ *    namespace: namespace
+ */
+    ['namespace' => 'Pages'] , function () {
+        Route::get('/' , function () {
+            return view('front.home.index');
+        });
+        Route::resource('job' , 'JobController');
 });
-Route::resource('job' , 'Pages\JobController');
 
 
 //-------------------------------------------------------------------------
@@ -24,18 +29,20 @@ Auth::routes();
 //----
 //--------------------admin
 Route::group(/**
- *    CRUD
+ *    middleware : Auth
+ *    namespace: Admin
+ *    prefix: admin
  */
-    ["middleware" => ['auth'], 'prefix' => 'admin'] , function () {
-    Route::get('/' , 'HomeController@index')->name('home');
-    Route::get('/home' , 'HomeController@index')->name('home');
+    ["middleware" => ['auth'] , 'prefix' => 'admin' , 'namespace' => 'Admin'] , function () {
+        Route::get('/' , 'HomeController@index')->name('home');
+        Route::get('/home' , 'HomeController@index')->name('home');
 
-    //--------------user------------//
-    Route::resource('/user' , 'Admin\\UserController');
-    //--------------role-----------//
-    Route::resource('/role' , 'Admin\\RoleController');
-    //--------------job---------------//
-    Route::resource('/job' , 'Admin\\JobController');
-    //--------------comment----------------//
-    Route::resource('comment' , 'Admin\\CommentsController');
+        //--------------user------------//
+        Route::resource('/user' , 'UserController');
+        //--------------role-----------//
+        Route::resource('/role' , 'RoleController');
+        //--------------job---------------//
+        Route::resource('/job' , 'JobController');
+        //--------------comment----------------//
+    //    Route::resource('comment' , 'Admin\\CommentsController');
 });
