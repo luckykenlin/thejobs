@@ -78,3 +78,17 @@
     line-height: 60px;
     font-size: 13px;
 }
+.user-image {
+    height: 50px;
+    border-radius:50%;
+    float: left;
+}
+.user-header {
+    height: 175px;
+    padding: 10px;
+    text-align: center;
+}
+.navbar-custom-menu>.user-menu>.dropdown-menu {
+    top:65px;
+
+}

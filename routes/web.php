@@ -18,6 +18,9 @@ Route::group(/**
         Route::get('/' , function () {
             return view('front.home.index');
         });
+        Route::get('/home' , function () {
+            return view('front.home.index');
+        });
         Route::resource('job' , 'JobController');
 });
 

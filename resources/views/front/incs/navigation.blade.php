@@ -6,36 +6,69 @@
             <a class="navbar-toggle" href="#" data-toggle="offcanvas"><i class="ti-menu"></i></a>
 
             <div class="logo-wrapper">
-                <a class="logo" href="index.html"><img src="{{config('app.url')."/assets/img/logo.png"}}" alt="logo"></a>
-                <a class="logo-alt" href="index.html"><img src="{{config('app.url')."/assets/img/logo-alt.png"}}" alt="logo-alt"></a>
+                <a class="logo" href="index.html"><img src="{{config('app.url')."/assets/img/logo.png"}}"
+                                                       alt="logo"></a>
+                <a class="logo-alt" href="index.html"><img src="{{config('app.url')."/assets/img/logo-alt.png"}}"
+                                                           alt="logo-alt"></a>
             </div>
 
         </div>
         <!-- END Logo -->
 
         <!-- User account -->
-        <div class="pull-right user-login-custom ">
-        <div class="dropdown pull-left">
-            <button  class="btn  btn-primary btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></button>
-            @include('front.auth.login')
-        </div>
-        <div class="dropdown pull-right">
-              &nbsp; or &nbsp;&nbsp;
-            <button  class="btn  btn-primary btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Register <span class="caret"></span></button>
-            @include('front.auth.register')
-        </div>
-        </div>
-        <!-- END User account -->
+        @if(!Auth::check())
+            <div class="pull-right user-login-custom ">
+
+                <div class="dropdown pull-left">
+                    <button class="btn  btn-primary btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></button>
+                    @include('front.auth.login')
+                </div>
+                <div class="dropdown pull-right">
+                    &nbsp; or &nbsp;&nbsp;
+                    <button class="btn  btn-primary btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Register <span class="caret"></span></button>
+                    @include('front.auth.register')
+                </div>
+            </div>
+    @endif
+
+    <!-- END User account -->
 
         <!-- Navigation menu -->
         <ul class="nav-menu">
+            @if(Auth::check())
+                <li class="pull-right">
+                    <a href="#">{{Auth::user()->name}}</a>
+                    <img src="http://www.demo.com/storage/images/default/male.jpg" class="user-image"
+                         alt="User Image">
+                    <ul>
+                        <li><a href="resume-list.html">Manage companies</a></li>
+                        <li><a href="resume-list.html">Manage resumes</a></li>
+                        <li><a href="resume-list.html">Manage jobs</a></li>
+                        <li><a href="resume-manage.html">Manage Posts</a></li>
+                        <li><a href="resume-manage.html">Setting</a></li>
+                        <li><a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">
+                               Sign out
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+
+                        </li>
+                    </ul>
+                </li>
+            @endif
             <li>
-                <a class="active" href="{{url('/')}}">Home</a>
+                <a class="{{ (Request::is('/') or  Request::is('home')) ? 'active' : '' }}" href="{{url('/')}}">Home</a>
             </li>
             <li>
-                <a href="{{url('job')}}">Job</a>
+                <a class="{{ Request::is('job') ? 'active' : '' }}" href="{{url('job')}}">Job</a>
                 <ul>
-                    <li><a href="job-add.html">Post a job</a></li>
+                    <li><a href="{{url('job/create')}}">Post a job</a></li>
                     <li><a href="job-apply.html">Apply for job</a></li>
                     @if(Auth::check())
                         <li><a href="job-manage.html">Manage jobs</a></li>
@@ -44,7 +77,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">Resume</a>
+                <a class="{{ Request::is('resume') ? 'active' : '' }}" href="#">Resume</a>
                 <ul>
                     <li><a href="resume-list.html">Browse resumes</a></li>
                     <li><a href="resume-add.html">Create a resume</a></li>
@@ -54,7 +87,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">Company</a>
+                <a class="{{ Request::is('company') ? 'active' : '' }}" href="#">Company</a>
                 <ul>
                     <li><a href="company-list.html">Browse companies</a></li>
                     <li><a href="company-add.html">Create a company</a></li>
@@ -64,7 +97,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">Contact us</a>
+                <a class="{{ Request::is('contact') ? 'active' : '' }}" href="#">Contact us</a>
                 <ul>
                     <li><a href="page-blog.html">Blog</a></li>
                     <li><a href="page-about.html">About</a></li>
