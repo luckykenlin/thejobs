@@ -10,7 +10,6 @@
     <main>
 
 
-
         <!-- Recent jobs -->
         <section>
             <div class="container">
@@ -20,109 +19,36 @@
                 </header>
 
                 <div class="row item-blocks-connected">
-
+                @foreach($jobs as $job)
                     <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="job-detail.html">
-                            <header>
-                                <img src="assets/img/logo-google.jpg" alt="">
-                                <div class="hgroup">
-                                    <h4>Senior front-end developer</h4>
-                                    <h5>Google</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Menlo park, CA</span>
-                                    <span class="label label-success">Full-time</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-
-
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="job-detail.html">
-                            <header>
-                                <img src="assets/img/logo-linkedin.png" alt="">
-                                <div class="hgroup">
-                                    <h4>Software Engineer (Entry or Senior)</h4>
-                                    <h5>Linkedin</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Livermore, CA</span>
-                                    <span class="label label-warning">Part-time</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="job-detail.html">
-                            <header>
-                                <img src="assets/img/logo-envato.png" alt="">
-                                <div class="hgroup">
-                                    <h4>Full Stack Web Developer</h4>
-                                    <h5>Envato</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">San Francisco, CA</span>
-                                    <span class="label label-info">Freelance</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="job-detail.html">
-                            <header>
-                                <img src="assets/img/logo-facebook.png" alt="">
-                                <div class="hgroup">
-                                    <h4>Web Applications Developer</h4>
-                                    <h5>Facebook</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Lexington, MA</span>
-                                    <span class="label label-danger">Internship</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-
-                    <!-- Job item -->
-                    <div class="col-xs-12">
-                        <a class="item-block" href="job-detail.html">
-                            <header>
-                                <img src="assets/img/logo-microsoft.jpg" alt="">
-                                <div class="hgroup">
-                                    <h4>Sr. SQL Server Developer</h4>
-                                    <h5>Microsoft</h5>
-                                </div>
-                                <div class="header-meta">
-                                    <span class="location">Palo Alto, CA</span>
-                                    <span class="label label-success">Remote</span>
-                                </div>
-                            </header>
-                        </a>
-                    </div>
-                    <!-- END Job item -->
-
+                        <div class="col-xs-12">
+                            <div class="item-block" onclick="window.location.href = '{{url('job/'.$job->id)}}'">
+                                <header>
+                                    <img src="{{config('app.url')."/assets/img/job.png"}}" alt="">
+                                    <div class="hgroup">
+                                        <h4>{{$job->job_name}}</h4>
+                                        <h5><a href="tel:{{$job->phone}}">{{$job->job_contact}} : {{$job->phone}}</a>
+                                        </h5>
+                                    </div>
+                                    <div class="header-meta">
+                                        <span class="location">{{$job->job_place}}</span>
+                                        <span class="{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "label label-success" : "label label-warning"}}">{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "full time" : "part time"}}</span>
+                                    </div>
+                                </header>
+                            </div>
+                        </div>
+                        <!-- END Job item -->
+                    @endforeach
                 </div>
-
                 <br><br>
-                <p class="text-center"><a class="btn btn-info" href="job-list.html">Browse all jobs</a></p>
+                <p class="text-center"><a class="btn btn-info" href="{{url('fjob')}}">Browse all jobs</a></p>
             </div>
         </section>
         <!-- END Recent jobs -->
 
 
         <!-- Facts -->
-        <section class="bg-img bg-repeat no-overlay section-sm" >
+        <section class="bg-img bg-repeat no-overlay section-sm">
             <div class="container">
 
                 <div class="row">
@@ -162,8 +88,13 @@
                         <h2>How it works</h2>
                     </header>
 
-                    <p class="lead">Pellentesque et pulvinar orci. Suspendisse sed euismod purus. Pellentesque nunc ex, ultrices eu enim non, consectetur interdum nisl. Nam congue interdum mauris, sed ultrices augue lacinia in. Praesent turpis purus, faucibus in tempor vel, dictum ac eros.</p>
-                    <p>Nulla quis felis et orci luctus semper sit amet id dui. Aenean ultricies lectus nunc, vel rhoncus odio sagittis eu. Sed at felis eu tortor mattis imperdiet et sed tortor. Nullam ac porttitor arcu. Vivamus tristique elit id tempor lacinia. Donec auctor at nibh eget tincidunt. Nulla facilisi. Nunc condimentum dictum mattis.</p>
+                    <p class="lead">Pellentesque et pulvinar orci. Suspendisse sed euismod purus. Pellentesque nunc ex,
+                        ultrices eu enim non, consectetur interdum nisl. Nam congue interdum mauris, sed ultrices augue
+                        lacinia in. Praesent turpis purus, faucibus in tempor vel, dictum ac eros.</p>
+                    <p>Nulla quis felis et orci luctus semper sit amet id dui. Aenean ultricies lectus nunc, vel rhoncus
+                        odio sagittis eu. Sed at felis eu tortor mattis imperdiet et sed tortor. Nullam ac porttitor
+                        arcu. Vivamus tristique elit id tempor lacinia. Donec auctor at nibh eget tincidunt. Nulla
+                        facilisi. Nunc condimentum dictum mattis.</p>
 
 
                     <br><br>

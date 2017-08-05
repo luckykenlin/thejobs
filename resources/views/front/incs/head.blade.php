@@ -17,6 +17,8 @@
     <link href="{{asset("assets/css/app.min.css")}}" rel="stylesheet">
     <link href="{{asset("assets/css/custom.css")}}" rel="stylesheet">
     <link href="{{asset("assets/vendors/summernote/summernote.css")}}" rel="stylesheet">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/all.css">
 
 
 

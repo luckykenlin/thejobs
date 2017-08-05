@@ -45,7 +45,7 @@
                     <ul>
                         <li><a href="resume-list.html">Manage companies</a></li>
                         <li><a href="resume-list.html">Manage resumes</a></li>
-                        <li><a href="resume-list.html">Manage jobs</a></li>
+                        <li><a href="{{url('job-manage')}}">Manage jobs</a></li>
                         <li><a href="resume-manage.html">Manage Posts</a></li>
                         <li><a href="resume-manage.html">Setting</a></li>
                         <li><a href="{{ route('logout') }}"
@@ -66,12 +66,12 @@
                 <a class="{{ (Request::is('/') or  Request::is('home')) ? 'active' : '' }}" href="{{url('/')}}">Home</a>
             </li>
             <li>
-                <a class="{{ Request::is('job') ? 'active' : '' }}" href="{{url('job')}}">Job</a>
+                <a class="{{ Request::is('fjob') ? 'active' : '' }}" href="{{url('fjob')}}">Job</a>
                 <ul>
-                    <li><a href="{{url('job/create')}}">Post a job</a></li>
+                    <li><a href="{{url('fjob/create')}}">Post a job</a></li>
                     <li><a href="job-apply.html">Apply for job</a></li>
                     @if(Auth::check())
-                        <li><a href="job-manage.html">Manage jobs</a></li>
+                        <li><a href="{{url('job-manage')}}">Manage jobs</a></li>
                     @endif
                     <li><a href="job-candidates.html">Candidates</a></li>
                 </ul>
