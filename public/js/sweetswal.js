@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 233);
+/******/ 	return __webpack_require__(__webpack_require__.s = 237);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 203:
+/***/ 223:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -77,7 +77,7 @@
 var posturl = $("#btn1").data('stuff')[0].posturl;
 var title = $("#btn1").data('stuff')[0].title;
 var type = $("#btn1").data('stuff')[0].type;
-var swal = __webpack_require__(91);
+var swal = __webpack_require__(53);
 // CommonJS
 $("#myForm").submit(function (event) {
     event.preventDefault();
@@ -118,15 +118,15 @@ $("#myForm").submit(function (event) {
 
 /***/ }),
 
-/***/ 233:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(203);
+module.exports = __webpack_require__(223);
 
 
 /***/ }),
 
-/***/ 91:
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!

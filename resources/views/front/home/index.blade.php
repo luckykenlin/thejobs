@@ -41,7 +41,7 @@
                     @endforeach
                 </div>
                 <br><br>
-                <p class="text-center"><a class="btn btn-info" href="{{url('fjob')}}">Browse all jobs</a></p>
+                <p class="text-center"><a class="btn btn-info" href="{{url('job')}}">Browse all jobs</a></p>
             </div>
         </section>
         <!-- END Recent jobs -->

@@ -10,11 +10,11 @@
             <br><br><br>
             <form class="header-job-search">
                 <div class="input-keyword">
-                    <input type="text" class="form-control" placeholder="Job title, skills, or company">
+                    <input type="text"  id="autocomplete-jobtitle" class="form-control" placeholder="Job title, skills, or company">
                 </div>
 
                 <div class="input-location">
-                    <input type="text" class="form-control" placeholder="City, state or zip">
+                    <input type="text"  id="autocomplete-city" name="country" class="form-control" placeholder="City, state or zip">
                 </div>
 
                 <div class="btn-search">
@@ -25,3 +25,25 @@
         </div>
     </div>
 </header>
+<script src="{{asset('plugins/jQueryUI/jquery.autocomplete.js')}}"></script>
+<script>
+    var countries = [
+        { value: 'Andorra', data: 'AD' },
+        // ...
+        { value: 'Zimbabwe', data: 'ZZ' }
+
+    ];
+
+    $('#autocomplete-city').autocomplete({
+        lookup: countries,
+        onSelect: function (suggestion) {
+            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+        }
+    });
+    $('#autocomplete-jobtitle').autocomplete({
+        lookup: countries,
+        onSelect: function (suggestion) {
+            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+        }
+    });
+</script>

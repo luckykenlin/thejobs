@@ -35,9 +35,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\Role');
     }
+
     public function jobs()
     {
         return $this->hasMany('App\Models\Job');
+    }
+
+    public function companies()
+    {
+        return $this->hasMany('App\Models\Company');
     }
     /** Is User A Administrator
      * @return bool

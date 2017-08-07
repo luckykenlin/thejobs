@@ -2,23 +2,24 @@
 /**
  * Created by PhpStorm.
  * User: Ken Lin
- * Date: 2017/7/3
- * Time: 9:51
+ * Date: 2017/8/6
+ * Time: 18:54
  */
 
 namespace App\Repositories;
 
-use \App\Contracts\Job\JobRepository as JobRepositoryImpl;
-use App\Models\Job;
+use \App\Contracts\Category\CategoryRepository as CategoryRepositoryImpl;
+use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 
-class JobRepository extends BaseRepository implements JobRepositoryImpl
+
+class CategoryRepository extends BaseRepository implements CategoryRepositoryImpl
 {
     /**
      * JobRepository constructor.
      * @param Model $model
      */
-    function __construct(Job $model)
+    function __construct(Category $model)
     {
         parent::__construct($model);
     }

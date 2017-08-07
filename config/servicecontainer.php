@@ -20,4 +20,14 @@ return [
         'contracts' => 'App\Contracts\Job\JobRepository' ,
         'repository' => 'App\Repositories\JobRepository'
     ],
+
+    'category' => [
+        'contracts' => 'App\Contracts\Category\CategoryRepository' ,
+        'repository' => 'App\Repositories\CategoryRepository'
+    ],
+
+    'company' => [
+        'contracts' => 'App\Contracts\Company\CompanyRepository' ,
+        'repository' => 'App\Repositories\CompanyRepository'
+    ],
 ];

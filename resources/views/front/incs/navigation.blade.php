@@ -66,9 +66,10 @@
                 <a class="{{ (Request::is('/') or  Request::is('home')) ? 'active' : '' }}" href="{{url('/')}}">Home</a>
             </li>
             <li>
-                <a class="{{ Request::is('fjob') ? 'active' : '' }}" href="{{url('fjob')}}">Job</a>
+                <a class="{{ Request::is('job') ? 'active' : '' }}" href="{{url('job')}}">Job</a>
                 <ul>
-                    <li><a href="{{url('fjob/create')}}">Post a job</a></li>
+                    <li><a href="{{url('job')}}">Browse jobs</a></li>
+                    <li><a href="{{url('job/create')}}">Post a job</a></li>
                     <li><a href="job-apply.html">Apply for job</a></li>
                     @if(Auth::check())
                         <li><a href="{{url('job-manage')}}">Manage jobs</a></li>
@@ -87,9 +88,9 @@
                 </ul>
             </li>
             <li>
-                <a class="{{ Request::is('company') ? 'active' : '' }}" href="#">Company</a>
+                <a class="{{ Request::is('company') ? 'active' : '' }}" href="{{url('company')}}">Company</a>
                 <ul>
-                    <li><a href="company-list.html">Browse companies</a></li>
+                    <li><a href="{{url('job')}}">Browse companies</a></li>
                     <li><a href="company-add.html">Create a company</a></li>
                     @if(Auth::check())
                         <li><a href="company-manage.html">Manage companies</a></li>

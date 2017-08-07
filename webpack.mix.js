@@ -19,4 +19,6 @@ mix.react("resources/assets/administrator/user/list.js", "public/administrator/u
 mix.react("resources/assets/administrator/job/list.js", "public/administrator/job/list.js");
 mix.react("resources/assets/administrator/role/list.js", "public/administrator/role/list.js");
 
-mix.js('resources/assets/js/sweetswal.js', 'public/js')
+mix.js('resources/assets/js/sweetswal.js', 'public/js');
+mix.js('resources/assets/administrator/usermanage/customloader.js', 'public/js');
+mix.js('resources/assets/administrator/usermanage/jobdelete.js', 'public/js');

@@ -18,7 +18,10 @@ Route::group(/**
         Route::get('/' , 'HomeController@index');
         Route::get('home' , 'HomeController@index');
         Route::get('job-manage' , 'UserManageController@jobManage');
-        Route::resource('fjob' , 'JobController');
+        Route::delete('job-manage/{id}', 'UserManageController@destroy')->name('job.delete');
+        Route::resource('job' , 'JobController');
+        Route::resource('company' , 'CompanyController');
+        Route::resource('Category' , 'CategoryController');
 });
 
 

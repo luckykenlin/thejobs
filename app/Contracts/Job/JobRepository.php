@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Contracts\Job;
+
 use App\Contracts\Base\BaseRepository;
 
 /**
