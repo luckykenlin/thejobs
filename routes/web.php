@@ -21,7 +21,7 @@ Route::group(/**
         Route::delete('job-manage/{id}', 'UserManageController@destroy')->name('job.delete');
         Route::resource('job' , 'JobController');
         Route::resource('company' , 'CompanyController');
-        Route::resource('Category' , 'CategoryController');
+        Route::resource('comment' , 'CommmentController');
 });
 
 
@@ -46,6 +46,9 @@ Route::group(/**
     Route::resource('/role' , 'RoleController');
     //--------------job---------------//
     Route::resource('/job' , 'JobController');
+    //--------------category-----------------------//
+    Route::resource('category' , 'CategoryController');
+    Route::get('category/{id}/delete' , ['as' => 'category.delete' , 'uses' => 'CategoryController@destroy']);
     //--------------comment----------------//
     //    Route::resource('comment' , 'Admin\\CommentsController');
 });

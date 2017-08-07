@@ -52,3 +52,19 @@ $factory->define(App\Models\Job::class , function (Faker\Generator $faker) {
     ];
     return $info;
 });
+
+$factory->define(App\Models\Company::class , function (Faker\Generator $faker) {
+    $info = [
+        'name' => $faker->company ,
+        'location' => $faker->city ,
+        'website_url' => $faker->url,
+        'email' =>  $faker->unique()->safeEmail ,
+        'founded_on' => $faker->time() ,
+        'short_desc' => $faker->text('100') ,
+        'detail' => $faker->text ,
+        'distance' => $faker->address ,
+        'employer_num' => $faker->numberBetween(5,99) ,
+        'category_id' => 2 ,
+    ];
+    return $info;
+});

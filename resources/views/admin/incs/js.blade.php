@@ -1,7 +1,7 @@
 <!-- jQuery 2.2.3 -->
 <script src="{{ config("app.url") . "/js/app.js" }}"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+{{--<script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>--}}
 <!-- Select2 -->
 <script src="{{asset('plugins/select2/select2.full.min.js')}}"></script>
 <!-- InputMask -->

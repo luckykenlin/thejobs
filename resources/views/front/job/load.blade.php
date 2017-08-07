@@ -7,7 +7,7 @@
 @foreach($jobs as $job)
     <!-- Job item -->
         <div class="col-xs-12">
-            <div class="item-block" onclick="window.location.href = '{{url('job/'.$job->id)}}'">
+            <div class="item-block" style="cursor: pointer" onclick="window.location.href = '{{url('job/'.$job->id)}}'">
                 <header>
                     <img src="{{config('app.url')."/assets/img/job.png"}}" alt="">
                     <div class="hgroup">

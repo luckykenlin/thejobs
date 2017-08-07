@@ -40,7 +40,7 @@
             @if(Auth::check())
                 <li class="pull-right">
                     <a href="#">{{Auth::user()->name}}</a>
-                    <img src="http://www.demo.com/storage/images/default/male.jpg" class="user-image"
+                    <img src="{{asset(Auth::user()->image)}}" class="user-image"
                          alt="User Image">
                     <ul>
                         <li><a href="resume-list.html">Manage companies</a></li>

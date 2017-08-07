@@ -59,6 +59,30 @@
                         </span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-edit"></i> <span>Company List</span>
+                        <span class="pull-right-container">
+                             <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="{{route('category.index')}}">
+                        <i class="fa fa-edit"></i> <span>Category List</span>
+                        <span class="pull-right-container">
+                             <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-edit"></i> <span>Comment List</span>
+                        <span class="pull-right-container">
+                             <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
 
                 <li class="treeview">
                     <a href="{{route('logout')}}" onclick="event.preventDefault();
