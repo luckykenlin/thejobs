@@ -21,7 +21,7 @@ Route::group(/**
         Route::delete('job-manage/{id}', 'UserManageController@destroy')->name('job.delete');
         Route::resource('job' , 'JobController');
         Route::resource('company' , 'CompanyController');
-        Route::resource('comment' , 'CommmentController');
+        Route::resource('comment' , 'CommentController');
 });
 
 

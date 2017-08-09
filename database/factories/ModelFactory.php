@@ -49,6 +49,7 @@ $factory->define(App\Models\Job::class , function (Faker\Generator $faker) {
         'job_category' => 'restaurant' ,
         'job_level' => '3-5 years' ,
         'category_id' => 2 ,
+        'company_id' => 4,
     ];
     return $info;
 });
@@ -59,10 +60,10 @@ $factory->define(App\Models\Company::class , function (Faker\Generator $faker) {
         'location' => $faker->city ,
         'website_url' => $faker->url,
         'email' =>  $faker->unique()->safeEmail ,
+        'phone' => $faker->phoneNumber ,
         'founded_on' => $faker->time() ,
         'short_desc' => $faker->text('100') ,
         'detail' => $faker->text ,
-        'distance' => $faker->address ,
         'employer_num' => $faker->numberBetween(5,99) ,
         'category_id' => 2 ,
     ];

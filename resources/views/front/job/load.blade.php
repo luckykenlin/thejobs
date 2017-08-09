@@ -23,9 +23,9 @@
         </div>
         <!-- END Job item -->
 @endforeach
-</div>
 <!-- Page navigation -->
-<nav class="text-center">
-    {{$jobs->links()}}
-</nav>
+    <nav class="text-center">
+        {{$jobs->links()}}
+    </nav>
 <!-- END Page navigation -->
+</div>

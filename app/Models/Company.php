@@ -17,11 +17,16 @@ class Company extends Model
 
     public function users()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User' ,'user_id');
     }
 
     public function categories()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo('App\Models\Category','category_id');
+    }
+
+    public function jobs()
+    {
+        return $this->hasMany('App\Models\Job');
     }
 }

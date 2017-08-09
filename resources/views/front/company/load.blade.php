@@ -2,19 +2,19 @@
 
     <div class="col-xs-12">
         <br>
-        <h5>We found <strong>86</strong> matches, you're watching <i>10</i> to <i>15</i></h5>
+        <h5>We found <strong>{{$companies->total()}}</strong> matches, you're watching <i>{{$companies->firstItem()}}</i> to <i>{{$companies->lastItem()}}</i></h5>
     </div>
-
+@foreach($companies as $company)
     <!-- Company detail -->
     <div class="col-xs-12">
-        <a class="item-block" href="company-detail.html">
+        <a class="item-block" href="{{route('company.edit', $company->id)}}">
             <header>
-                <img src="assets/img/logo-google.jpg" alt="">
+                <img src="{{config('app.url')."/assets/img/job.png"}}" alt="company">
                 <div class="hgroup">
-                    <h4>Google</h4>
-                    <h5>Internet and computer software</h5>
+                    <h4>{{$company->name}}</h4>
+                    <h5>{{$company->categories->name}}</h5>
                 </div>
-                <span class="open-position">15 open position</span>
+                <span class="open-position">{{count($company->jobs)}} open position</span>
             </header>
 
             <div class="item-body">
@@ -24,107 +24,10 @@
     </div>
     <!-- END Company detail -->
 
-
-    <!-- Company detail -->
-    <div class="col-xs-12">
-        <a class="item-block" href="company-detail.html">
-            <header>
-                <img src="assets/img/logo-facebook.png" alt="">
-                <div class="hgroup">
-                    <h4>Facebook</h4>
-                    <h5>Internet</h5>
-                </div>
-                <span class="open-position">6 open position</span>
-            </header>
-
-            <div class="item-body">
-                <p>Facebook is a corporation and online social networking service headquartered in Menlo Park, California, in the United States. Its website was launched on February 4, 2004, by Mark Zuckerberg with his Harvard College roommates and fellow students Eduardo Saverin, Andrew McCollum, Dustin Moskovitz and Chris Hughes. The founders had initially limited the website's membership to Harvard students, but later expanded it to colleges in the Boston area, the Ivy League, and Stanford University. It gradually added support for students at various other universities and later to high-school students.</p>
-            </div>
-        </a>
-    </div>
-    <!-- END Company detail -->
-
-
-
-    <!-- Company detail -->
-    <div class="col-xs-12">
-        <a class="item-block" href="company-detail.html">
-            <header>
-                <img src="assets/img/logo-envato.png" alt="">
-                <div class="hgroup">
-                    <h4>Envato</h4>
-                    <h5>Internet, Web Design, Web Development</h5>
-                </div>
-                <span class="open-position">2 open position</span>
-            </header>
-
-            <div class="item-body">
-                <p>Envato (formerly Eden) operates a group of digital marketplaces that sell creative assets for web designers, including themes, graphics, video, audio, photography and 3D models. It has over 1.5 million active buyers and sellers and over 6 million community members. Its highest-trafficked marketplace, ThemeForest, is the 204th most visited site in the world according to Alexa.</p>
-            </div>
-        </a>
-    </div>
-    <!-- END Company detail -->
-
-
-
-    <!-- Company detail -->
-    <div class="col-xs-12">
-        <a class="item-block" href="company-detail.html">
-            <header>
-                <img src="assets/img/logo-microsoft.jpg" alt="">
-                <div class="hgroup">
-                    <h4>Microsoft</h4>
-                    <h5>Computer software and hardware</h5>
-                </div>
-                <span class="open-position">7 open position</span>
-            </header>
-
-            <div class="item-body">
-                <p>Microsoft is an American multinational technology company headquartered in Redmond, Washington, that develops, manufactures, licenses, supports and sells computer software, consumer electronics and personal computers and services. Its best known software products are the Microsoft Windows line of operating systems, Microsoft Office office suite, and Internet Explorer and Edge web browsers. Its flagship hardware products are the Xbox game consoles and the Microsoft Surface tablet lineup. It is the world's largest software maker by revenue, and one of the world's most valuable companies.</p>
-            </div>
-        </a>
-    </div>
-    <!-- END Company detail -->
-
-
-    <!-- Company detail -->
-    <div class="col-xs-12">
-        <a class="item-block" href="company-detail.html">
-            <header>
-                <img src="assets/img/logo-linkedin.png" alt="">
-                <div class="hgroup">
-                    <h4>Linkedin</h4>
-                    <h5>Internet</h5>
-                </div>
-                <span class="open-position">3 open position</span>
-            </header>
-
-            <div class="item-body">
-                <p>LinkedIn is a business-oriented social networking service. Founded in December 2002 and launched on May 5, 2003, it is mainly used for professional networking. As of 2015, most of the site's revenue comes from selling access to information about its users to recruiters and sales professionals. In 2006, LinkedIn increased to 20 million members. As of October 2015, LinkedIn reports more than 400 million acquired users in more than 200 countries and territories.</p>
-            </div>
-        </a>
-    </div>
-    <!-- END Company detail -->
-
-
-    <!-- Page navigation -->
+@endforeach
+<!-- Page navigation -->
     <nav class="text-center">
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="Previous">
-                    <i class="ti-angle-left"></i>
-                </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li class="active"><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <i class="ti-angle-right"></i>
-                </a>
-            </li>
-        </ul>
+        {{$companies->links()}}
     </nav>
     <!-- END Page navigation -->
 

@@ -90,7 +90,7 @@
             <li>
                 <a class="{{ Request::is('company') ? 'active' : '' }}" href="{{url('company')}}">Company</a>
                 <ul>
-                    <li><a href="{{url('job')}}">Browse companies</a></li>
+                    <li><a href="{{url('company')}}">Browse companies</a></li>
                     <li><a href="company-add.html">Create a company</a></li>
                     @if(Auth::check())
                         <li><a href="company-manage.html">Manage companies</a></li>

@@ -25,7 +25,11 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-      return view('front.company.index');
+    {$pageinfo['pageSize'] = 5;
+        $companies = $this->companies->fetch($pageinfo , null , null , null);
+        if ($request->ajax()) {
+            return view('front.company.load' , ['companies' => $companies])->render();
+        }
+        return view('front.company.index' , compact('companies'));
     }
 }

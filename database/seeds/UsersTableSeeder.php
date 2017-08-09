@@ -48,5 +48,39 @@ class UsersTableSeeder extends Seeder
             "created_at" => new Carbon(),
             "updated_at" => new Carbon(),
         ]);
+        DB::table('users')-> insert([
+            'name' => 'ken',
+            'email' => 'll@example.com',
+            'sex' => \App\Contracts\Constant::MALE,
+            'password' => bcrypt('secret'),
+            'remember_token' => str_random(10),
+            'address' => $faker->address,
+            'image' => 'storage/images/default/male.jpg',
+            'describe' => $faker->jobTitle,
+            'birthday' => $faker->date(),
+            'role_id' => \App\Contracts\Constant::ROLE_COMMON,
+            'phone' => $faker->phoneNumber,
+            'marital' => $faker->boolean,
+            'nationality' => 'CN',
+            "created_at" => new Carbon(),
+            "updated_at" => new Carbon(),
+        ]);
+        DB::table('users')-> insert([
+            'name' => 'ken',
+            'email' => 'kk@example.com',
+            'sex' => \App\Contracts\Constant::MALE,
+            'password' => bcrypt('secret'),
+            'remember_token' => str_random(10),
+            'address' => $faker->address,
+            'image' => 'storage/images/default/male.jpg',
+            'describe' => $faker->jobTitle,
+            'birthday' => $faker->date(),
+            'role_id' => \App\Contracts\Constant::ROLE_COMMON,
+            'phone' => $faker->phoneNumber,
+            'marital' => $faker->boolean,
+            'nationality' => 'CN',
+            "created_at" => new Carbon(),
+            "updated_at" => new Carbon(),
+        ]);
     }
 }
