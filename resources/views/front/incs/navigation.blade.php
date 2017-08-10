@@ -43,11 +43,11 @@
                     <img src="{{asset(Auth::user()->image)}}" class="user-image"
                          alt="User Image">
                     <ul>
-                        <li><a href="resume-list.html">Manage companies</a></li>
-                        <li><a href="resume-list.html">Manage resumes</a></li>
                         <li><a href="{{url('job-manage')}}">Manage jobs</a></li>
-                        <li><a href="resume-manage.html">Manage Posts</a></li>
-                        <li><a href="resume-manage.html">Setting</a></li>
+                        <li><a href="{{url('company-manage')}}">Manage companies</a></li>
+                        <li><a href="{{url('resume-manage')}}">Manage resumes</a></li>
+                        <li><a href="{{url('post-manage')}}">Manage Posts</a></li>
+                        <li><a href="#">Setting</a></li>
                         <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                document.getElementById('logout-form').submit();">
@@ -91,9 +91,9 @@
                 <a class="{{ Request::is('company') ? 'active' : '' }}" href="{{url('company')}}">Company</a>
                 <ul>
                     <li><a href="{{url('company')}}">Browse companies</a></li>
-                    <li><a href="company-add.html">Create a company</a></li>
+                    <li><a href="{{url('company/create')}}">Create a company</a></li>
                     @if(Auth::check())
-                        <li><a href="company-manage.html">Manage companies</a></li>
+                        <li><a href="{{url('company-manage')}}">Manage companies</a></li>
                     @endif
                 </ul>
             </li>

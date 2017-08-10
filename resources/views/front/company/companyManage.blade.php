@@ -1,19 +1,18 @@
 @extends('layouts.front')
 @section('title')
-    <title> job - manage </title>
+    <title> company - manage </title>
 @endsection
 @section('header')
-    @include('front.job.manageHeader')
+    @include('front.company.manageHeader')
 @endsection
 @section('content')
     <main>
         <section class="no-padding-top bg-alt">
             <div class="container">
-                <div class="row" id="loader">
-                <!-- ajax --loader -->
-                     @include('front.job.ownLoad')
-
-                <!-- END loader -->
+                <div class="row item-blocks-condensed" id="loader">
+                    <!-- ajax --loader -->
+                       @include('front.company.ownLoad')
+                    <!-- END loader -->
                 </div>
             </div>
         </section>

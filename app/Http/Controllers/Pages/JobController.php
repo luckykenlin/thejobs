@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pages;
 
+use App\Models\Category;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -49,7 +50,10 @@ class JobController extends Controller
     public function create()
     {
         if (Auth::check())
-            return view("front.job.create");
+        {
+            $categories = Category::where('name', '=', 'Root Category')->first();
+            return view("front.job.create", compact('categories'));
+        }
         else return abort(403);
     }
 

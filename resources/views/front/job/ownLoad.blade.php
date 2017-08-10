@@ -44,4 +44,4 @@
     {{$jobs->links()}}
 </nav>
 <!-- END Page navigation -->
-<script src="{{asset('js/jobdelete.js')}}"></script>
+<script src="{{asset('js/datadelete.js')}}"></script>

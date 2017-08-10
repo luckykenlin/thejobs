@@ -13,7 +13,6 @@
                     @include('front.job.load')
                 <!-- END loader -->
             </div>
-            <div class="loadingdiv" id="load" ><img src="{{asset('assets/img/ajax-loader.gif')}}"  alt="Loading.."/></div>
         </section>
     </main>
 @endsection

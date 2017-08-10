@@ -39,8 +39,6 @@
             </div>
         </section>
         <!-- END Submit -->
-
-
     </main>
 @endsection
 @section('js')

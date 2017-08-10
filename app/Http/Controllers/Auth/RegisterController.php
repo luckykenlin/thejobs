@@ -67,7 +67,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'role_id' => Constant::ROLE_COMMON
+            'role_id' => Constant::ROLE_COMMON,
+            'image' => 'storage/images/default/avatar.png'
         ]);
     }
 }

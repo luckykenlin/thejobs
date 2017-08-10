@@ -16,14 +16,13 @@
 
                 <div class="form-group col-xs-12 col-sm-6">
                     <select class="form-control" id="category_id" name="category_id">
-                        <option value="3" selected="">
-                            Restourant
-                        </option>
-                        <option value="4">
-                            Hotel
-                        </option>
+                        {{--@foreach($categories -> getDescendants() as $descendant)--}}
+                            {{--<option value="{{$descendant->id}}">--}}
+                                {{--{{$descendant->name}}--}}
+                            {{--</option>--}}
+                        {{--@endforeach--}}
                     </select>
-                    <a class="help-block" href="company-add.html">Add new category</a>
+                    <a class="help-block" href="{{url('company/create')}}">Add new company</a>
                 </div>
 
                 <div class="form-group col-xs-12">
@@ -71,7 +70,8 @@
                 <div class="form-group col-xs-12 col-sm-6 col-md-4">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon"><i class="fa fa-flask"></i></span>
-                        <input type="text" name="job_level" id="job_level" class="form-control" placeholder="Experience, e.g. 5">
+                        <input type="text" name="job_level" id="job_level" class="form-control"
+                               placeholder="Experience, e.g. 5">
                         <span class="input-group-addon">Years</span>
                     </div>
                 </div>

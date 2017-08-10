@@ -1,0 +1,1 @@
+<div class="loadingdiv" id="load" ><img src="{{asset('assets/img/ajax-loader.gif')}}"  alt="Loading.."/></div>

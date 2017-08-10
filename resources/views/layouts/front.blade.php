@@ -19,6 +19,9 @@
 <!-- Main container -->
 @yield('content')
 <!-- END Main container -->
+<!--       Loading    -->
+@include('front.incs.loading')
+<!-- END loading -->
 {{--Site footer--}}
 @include('front.incs.footer')
 {{--End Site footer--}}

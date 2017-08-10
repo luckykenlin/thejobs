@@ -3,10 +3,10 @@ const axios = require('axios');
 $(document).ready(function () {
     $('body').delegate(".btn-danger","click",function (e) {
         e.preventDefault();
-        jobdelete($('.btn-danger').attr('href'));
+        datadelete($('.btn-danger').attr('href'));
     })
 })
-function jobdelete(url) {
+function datadelete(url) {
     swal({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -18,6 +18,7 @@ function jobdelete(url) {
         preConfirm: function () {
             return new Promise(function (resolve, reject) {
                 axios.delete(url).then((response) => {
+                    $('#loader').html(response.data);
                     resolve(response);
                 }).catch((error) => {
                     console.log("destroy error", error);

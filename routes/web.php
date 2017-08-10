@@ -17,8 +17,18 @@ Route::group(/**
     ['namespace' => 'Pages'] , function () {
         Route::get('/' , 'HomeController@index');
         Route::get('home' , 'HomeController@index');
-        Route::get('job-manage' , 'UserManageController@jobManage');
-        Route::delete('job-manage/{id}', 'UserManageController@destroy')->name('job.delete');
+
+        //---------- Usermanage action ------------------------------
+            //----------------   Job -------------------------------
+            Route::get('job-manage' , 'UserManageController@jobManage');  //  Job's management by user
+            Route::delete('job-manage/{id}', 'UserManageController@jobDestroy')->name('job.delete');// Job's deletion by user
+
+            //----------------   company ----------------------------
+            Route::get('company-manage' , 'UserManageController@companyManage');  //  Job's management by user
+            Route::delete('company-manage/{id}', 'UserManageController@companydestroy')->name('company.delete');// Job's deletion by user
+
+        //----------- END ------------------------
+
         Route::resource('job' , 'JobController');
         Route::resource('company' , 'CompanyController');
         Route::resource('comment' , 'CommentController');
@@ -30,7 +40,7 @@ Route::group(/**
 Auth::routes();
 
 //----
-//--------------------admin
+//--------------------Admin  Dashboard
 Route::group(/**
  *    middleware : Auth
  *    namespace: Admin
