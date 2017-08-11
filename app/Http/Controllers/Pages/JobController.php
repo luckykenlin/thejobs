@@ -31,7 +31,7 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $pageinfo = [])
     {
         $pageinfo['pageSize'] = 10;
         $jobs = $this->jobs->fetch($pageinfo , null , null , null);
@@ -98,7 +98,9 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        return('It is a edit page, Coming soon!!');
+        $job = $this->jobs->find($id);
+        $companies = $job->companies();
+        return view('front.job.edit' , compact('job'));
     }
 
     /**
@@ -110,11 +112,9 @@ class JobController extends Controller
      */
     public function update(Request $request , $id)
     {
-        $this->authorize('admin' , User::class);
         $data = $request->all();
         $this->jobs->update($data , $id);
-        session()->flash('flash_message' , 'successful!');
-        return redirect('admin/job');
+        return redirect('job-manage');
     }
 
 

@@ -36,7 +36,9 @@ class CreateCategoriesTable extends Migration {
    * @return void
    */
   public function down() {
-    Schema::drop('categories');
+      DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+      Schema::dropIfExists('categories');
+      DB::statement('SET FOREIGN_KEY_CHECKS = 1');
   }
 
 }

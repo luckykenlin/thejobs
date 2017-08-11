@@ -8,7 +8,7 @@
     <div class="col-xs-12">
         <div class="item-block">
             <header>
-                <a href="{{route('company.show',$company->id)}}"><img src="assets/img/logo-google.jpg" alt=""></a>
+                <a href="{{route('company.show',$company->id)}}"><img src="{{config('app.url')."/".$company->image}}" alt=""></a>
                 <div class="hgroup">
                     <h4><a href="{{route('company.show',$company->id)}}">{{$company->name}}</a></h4>
                     <h5>{{$company->categories->name}}<a href="{{route('company.show',$company->id)}}#open-positions"><span

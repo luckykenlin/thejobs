@@ -6,9 +6,9 @@
             <a class="navbar-toggle" href="#" data-toggle="offcanvas"><i class="ti-menu"></i></a>
 
             <div class="logo-wrapper">
-                <a class="logo" href="index.html"><img src="{{config('app.url')."/assets/img/logo.png"}}"
+                <a class="logo" href="{{route('front.home')}}"><img src="{{config('app.url')."/assets/img/logo.png"}}"
                                                        alt="logo"></a>
-                <a class="logo-alt" href="index.html"><img src="{{config('app.url')."/assets/img/logo-alt.png"}}"
+                <a class="logo-alt" href="{{route('front.home')}}"><img src="{{config('app.url')."/assets/img/logo-alt.png"}}"
                                                            alt="logo-alt"></a>
             </div>
 

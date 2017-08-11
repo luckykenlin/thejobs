@@ -23,9 +23,11 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
+     * @param array $pageinfo
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $pageinfo = [])
     {
         $pageinfo['pageSize'] = 5;
         $companies = $this->companies->fetch($pageinfo , null , null , null);
@@ -76,4 +78,31 @@ class CompanyController extends Controller
         $company = $this->companies->find($id);
         return view('front.company.show' , compact('company'));
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $company = $this->companies->find($id);
+        return view('front.company.edit' , compact('company'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request , $id)
+    {
+        $data = $request->all();
+        $this->companies->update($data , $id);
+        return redirect('company-manage');
+    }
+
 }

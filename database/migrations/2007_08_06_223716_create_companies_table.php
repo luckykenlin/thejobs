@@ -42,6 +42,8 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Companies');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('companies');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

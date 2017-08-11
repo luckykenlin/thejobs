@@ -5,7 +5,7 @@
 
 @foreach($jobs as $job)
     <!-- Job item -->
-    <a href="{{url('job/'.$job->id).'/edit'}}">
+    <a href="{{url('job/'.$job->id)}}">
     <div class="col-xs-12">
 
             <div class="item-block">
@@ -22,10 +22,10 @@
                 </header>
 
                 <footer>
-                    <p class="status"><strong>Status:</strong> Expires on 14 April</p>
+                    <p class="status"><strong>Status:</strong>{{$job->job_status? 'Empty' : 'Filled'}}</p>
 
                     <div class="action-btn">
-                        <a class="btn btn-xs btn-gray" href="#">Edit</a>
+                        <a class="btn btn-xs btn-gray" href="{{url('job/'.$job->id).'/edit'}}">Edit</a>
                         <a class="btn btn-xs btn-success" href="#">Mark filled</a>
                         <a class="btn btn-xs btn-danger" href="{{route('job.delete', $job->id)}}"
                         >Delete</a>

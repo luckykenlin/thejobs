@@ -15,7 +15,7 @@ Route::group(/**
  *    namespace: namespace
  */
     ['namespace' => 'Pages'] , function () {
-        Route::get('/' , 'HomeController@index');
+        Route::get('/' , 'HomeController@index')->name('front.home');
         Route::get('home' , 'HomeController@index');
 
         //---------- Usermanage action ------------------------------

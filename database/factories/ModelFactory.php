@@ -39,15 +39,17 @@ $factory->define(App\Models\Job::class , function (Faker\Generator $faker) {
     $info = [
         'job_name' => $faker->jobTitle ,
         'job_place' => $faker->city ,
+        'working_days' =>  6,
         'job_type' => \App\Contracts\Constant::FULL_TIME ,
         'job_status' => \App\Contracts\Constant::JOB_PENDED_SUCCESSFUL ,
         'job_contact' => $faker->name ,
         'phone' => $faker->phoneNumber ,
-        'job_salary' => '3000' ,
+        'job_salary' => 3000 ,
         'distance' => $faker->address ,
-        'job_desc' => $faker->paragraph() ,
+        'short_desc' => $faker->paragraph() ,
+        'job_desc' => $faker->paragraph(6) ,
         'job_category' => 'restaurant' ,
-        'job_level' => '3-5 years' ,
+        'job_level' => '3-5' ,
         'category_id' => 2 ,
         'company_id' => 4,
     ];
@@ -66,6 +68,7 @@ $factory->define(App\Models\Company::class , function (Faker\Generator $faker) {
         'detail' => $faker->text ,
         'employer_num' => $faker->numberBetween(5,99) ,
         'category_id' => 2 ,
+        'image' => 'assets/img/job.png',
     ];
     return $info;
 });
