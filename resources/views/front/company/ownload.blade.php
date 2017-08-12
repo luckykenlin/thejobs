@@ -1,8 +1,3 @@
-<div class="col-xs-12 text-right">
-    <br>
-    <a class="btn btn-primary btn-sm" href="{{url('company/create')}}">Add new company</a>
-</div>
-
 @foreach($companies as $company)
     <!-- Company item -->
     <div class="col-xs-12">
@@ -29,4 +24,4 @@
     {{$companies->links()}}
 </nav>
 <!-- END Page navigation -->
-<script src="{{asset('js/datadelete.js')}}"></script>
+<script src="{{asset('js/dataUtility.js')}}"></script>

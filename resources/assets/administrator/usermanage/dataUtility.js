@@ -7,6 +7,8 @@ $(document).ready(function () {
     })
 })
 function datadelete(url) {
+    let pageSize  =$('#numPicker').val();
+    let page = $('.pagination .active span').text();
     swal({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -17,7 +19,7 @@ function datadelete(url) {
         allowOutsideClick: false,
         preConfirm: function () {
             return new Promise(function (resolve, reject) {
-                axios.delete(url).then((response) => {
+                axios.delete(url+'?'+'pageSize='+pageSize+'&page='+page).then((response) => {
                     $('#loader').html(response.data);
                     resolve(response);
                 }).catch((error) => {
@@ -35,3 +37,25 @@ function datadelete(url) {
         });
     })
 }
+//Mark功能实现
+$(document).ready(function () {
+    $('.mark').click(function (e) {
+        e.preventDefault();
+        let url = $(this).attr('href');
+        let value =  $(this).text();
+        let taken = document.querySelector("#token").getAttribute("content");
+        let pageSize  =$('#numPicker').val();
+        let page = $('.pagination .active span').text();
+        jQuery("#load").show("slow");
+        $.ajax({
+            method: "POST",
+            url: url,
+            data: { status: value ,_token: taken ,pageSize: pageSize, page: page}
+        }).done(function (data) {
+            jQuery("#load").hide();
+            $('#loader').html(data);
+        }).fail(function () {
+            alert('Jobs could not be loaded.');
+        });
+    })
+})

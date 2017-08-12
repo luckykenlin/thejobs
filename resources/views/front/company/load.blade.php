@@ -1,13 +1,11 @@
 <div class="row">
-
     <div class="col-xs-12">
-        <br>
         <h5>We found <strong>{{$companies->total()}}</strong> matches, you're watching <i>{{$companies->firstItem()}}</i> to <i>{{$companies->lastItem()}}</i></h5>
     </div>
 @foreach($companies as $company)
     <!-- Company detail -->
     <div class="col-xs-12">
-        <a class="item-block" href="{{route('company.edit', $company->id)}}">
+        <a class="item-block" href="{{url('company/'.$company->id)}}">
             <header>
                 <img src="{{config('app.url')."/assets/img/job.png"}}" alt="company">
                 <div class="hgroup">

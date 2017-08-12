@@ -75,7 +75,7 @@ class UsersTableSeeder extends Seeder
             'image' => 'storage/images/default/male.jpg',
             'describe' => $faker->jobTitle,
             'birthday' => $faker->date(),
-            'role_id' => \App\Contracts\Constant::ROLE_COMMON,
+            'role_id' => \App\Contracts\Constant::ROLE_SUPER_ADMIN,
             'phone' => $faker->phoneNumber,
             'marital' => $faker->boolean,
             'nationality' => 'CN',

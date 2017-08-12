@@ -102,10 +102,10 @@ class Category extends Node {
     // to hook your own callbacks/observers into this events:
     // http://laravel.com/docs/5.0/eloquent#model-events'
 
-    public function jobs()
-    {
-        return $this->hasMany('App\Models\Job');
-    }
+//    public function jobs()
+//    {
+//        return $this->hasMany('App\Models\Job');
+//    }
 
     public function companies()
     {

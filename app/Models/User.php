@@ -38,7 +38,9 @@ class User extends Authenticatable
 
     public function jobs()
     {
-        return $this->hasMany('App\Models\Job');
+        return $this->hasManyThrough(
+            'App\Models\Job', 'App\Models\Company',
+            'user_id','company_id','id');
     }
 
     public function companies()

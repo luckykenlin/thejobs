@@ -11,6 +11,7 @@ use App\Contracts\Job\JobRepository;
 use App\Utility\DateUtility;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use function MongoDB\BSON\toJSON;
 
 class JobController extends Controller
 {
@@ -31,13 +32,25 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $pageinfo = [])
+    public function index(Request $request)
     {
+
         $pageinfo['pageSize'] = 10;
-        $jobs = $this->jobs->fetch($pageinfo , null , null , null);
-        if ($request->ajax()) {
+
+        if ($request->ajax())
+        {
+            $pageinfo['pageSize'] = 10;
+            if(isset($request) and $request->pageSize)
+            {
+                $data = $request->all();
+                $pageinfo['pageSize'] = $data['pageSize'];
+            }
+            $jobs = $this->jobs->fetch($pageinfo , null , null , null);
+            $jobs->withPath("job?pageSize=".$pageinfo['pageSize']);
             return view('front.job.load' , ['jobs' => $jobs])->render();
         }
+
+        $jobs = $this->jobs->fetch($pageinfo , null , null , null);
         return view('front.job.index' , compact('jobs'));
     }
 
@@ -70,8 +83,9 @@ class JobController extends Controller
        {
            $data = $request->all();
            $data['user_id'] = Auth::user()->id;
+           if (isset(  $data['job_desc'])) $data['job_desc'] = htmlspecialchars($data['job_desc']);
            $this->jobs->save($data);
-           return redirect('job');
+           return redirect('job-manage');
        }else
            return abort('403');
 
@@ -99,7 +113,6 @@ class JobController extends Controller
     public function edit($id)
     {
         $job = $this->jobs->find($id);
-        $companies = $job->companies();
         return view('front.job.edit' , compact('job'));
     }
 
@@ -113,6 +126,7 @@ class JobController extends Controller
     public function update(Request $request , $id)
     {
         $data = $request->all();
+        $data['job_desc'] = htmlspecialchars($data['job_desc']);
         $this->jobs->update($data , $id);
         return redirect('job-manage');
     }

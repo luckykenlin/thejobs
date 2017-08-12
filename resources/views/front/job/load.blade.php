@@ -1,6 +1,5 @@
 <div class="row item-blocks-condensed">
     <div class="col-xs-12">
-        <br>
         <h5>We found <strong>{{$jobs->total()}}</strong> matches, you're watching <i>{{$jobs->firstItem()}}</i> to
             <i>{{$jobs->lastItem()}}</i></h5>
     </div>
@@ -27,5 +26,5 @@
     <nav class="text-center">
         {{$jobs->links()}}
     </nav>
-<!-- END Page navigation -->
+    <!-- END Page navigation -->
 </div>

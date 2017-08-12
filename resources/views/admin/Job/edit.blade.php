@@ -164,12 +164,12 @@
                                 <label>Pending_status</label>
                                 <select class="form-control" id="job_status" name="job_status">
                                     <option value="1"
-                                            @if($job->job_status == \App\Contracts\Constant::JOB_PENDED_SUCCESSFUL) selected @endif>
-                                        Pended
+                                            @if($job->job_status == \App\Contracts\Constant::JOB_FILLED) selected @endif>
+                                        FILLED
                                     </option>
                                     <option value="0"
-                                            @if($job->job_status == \App\Contracts\Constant::JOB_PENDING) selected @endif>
-                                        Pendding
+                                            @if($job->job_status == \App\Contracts\Constant::JOB_EMPTY) selected @endif>
+                                        EMPTY
                                     </option>
                                 </select>
                                 @if ($errors->has('job_status'))

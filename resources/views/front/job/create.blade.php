@@ -19,7 +19,7 @@
                     <p>Write about your company, job description, skills required, benefits, etc.</p>
                 </header>
 
-                <textarea class="summernote-editor" style="display: none;"></textarea>
+                <textarea class="summernote-editor" style="display: none;" name="job_desc"></textarea>
             </div>
         </section>
         <!-- END Job detail -->
@@ -40,6 +40,7 @@
         </section>
         <!-- END Submit -->
     </main>
+</form>
 @endsection
 @section('js')
     <script src="{{asset("assets/vendors/summernote/summernote.js")}}"></script>

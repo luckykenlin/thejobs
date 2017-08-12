@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pages;
 
+use App\Contracts\Constant;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Job;
@@ -19,7 +20,7 @@ class UserManageController extends Controller
     /**
      * UserManageController constructor.
      * @param UserRepository $user
-      */
+     */
     function __construct(UserRepository $users)
     {
         $this->users = $users;
@@ -32,14 +33,25 @@ class UserManageController extends Controller
      */
     public function jobManage(Request $request)
     {
-        if (Auth::check()){
-        $jobs = $this->users->find(Auth::user()->id)->jobs()->paginate(5);
-        if ($request->ajax()) {
-            return view('front.job.ownLoad' , ['jobs' => $jobs])->render();
-        }
-        return view('front.job.jobManage',compact('jobs'));
-        }
-        else return abort(403);
+
+        if (Auth::check()) {
+            $pageinfo['pageSize'] = 10;
+
+            if ($request->ajax()) {
+                $pageinfo['pageSize'] = 10;
+                if (isset($request) and $request->pageSize) {
+                    $data = $request->all();
+                    $pageinfo['pageSize'] = $data['pageSize'];
+                }
+                $jobs = $this->users->find(Auth::user()->id)->jobs()->paginate($pageinfo['pageSize']);
+                $jobs->withPath("job-manage?pageSize=" . $pageinfo['pageSize']);
+                return view('front.job.ownload' , ['jobs' => $jobs])->render();
+            }
+
+            $jobs = $this->users->find(Auth::user()->id)->jobs()->paginate($pageinfo['pageSize']);
+            return view('front.job.jobManage' , compact('jobs'));
+
+        } else return abort(403);
     }
 
     /**
@@ -49,14 +61,24 @@ class UserManageController extends Controller
      */
     public function companyManage(Request $request)
     {
-        if (Auth::check()){
-            $companies = $this->users->find(Auth::user()->id)->companies()->paginate(5);
+        if (Auth::check()) {
+            $pageinfo['pageSize'] = 10;
+
             if ($request->ajax()) {
-                return view('front.company.ownLoad' , ['companies' => $companies])->render();
+                $pageinfo['pageSize'] = 10;
+                if (isset($request) and $request->pageSize) {
+                    $data = $request->all();
+                    $pageinfo['pageSize'] = $data['pageSize'];
+                }
+                $companies = $this->users->find(Auth::user()->id)->companies()->orderBy('updated_at' , 'desc')->paginate($pageinfo['pageSize']);
+                $companies->withPath("company-manage?pageSize=" . $pageinfo['pageSize']);
+                return view('front.company.ownload' , ['companies' => $companies])->render();
             }
-            return view('front.company.companyManage',compact('companies'));
-        }
-        else return abort(403);
+
+            $companies = $this->users->find(Auth::user()->id)->companies()->orderBy('created_at' , 'desc')->paginate($pageinfo['pageSize']);
+            return view('front.company.companyManage' , compact('companies'));
+
+        } else return abort(403);
     }
 
     /**
@@ -66,13 +88,13 @@ class UserManageController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function jobDestroy($id, Request $request)
+    public function jobDestroy($id , Request $request)
     {
 //        $this->authorize('delete' , [User::class , $id]);
         $result = Job::destroy($id);
         if ($result) {
-            $jobs =User::find(Auth::user()->id)->jobs()->paginate(5);
-            $jobs->withPath("job-manage");
+            $jobs = User::find(Auth::user()->id)->jobs()->paginate($request->pageSize);
+            $jobs->withPath("job-manage?page=".$request->page);
             if ($request->ajax()) {
                 return view('front.job.ownLoad' , ['jobs' => $jobs])->render();
             }
@@ -90,12 +112,12 @@ class UserManageController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function companyDestroy($id, Request $request)
+    public function companyDestroy($id , Request $request)
     {
 //        $this->authorize('delete' , [User::class , $id]);
-        $result = Company::destroy($id);
+        if (isset($id)) $result = Company::destroy($id);
         if ($result) {
-            $companies =User::find(Auth::user()->id)->companies()->paginate(5);
+            $companies = User::find(Auth::user()->id)->companies()->paginate(5);
             $companies->withPath("company-manage");
             if ($request->ajax()) {
                 return view('front.company.ownLoad' , ['companies' => $companies])->render();
@@ -105,4 +127,36 @@ class UserManageController extends Controller
             return abort('403');
         }
     }
+
+    /**
+     * Mark job_status to be available for can
+     * @param Request $request
+     * @param $id
+     */
+    public function jobMark(Request $request , $id)
+    {
+        if (isset($id)) {
+            $data = $request->all();
+            if ($data['status'] == 'Mark filled')
+                Job::find($id)->update(['job_status' => Constant::JOB_FILLED]);
+            else
+                Job::find($id)->update(['job_status' => Constant::JOB_EMPTY]);
+        }
+        if ($request->ajax()) {
+            $pageinfo['pageSize'] = 10;
+            if (isset($request) and $request->pageSize) {
+                $data = $request->all();
+                $pageinfo['pageSize'] = $data['pageSize'];
+            }
+            if (isset($request) and $request->page) {
+                $data = $request->all();
+                $pageinfo['page'] = $data['page'];
+            }
+            $jobs = $this->users->find(Auth::user()->id)->jobs()->paginate($pageinfo['pageSize']);
+            $jobs->withPath("job-manage?page=".$pageinfo['page']."&pageSize=" . $pageinfo['pageSize']);
+            return view('front.job.ownload' , ['jobs' => $jobs])->render();
+        }
+
+    }
+
 }

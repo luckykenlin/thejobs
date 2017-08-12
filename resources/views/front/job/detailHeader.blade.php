@@ -4,11 +4,11 @@
             <img class="logo" src="{{config('app.url')."/assets/img/job.png"}}" alt="logo">
             <div class="hgroup">
                 <h1>{{$job->job_name}}</h1>
-                <h3><a href="#">{{$job->job_category}}</a></h3>
+                <h3><a href="#">{{$job->companies->name}}</a></h3>
             </div>
             <time datetime="{{$job->updated_at}}">{{$job->time}}</time>
             <hr>
-            <p class="lead">{{$job->job_desc}}</p>
+            <p class="lead">{{$job->short_desc}}</p>
 
             <ul class="details cols-3">
                 <li>
@@ -33,7 +33,7 @@
 
                 <li>
                     <i class="fa fa-flask"></i>
-                    <span>{{$job->job_level}}</span>
+                    <span>{{$job->job_level}} years experiences</span>
                 </li>
 
                 <li>

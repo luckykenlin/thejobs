@@ -4,7 +4,7 @@
   "/administrator/job/list.js": "/administrator/job/list.js",
   "/js/app.js": "/js/app.js",
   "/css/app.css": "/css/app.css",
-  "/js/datadelete.js": "/js/datadelete.js",
+  "/js/dataUtility.js": "/js/dataUtility.js",
   "/js/sweetswal.js": "/js/sweetswal.js",
   "/js/customloader.js": "/js/customloader.js"
 }

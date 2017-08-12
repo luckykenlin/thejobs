@@ -1,43 +1,43 @@
 <header class="page-header bg-img" style="background-image: url({{asset('assets/img/bg-banner1.jpg')}})">
     <div class="container">
         <div class="header-detail">
-            <img class="logo" src="assets/img/logo-google.jpg" alt="">
+            <img class="logo" src="{{config('app.url').'/'.$company->image}}" alt="logo">
             <div class="hgroup">
-                <h1>Google</h1>
-                <h3>Internet and computer software</h3>
+                <h1>{{$company->name}}</h1>
+                <h3>{{$company->categories->name}}</h3>
             </div>
             <hr>
-            <p class="lead">Google Inc. is an American multinational technology company specializing in Internet-related services and products. These include online advertising technologies, search, cloud computing, and software. Most of its profits are derived from AdWords, an online advertising service that places advertising near the list of search results.</p>
+            <p class="lead">{{$company->short_desc}}</p>
 
             <ul class="details cols-3">
                 <li>
                     <i class="fa fa-map-marker"></i>
-                    <span>Menlo Park, CA</span>
+                    <span>{{$company->location}}</span>
                 </li>
 
                 <li>
                     <i class="fa fa-globe"></i>
-                    <a href="#">Google.com</a>
+                    <a href="{{$company->website_url}}">{{$company->website_url}}</a>
                 </li>
 
                 <li>
                     <i class="fa fa-users"></i>
-                    <span>50,000 - 70,000 employer</span>
+                    <span>{{$company->employer_num}} employer</span>
                 </li>
 
                 <li>
                     <i class="fa fa-birthday-cake"></i>
-                    <span>From 1998</span>
+                    <span>{{$company->founded_on}}</span>
                 </li>
 
                 <li>
                     <i class="fa fa-phone"></i>
-                    <span>(+1) 123 456 7890</span>
+                    <span>{{$company->phone}}</span>
                 </li>
 
                 <li>
                     <i class="fa fa-envelope"></i>
-                    <a href="#">info@google.com</a>
+                    <a href="#">{{$company->email}}</a>
                 </li>
             </ul>
 

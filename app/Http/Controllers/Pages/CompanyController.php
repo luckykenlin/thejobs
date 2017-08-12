@@ -29,11 +29,22 @@ class CompanyController extends Controller
      */
     public function index(Request $request, $pageinfo = [])
     {
-        $pageinfo['pageSize'] = 5;
-        $companies = $this->companies->fetch($pageinfo , null , null , null);
-        if ($request->ajax()) {
+        $pageinfo['pageSize'] = 10;
+
+        if ($request->ajax())
+        {
+            $pageinfo['pageSize'] = 10;
+            if(isset($request) and $request->pageSize)
+            {
+                $data = $request->all();
+                $pageinfo['pageSize'] = $data['pageSize'];
+            }
+            $companies = $this->companies->fetch($pageinfo , null , null , null);
+            $companies->withPath("company?pageSize=".$pageinfo['pageSize']);
             return view('front.company.load' , ['companies' => $companies])->render();
         }
+
+        $companies = $this->companies->fetch($pageinfo , null , null , null);
         return view('front.company.index' , compact('companies'));
     }
 
@@ -61,6 +72,7 @@ class CompanyController extends Controller
         {
             $data = $request->all();
             $data['user_id'] = Auth::user()->id;
+            if (isset(  $data['detail'])) $data['detail'] = htmlspecialchars($data['detail']);
             $this->companies->save($data);
             return redirect('company');
         }else
@@ -73,10 +85,15 @@ class CompanyController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request ,$id)
     {
         $company = $this->companies->find($id);
-        return view('front.company.show' , compact('company'));
+        $jobs = $company->jobs()->orderBy('updated_at', 'desc')->paginate(5);
+        if($request->ajax())
+        {
+            return view('front.company.jobload' , ['jobs' => $jobs])->render();
+        }
+        return view('front.company.show' , compact('company','jobs'));
     }
 
     /**
@@ -101,6 +118,7 @@ class CompanyController extends Controller
     public function update(Request $request , $id)
     {
         $data = $request->all();
+        $data['detail'] = htmlspecialchars($data['detail']);
         $this->companies->update($data , $id);
         return redirect('company-manage');
     }
