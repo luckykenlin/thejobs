@@ -1,8 +1,16 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Ken Lin
+ * Date: 2017/8/13
+ * Time: 18:49
+ */
 
 namespace App\Utility;
 
-class DataTableUtility
+
+
+class DataUtility
 {
     /**
      * @param $dataTableParameters
@@ -52,4 +60,43 @@ class DataTableUtility
         }
         return $orderColumn;
     }
+
+    /**
+     * @param $defaultPageSize
+     * @param $data
+     * @return array
+     */
+    public static function pageInfo($defaultPageSize ,$data)
+    {
+        $pageInfo = [];
+        if (isset($defaultPageSize))
+            $pageInfo['pageSize'] = $defaultPageSize;
+
+        if (array_key_exists("pageSize", $data))
+            $pageInfo['pageSize'] = $data['pageSize'];
+
+        if (array_key_exists("page", $data))
+             $pageInfo['page'] = $data['page'];
+
+        return $pageInfo;
+    }
+
+    /**
+     * @param $pageInfo
+     * @param $pathUrl
+     * @return array
+     */
+    public static function pathUrl($pageInfo, $pathUrl)
+    {
+        $pathUrl = $pathUrl.'?';
+        for (; $value = current($pageInfo); next($pageInfo))
+        {
+            if (key($pageInfo) == 'page') next($pageInfo);
+            else $pathUrl = $pathUrl . key($pageInfo) . "=" . $value . '&';
+        }
+
+        return $pathUrl;
+    }
+
+
 }

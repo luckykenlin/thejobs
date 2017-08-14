@@ -80,7 +80,7 @@ $(document).on('click', '.pagination a', function (e) {
 
     var url = $(this).attr('href');
     getData(url);
-    //                    window.history.pushState("", "", url);
+    // window.history.pushState("", "", url);
 });
 $(function () {
     //选项卡实现异步刷新列表数据个数

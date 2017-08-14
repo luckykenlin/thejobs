@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Contracts\Company\CompanyRepository;
+use App\Models\Company;
+use App\Utility\DataUtility;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -29,22 +31,16 @@ class CompanyController extends Controller
      */
     public function index(Request $request, $pageinfo = [])
     {
-        $pageinfo['pageSize'] = 10;
-
-        if ($request->ajax())
-        {
-            $pageinfo['pageSize'] = 10;
-            if(isset($request) and $request->pageSize)
-            {
-                $data = $request->all();
-                $pageinfo['pageSize'] = $data['pageSize'];
-            }
-            $companies = $this->companies->fetch($pageinfo , null , null , null);
-            $companies->withPath("company?pageSize=".$pageinfo['pageSize']);
+        $pageInfo = DataUtility::pageInfo(10 , $request->all());
+        $pathUrl = $request->path();
+        $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+        $jobs = Company::query();
+        if ($request->expectsJson()) {
+            $companies = $this->companies->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
             return view('front.company.load' , ['companies' => $companies])->render();
         }
 
-        $companies = $this->companies->fetch($pageinfo , null , null , null);
+        $companies = $this->companies->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
         return view('front.company.index' , compact('companies'));
     }
 

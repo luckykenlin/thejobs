@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Pages;
 use App\Models\Category;
 use App\Models\Job;
 use App\Models\User;
+use App\Utility\DataUtility;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Contracts\Job\JobRepository;
 use App\Utility\DateUtility;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use function MongoDB\BSON\toJSON;
 
@@ -34,24 +36,18 @@ class JobController extends Controller
      */
     public function index(Request $request)
     {
+            $pageInfo = DataUtility::pageInfo(10 , $request->all());
+            $pathUrl = $request->path();
+            $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+            $jobs = Job::query();
+            if ($request->expectsJson()) {
+                $jobs = $this->jobs->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
 
-        $pageinfo['pageSize'] = 10;
-
-        if ($request->ajax())
-        {
-            $pageinfo['pageSize'] = 10;
-            if(isset($request) and $request->pageSize)
-            {
-                $data = $request->all();
-                $pageinfo['pageSize'] = $data['pageSize'];
+                return view('front.job.load' , ['jobs' => $jobs])->render();
             }
-            $jobs = $this->jobs->fetch($pageinfo , null , null , null);
-            $jobs->withPath("job?pageSize=".$pageinfo['pageSize']);
-            return view('front.job.load' , ['jobs' => $jobs])->render();
-        }
 
-        $jobs = $this->jobs->fetch($pageinfo , null , null , null);
-        return view('front.job.index' , compact('jobs'));
+            $jobs = $this->jobs->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
+            return view('front.job.index' , compact('jobs'));
     }
 
 
