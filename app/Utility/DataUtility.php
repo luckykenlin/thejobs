@@ -69,6 +69,7 @@ class DataUtility
     public static function pageInfo($defaultPageSize ,$data)
     {
         $pageInfo = [];
+
         if (isset($defaultPageSize))
             $pageInfo['pageSize'] = $defaultPageSize;
 

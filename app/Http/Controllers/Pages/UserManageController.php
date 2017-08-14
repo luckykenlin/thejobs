@@ -6,7 +6,6 @@ use App\Contracts\Constant;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Job;
-use App\Models\User;
 use App\Utility\DataUtility;
 use Illuminate\Http\Request;
 use \App\Contracts\User\UserRepository;
@@ -81,14 +80,18 @@ class UserManageController extends Controller
     public function jobDestroy($id , Request $request)
     {
 
-        $result = Job::destroy($id);
+        if (isset($id)) $result = Job::destroy($id);
         if ($result) {
-            $jobs = User::find(Auth::user()->id)->jobs()->paginate($request->pageSize);
-            dd($jobs->withPath("job-manage?page=" . $request->page));
+            $pageInfo = DataUtility::pageInfo(10 , $request->all());
+            $pathUrl = explode('/', $request->path())[0];
+            $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+            $jobs = $this->users->find(Auth::user()->id)->jobs();
 
-            if ($request->ajax()) {
+            if ($request->expectsJson()) {
+                $jobs = $this->users->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
                 return view('front.job.ownLoad' , ['jobs' => $jobs])->render();
             }
+            $jobs = $this->users->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
             return view('front.job.ownLoad' , ['jobs' => $jobs])->render();
         } else {
             return abort('403');
@@ -140,17 +143,11 @@ class UserManageController extends Controller
                 Job::find($id)->update(['job_status' => Constant::JOB_EMPTY]);
         }
         if ($request->ajax()) {
-            $pageinfo['pageSize'] = 10;
-            if (isset($request) and $request->pageSize) {
-                $data = $request->all();
-                $pageinfo['pageSize'] = $data['pageSize'];
-            }
-            if (isset($request) and $request->page) {
-                $data = $request->all();
-                $pageinfo['page'] = $data['page'];
-            }
-            $jobs = $this->users->find(Auth::user()->id)->jobs()->paginate($pageinfo['pageSize']);
-            $jobs->withPath("job-manage?page=" . $pageinfo['page'] . "&pageSize=" . $pageinfo['pageSize']);
+            $pageInfo = DataUtility::pageInfo(10 , $request->all());
+            $pathUrl = explode('/', $request->path())[0];
+            $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+            $jobs = $this->users->find(Auth::user()->id)->jobs();
+            $jobs = $this->users->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
             return view('front.job.ownload' , ['jobs' => $jobs])->render();
         }
 
