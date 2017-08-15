@@ -40,6 +40,7 @@ class JobController extends Controller
             $pathUrl = $request->path();
             $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
             $jobs = Job::query();
+
             if ($request->expectsJson()) {
                 $jobs = $this->jobs->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
 

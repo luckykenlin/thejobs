@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6167ead12066777ed708976eb9808a3",
+    "content-hash": "e81b9d55e29e956b39ccdc14b19d18c9",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -1661,6 +1661,58 @@
             "time": "2017-03-26T20:37:53+00:00"
         },
         {
+            "name": "spatie/laravel-pjax",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-pjax.git",
+                "reference": "30e1509517a6371a5774a29e99e2db204cb7fc5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-pjax/zipball/30e1509517a6371a5774a29e99e2db204cb7fc5b",
+                "reference": "30e1509517a6371a5774a29e99e2db204cb7fc5b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "^5.1",
+                "illuminate/support": "^5.1",
+                "php": "^5.5.0|^7.0",
+                "symfony/css-selector": "^2.7|^3.0",
+                "symfony/dom-crawler": "^2.7|^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Pjax\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A pjax middleware for Laravel 5",
+            "homepage": "https://github.com/spatie/laravel-pjax",
+            "keywords": [
+                "laravel-pjax",
+                "pjax",
+                "spatie"
+            ],
+            "time": "2016-02-18T15:16:46+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.8",
             "source": {
@@ -1891,6 +1943,62 @@
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
             "time": "2017-07-05T13:02:37+00:00"
+        },
+        {
+            "name": "symfony/dom-crawler",
+            "version": "v3.3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dom-crawler.git",
+                "reference": "fc2c588ce376e9fe04a7b8c79e3ec62fe32d95b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/fc2c588ce376e9fe04a7b8c79e3ec62fe32d95b1",
+                "reference": "fc2c588ce376e9fe04a7b8c79e3ec62fe32d95b1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "require-dev": {
+                "symfony/css-selector": "~2.8|~3.0"
+            },
+            "suggest": {
+                "symfony/css-selector": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\DomCrawler\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony DomCrawler Component",
+            "homepage": "https://symfony.com",
+            "time": "2017-05-25T23:10:31+00:00"
         },
         {
             "name": "symfony/event-dispatcher",

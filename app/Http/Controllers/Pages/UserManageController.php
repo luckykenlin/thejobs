@@ -106,7 +106,7 @@ class UserManageController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function companyDestroy($id , Request $request)
+    public function companyDestroy(Request $request, $id)
     {
 //        $this->authorize('delete' , [User::class , $id]);
         if (isset($id)) $result = Company::destroy($id);

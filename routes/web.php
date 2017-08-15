@@ -29,7 +29,7 @@ Route::group(/**
             Route::post('job-mark/{id}' , 'UserManageController@jobMark')->name('job.mark');  //  Mark a job's status
             //----------------   company ----------------------------
             Route::get('company-manage' , 'UserManageController@companyManage');  //  Job's management by user
-            Route::delete('company-manage/{id}', 'UserManageController@companydestroy')->name('company.delete');// Job's deletion by user
+            Route::delete('company-manage/{id}', 'UserManageController@companyDestroy')->name('company.delete');// Job's deletion by user
 
         //----------- END ------------------------
 

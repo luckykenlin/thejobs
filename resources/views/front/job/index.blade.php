@@ -34,5 +34,5 @@
     </main>
 @endsection
 @section('js')
-    <script src="{{asset('js/customloader.js')}}"></script>
+    <script src="{{asset('assets/js/customloader.js')}}"></script>
 @endsection
