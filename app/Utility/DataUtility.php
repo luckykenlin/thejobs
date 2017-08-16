@@ -93,11 +93,8 @@ class DataUtility
         for (; $value = current($pageInfo); next($pageInfo))
         {
             if (key($pageInfo) == 'page') next($pageInfo);
-            else $pathUrl = $pathUrl . key($pageInfo) . "=" . $value . '&';
+            else $pathUrl = $pathUrl . key($pageInfo) . "=" . $value;
         }
-
         return $pathUrl;
     }
-
-
 }

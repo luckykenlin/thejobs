@@ -7,7 +7,7 @@
     <div class="col-xs-12">
         <a class="item-block" href="{{url('company/'.$company->id)}}">
             <header>
-                <img src="{{config('app.url')."/assets/img/job.png"}}" alt="company">
+                <img src="{{config('app.url')."/".$company->image}}" alt="company">
                 <div class="hgroup">
                     <h4>{{$company->name}}</h4>
                     <h5>{{$company->categories->name}}</h5>

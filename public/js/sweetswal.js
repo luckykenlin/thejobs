@@ -77,7 +77,7 @@
 var posturl = $("#btn1").data('stuff')[0].posturl;
 var title = $("#btn1").data('stuff')[0].title;
 var type = $("#btn1").data('stuff')[0].type;
-var swal = __webpack_require__(53);
+var swal = __webpack_require__(91);
 // CommonJS
 $("#myForm").submit(function (event) {
     event.preventDefault();
@@ -126,7 +126,7 @@ module.exports = __webpack_require__(223);
 
 /***/ }),
 
-/***/ 53:
+/***/ 91:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!

@@ -38,12 +38,11 @@
                     </div>
                     <div class="form-group">
                         <label>
-                            <div aria-checked="false" aria-disabled="false" style="position: relative;"><input
-                                        type="checkbox"
-                                        class="flat-red" style="position: absolute; opacity: 0;">
-                                <ins class="iCheck-helper"
-                                     style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                                keep me logged-in
+                            <div class="checkbox">
+                                <input type="checkbox" id="contract2" name="contract">
+                                <label for="contract2">
+                                    keep me logged-in
+                                </label>
                             </div>
                         </label>
                     </div>
@@ -51,29 +50,8 @@
             </div>
 
             <div class="bottom text-center">
-                New here ? <a href="#" data-toggle="dropdown" id="dropdownMenu2"><b>Join Us</b></a>
-                @include('front.auth.register')
+                New here ? <a href="{{route('register')}}"><b>Join Us</b></a>
             </div>
         </div>
     </li>
 </ul>
-<script>
-    $(function () {
-        //iCheck for checkbox and radio inputs
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-            checkboxClass: 'icheckbox_minimal-blue',
-            radioClass: 'iradio_minimal-blue'
-        });
-        //Red color scheme for iCheck
-        $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-            checkboxClass: 'icheckbox_minimal-red',
-            radioClass: 'iradio_minimal-red'
-        });
-        //Flat red color scheme for iCheck
-        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-            checkboxClass: 'icheckbox_flat-green',
-            radioClass: 'iradio_flat-green'
-        });
-    });
-
-</script>

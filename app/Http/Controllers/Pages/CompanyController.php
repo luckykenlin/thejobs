@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Contracts\Company\CompanyRepository;
+use App\Models\Category;
 use App\Models\Company;
 use App\Utility\DataUtility;
 use Illuminate\Http\Request;
@@ -29,18 +30,18 @@ class CompanyController extends Controller
      * @param array $pageinfo
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $pageinfo = [])
+    public function index(Request $request , $pageinfo = [])
     {
         $pageInfo = DataUtility::pageInfo(10 , $request->all());
         $pathUrl = $request->path();
-        $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+        $pathUrl = DataUtility::pathUrl($pageInfo , $pathUrl);
         $jobs = Company::query();
         if ($request->expectsJson()) {
-            $companies = $this->companies->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
+            $companies = $this->companies->fetchByPageInfo($jobs , $pageInfo , null , null , null , null , $pathUrl);
             return view('front.company.load' , ['companies' => $companies])->render();
         }
 
-        $companies = $this->companies->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
+        $companies = $this->companies->fetchByPageInfo($jobs , $pageInfo , null , null , null , null , $pathUrl);
         return view('front.company.index' , compact('companies'));
     }
 
@@ -51,8 +52,9 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        if(Auth::check()){
-            return view("front.company.create");
+        if (Auth::check()) {
+            $categories = Category::where('name' , '=' , 'Root Category')->first();
+            return view("front.company.create" , compact('categories'));
         } else return abort(403);
     }
 
@@ -64,14 +66,18 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $data = $request->all();
             $data['user_id'] = Auth::user()->id;
-            if (isset(  $data['detail'])) $data['detail'] = htmlspecialchars($data['detail']);
+            if (isset($data['detail'])) $data['detail'] = htmlspecialchars($data['detail']);
+            if ($request->hasFile('image')) {
+                $request->file('image')->storeAs(
+                    'public/images/' . $data['user_id'] , 'company' . '.' . $request->file('image')->extension());
+            $data['image'] = 'storage/images/' . $data['user_id'] . '/' . 'company' . '.' . $request->file('image')->extension();
+        }
             $this->companies->save($data);
             return redirect('company');
-        }else
+        } else
             return abort('403');
     }
 
@@ -81,15 +87,14 @@ class CompanyController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request ,$id)
+    public function show(Request $request , $id)
     {
         $company = $this->companies->find($id);
-        $jobs = $company->jobs()->orderBy('updated_at', 'desc')->paginate(5);
-        if($request->ajax())
-        {
+        $jobs = $company->jobs()->orderBy('updated_at' , 'desc')->paginate(5);
+        if ($request->ajax()) {
             return view('front.company.jobload' , ['jobs' => $jobs])->render();
         }
-        return view('front.company.show' , compact('company','jobs'));
+        return view('front.company.show' , compact('company' , 'jobs'));
     }
 
     /**
@@ -101,7 +106,8 @@ class CompanyController extends Controller
     public function edit($id)
     {
         $company = $this->companies->find($id);
-        return view('front.company.edit' , compact('company'));
+        $categories = Category::where('name' , '=' , 'Root Category')->first();
+        return view('front.company.edit' , compact('company','categories'));
     }
 
     /**

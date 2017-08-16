@@ -52,15 +52,7 @@
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="{{route('role.index')}}">
-                        <i class="fa fa-edit"></i> <span>Role-Permission</span>
-                        <span class="pull-right-container">
-                             <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
+                    <a href="{{route('company.index')}}">
                         <i class="fa fa-edit"></i> <span>Company List</span>
                         <span class="pull-right-container">
                              <i class="fa fa-angle-left pull-right"></i>
@@ -78,6 +70,14 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-edit"></i> <span>Comment List</span>
+                        <span class="pull-right-container">
+                             <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="{{route('role.index')}}">
+                        <i class="fa fa-edit"></i> <span>Role-Permission</span>
                         <span class="pull-right-container">
                              <i class="fa fa-angle-left pull-right"></i>
                         </span>

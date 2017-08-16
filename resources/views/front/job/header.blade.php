@@ -153,6 +153,9 @@
             </div>
 
             <div class="button-group">
+                <div class="action-buttons pull-left">
+                    <a class="btn btn-primary" href="{{url('job/create')}}">Post A Job</a>
+                </div>
                 <div class="action-buttons">
                     <button class="btn btn-primary">Apply filter</button>
                 </div>

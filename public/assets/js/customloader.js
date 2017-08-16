@@ -11,7 +11,7 @@ $(document).pjax('.pagination a', '#loader', {
     type:"GET",
     dataType:"html",
     scrollTo: false,
-
+    timeout: 2000,
 });
 
 $(function() {
@@ -24,7 +24,8 @@ $(function() {
             dataType:"html",
             url: '?'+'pageSize='+currentValue ,
             scrollTo: false,
-            container: '#loader'
+            container: '#loader',
+            timeout: 2000,
         });
 
     });
@@ -36,28 +37,3 @@ $(document).on('pjax:send', function() {
 $(document).on('pjax:complete', function() {
     $('#load').hide()
 })
-
-
-
-
-
-//异步分页
-// $(document).on('click', '.pagination a', function (e) {
-//     e.preventDefault();
-//
-//     var url = $(this).attr('href');
-//     getData(url);
-// });
-
-//取数据
-// function getData(url) {
-//     jQuery("#load").show("slow");
-//     $.ajax({
-//         url: url
-//     }).done(function (data) {
-//         jQuery("#load").hide();
-//         $('#loader').html(data);
-//     }).fail(function () {
-//         alert('Jobs could not be loaded.');
-//     });
-// }

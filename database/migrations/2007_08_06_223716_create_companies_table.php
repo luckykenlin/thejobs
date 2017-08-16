@@ -22,6 +22,7 @@ class CreateCompaniesTable extends Migration
             $table->string('founded_on')->nullable();
             $table->string('email')->nullable();
             $table->string('image')->nullable();
+            $table->string('social_media')->nullable();
             $table->text('short_desc')->nullable();
             $table->text('detail')->nullable();
             $table->string('employer_num')->nullable()->index();

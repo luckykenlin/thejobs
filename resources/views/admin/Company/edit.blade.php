@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section("title")
-    <title> Job Create </title>
+    <title> profile </title>
 @endsection
 @section('content')
     <section class="content-header">
@@ -17,8 +17,10 @@
     {{-- Main Content--}}
     <section class="content">
         <div class="row">
-            <form role="form" class="editForm" action="{{url('admin/job')}}"
+            <form role="form" class="editForm" id="myForm"
+                  action="{{url('admin/job',$job->id)}}"
                   method="post" enctype="multipart/form-data">
+            {{ method_field("patch") }}
             {{ csrf_field() }}
             <!-- left column -->
                 <div class="col-md-6">
@@ -34,7 +36,7 @@
                             <div class="form-group {{ $errors->has('job_name') ? ' has-error' : '' }}">
                                 <label>job_title</label>
                                 <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="" id="job_name" name="job_name" required>
+                                       value="{{$job->job_name}}" id="job_name" name="job_name" required>
                                 @if ($errors->has('job_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('job_name') }}</strong>
@@ -45,7 +47,7 @@
                             <div class="form-group {{ $errors->has('job_place') ? ' has-error' : '' }}">
                                 <label>location</label>
                                 <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="" id="job_place" name="job_place" required>
+                                       value="{{$job->job_place}}" id="job_place" name="job_place" required>
                                 @if ($errors->has('job_place'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('job_place') }}</strong>
@@ -56,7 +58,7 @@
                             <div class="form-group {{ $errors->has('job_salary') ? ' has-error' : '' }}">
                                 <label>salary</label>
                                 <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="" id="job_salary" name="job_salary" required>
+                                       value="{{$job->job_salary}}" id="job_salary" name="job_salary" required>
                                 @if ($errors->has('job_salary'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('job_salary') }}</strong>
@@ -71,7 +73,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" value="" class="form-control pull-right"
+                                    <input type="text" value="{{$job->updated_at}}" class="form-control pull-right"
                                            id="datepicker" name="updated_at" required>
                                     @if ($errors->has('updated_at'))
                                         <span class="help-block">
@@ -90,7 +92,7 @@
                                     </div>
                                     <input type="text" class="form-control"
                                            data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask=""
-                                           value="" id="phone" name="phone" required>
+                                           value="{{$job->phone}}" id="phone" name="phone" required>
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -104,7 +106,7 @@
                             <div class="form-group {{ $errors->has('job_desc') ? ' has-error' : '' }}">
                                 <label>describe</label>
                                 <textarea class="form-control" rows="3"
-                                          id="job_desc" name="job_desc" required></textarea>
+                                          id="job_desc" name="job_desc" required>{{ $job->job_desc}}</textarea>
                                 @if ($errors->has('job_desc'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('job_desc') }}</strong>
@@ -131,7 +133,7 @@
                             <div class="form-group {{ $errors->has('job_contact') ? ' has-error' : '' }}">
                                 <label>contact</label>
                                 <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="" id="job_contact" name="job_contact" required>
+                                       value="{{$job->job_contact}}" id="job_contact" name="job_contact" required>
                                 @if ($errors->has('job_contact'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('job_contact') }}</strong>
@@ -142,10 +144,12 @@
                             <div class="form-group {{ $errors->has('job_type') ? ' has-error' : '' }}">
                                 <label>job_type</label>
                                 <select class="form-control" id="job_type" name="job_type">
-                                    <option value="{{\App\Contracts\Constant::FULL_TIME}}">
+                                    <option value="3"
+                                            @if($job->job_type == \App\Contracts\Constant::FULL_TIME) selected @endif>
                                         Full time
                                     </option>
-                                    <option value="{{\App\Contracts\Constant::PART_TIME}}">
+                                    <option value="4"
+                                            @if($job->job_type == \App\Contracts\Constant::PART_TIME) selected @endif>
                                         Part time
                                     </option>
                                 </select>
@@ -159,11 +163,13 @@
                             <div class="form-group {{ $errors->has('job_status') ? ' has-error' : '' }}">
                                 <label>Pending_status</label>
                                 <select class="form-control" id="job_status" name="job_status">
-                                    <option value="1">
-                                        Pended
+                                    <option value="1"
+                                            @if($job->job_status == \App\Contracts\Constant::JOB_FILLED) selected @endif>
+                                        FILLED
                                     </option>
-                                    <option value="0">
-                                        Pendding
+                                    <option value="0"
+                                            @if($job->job_status == \App\Contracts\Constant::JOB_EMPTY) selected @endif>
+                                        EMPTY
                                     </option>
                                 </select>
                                 @if ($errors->has('job_status'))
@@ -176,7 +182,7 @@
                             <div class="form-group {{ $errors->has('job_level') ? ' has-error' : '' }}">
                                 <label>job_level</label>
                                 <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="" id="job_level" name="job_level" required>
+                                       value="{{$job->job_level}}" id="job_level" name="job_level" required>
                                 @if ($errors->has('job_level'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('job_level') }}</strong>
@@ -187,7 +193,7 @@
                             <div class="form-group {{ $errors->has('job_category') ? ' has-error' : '' }}">
                                 <label>job_category</label>
                                 <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="restaurant" id="job_category" name="job_category" required>
+                                       value="{{$job->job_category}}" id="job_category" name="job_category" required>
                                 @if ($errors->has('job_category'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('job_category') }}</strong>
@@ -196,7 +202,7 @@
                             </div>
                             <!-- footer -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-flat btn-primary">Submit</button>
+                                <button type="submit" id="btn1" class="btn btn-flat btn-primary" data-stuff='[{"posturl":"{{url("admin/job").'/'.$job->id}}","title":"updated", "type":"POST"}]'>Submit</button>
                             </div>
 
                         </div>
@@ -209,4 +215,7 @@
         </div>
         <!-- /.row -->
     </section>
+@endsection
+@section('js')
+    <script src="{{ config("app.url") . "/js/sweetswal.js" }}"></script>
 @endsection

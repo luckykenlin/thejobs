@@ -27,6 +27,3 @@
         </section>
     </main>
 @endsection
-@section('js')
-    <script src="{{asset('js/customloader.js')}}"></script>
-@endsection

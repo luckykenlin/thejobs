@@ -47,7 +47,7 @@
                 </form>
             </div>
             <div class="bottom text-center">
-                Already have account ? <a href="#"><b><br>Click here</b></a>
+                Already have account ? <a href="{{route('login')}}"><b><br>Click here</b></a>
             </div>
         </div>
     </li>

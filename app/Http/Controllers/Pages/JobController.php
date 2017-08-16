@@ -39,7 +39,8 @@ class JobController extends Controller
             $pageInfo = DataUtility::pageInfo(10 , $request->all());
             $pathUrl = $request->path();
             $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
-            $jobs = Job::query();
+            //show status  == unfill positions!  query built
+            $jobs = Job::query()->where('job_status', '=', 0);
 
             if ($request->expectsJson()) {
                 $jobs = $this->jobs->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
@@ -61,8 +62,7 @@ class JobController extends Controller
     {
         if (Auth::check())
         {
-            $categories = Category::where('name', '=', 'Root Category')->first();
-            return view("front.job.create", compact('categories'));
+            return view("front.job.create");
         }
         else return abort(403);
     }
@@ -79,7 +79,6 @@ class JobController extends Controller
        if(Auth::check())
        {
            $data = $request->all();
-           $data['user_id'] = Auth::user()->id;
            if (isset(  $data['job_desc'])) $data['job_desc'] = htmlspecialchars($data['job_desc']);
            $this->jobs->save($data);
            return redirect('job-manage');

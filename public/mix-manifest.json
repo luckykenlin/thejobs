@@ -2,9 +2,9 @@
   "/administrator/user/list.js": "/administrator/user/list.js",
   "/administrator/role/list.js": "/administrator/role/list.js",
   "/administrator/job/list.js": "/administrator/job/list.js",
+  "/administrator/company/list.js": "/administrator/company/list.js",
   "/js/app.js": "/js/app.js",
   "/css/app.css": "/css/app.css",
   "/js/dataUtility.js": "/js/dataUtility.js",
-  "/js/sweetswal.js": "/js/sweetswal.js",
-  "/js/customloader.js": "/js/customloader.js"
+  "/js/sweetswal.js": "/js/sweetswal.js"
 }

@@ -70,20 +70,20 @@
                 <ul>
                     <li><a href="{{url('job')}}">Browse jobs</a></li>
                     <li><a href="{{url('job/create')}}">Post a job</a></li>
-                    <li><a href="job-apply.html">Apply for job</a></li>
+                    <li><a href="#">Apply for job</a></li>
                     @if(Auth::check())
                         <li><a href="{{url('job-manage')}}">Manage jobs</a></li>
                     @endif
-                    <li><a href="job-candidates.html">Candidates</a></li>
+                    <li><a href="#">Candidates</a></li>
                 </ul>
             </li>
             <li>
                 <a class="{{ Request::is('resume') ? 'active' : '' }}" href="#">Resume</a>
                 <ul>
-                    <li><a href="resume-list.html">Browse resumes</a></li>
-                    <li><a href="resume-add.html">Create a resume</a></li>
+                    <li><a href="#">Browse resumes</a></li>
+                    <li><a href="#">Create a resume</a></li>
                     @if(Auth::check())
-                        <li><a href="resume-manage.html">Manage resumes</a></li>
+                        <li><a href="#">Manage resumes</a></li>
                     @endif
                 </ul>
             </li>

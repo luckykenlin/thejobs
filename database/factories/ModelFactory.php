@@ -61,6 +61,7 @@ $factory->define(App\Models\Company::class , function (Faker\Generator $faker) {
         'name' => $faker->company ,
         'location' => $faker->city ,
         'website_url' => $faker->url,
+//        'social_media' => $faker->shuffleArray(),
         'email' =>  $faker->unique()->safeEmail ,
         'phone' => $faker->phoneNumber ,
         'founded_on' => $faker->time() ,

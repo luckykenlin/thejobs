@@ -227,8 +227,7 @@ class BaseRepository implements BaseRepositoryImpl
      */
     public function fetchByPageInfo($query, $pageInfo = [], $filterColumn = [], $orderColumn = [], $searchColumn = [], $eagerLoading = [], $pathUrl)
     {
-        $result = $query->paginate($pageInfo['pageSize']);
-        $pathUrl = $pathUrl.'?';
+        $result = $query->latest('created_at')->paginate($pageInfo['pageSize']);
         $result->withPath($pathUrl);
         return $result;
     }

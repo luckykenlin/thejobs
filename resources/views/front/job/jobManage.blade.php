@@ -40,6 +40,3 @@
         </section>
     </main>
 @endsection
-@section('js')
-    <script src="{{asset('assets/js/customloader.js')}}"></script>
-@endsection
