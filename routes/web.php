@@ -63,7 +63,7 @@ Route::group(/**
     //--------------company---------------//
     Route::resource('/company' , 'CompanyController');
     //--------------category-----------------------//
-    Route::resource('category' , 'CategoryController');
+    Route::resource('/category' , 'CategoryController');
     Route::get('category/{id}/delete' , ['as' => 'category.delete' , 'uses' => 'CategoryController@destroy']);
     //--------------comment----------------//
     //    Route::resource('comment' , 'Admin\\CommentsController');

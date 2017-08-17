@@ -120,7 +120,12 @@ class CompanyController extends Controller
     public function update(Request $request , $id)
     {
         $data = $request->all();
-        $data['detail'] = htmlspecialchars($data['detail']);
+        if (isset($data['detail'])) $data['detail'] = htmlspecialchars($data['detail']);
+        if ($request->hasFile('image')) {
+            $request->file('image')->storeAs(
+                'public/images/' . $data['user_id'] , 'company' . '.' . $request->file('image')->extension());
+            $data['image'] = 'storage/images/' . $data['user_id'] . '/' . 'company' . '.' . $request->file('image')->extension();
+        }
         $this->companies->update($data , $id);
         return redirect('company-manage');
     }

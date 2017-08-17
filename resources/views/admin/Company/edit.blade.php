@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section("title")
-    <title> profile </title>
+    <title> profile</title>
 @endsection
 @section('content')
     <section class="content-header">
@@ -17,8 +17,7 @@
     {{-- Main Content--}}
     <section class="content">
         <div class="row">
-            <form role="form" class="editForm" id="myForm"
-                  action="{{url('admin/job',$job->id)}}"
+            <form role="form" class="editForm"      action="{{url('admin/company',$company->id)}}"
                   method="post" enctype="multipart/form-data">
             {{ method_field("patch") }}
             {{ csrf_field() }}
@@ -27,61 +26,55 @@
                     <!-- general form elements -->
                     <div class="box box-warning">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Job infomation</h3>
+                            <h3 class="box-title">Company infomation</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
 
                             <!-- text input -->
-                            <div class="form-group {{ $errors->has('job_name') ? ' has-error' : '' }}">
-                                <label>job_title</label>
+                            <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label>company name</label>
                                 <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="{{$job->job_name}}" id="job_name" name="job_name" required>
-                                @if ($errors->has('job_name'))
+                                       value="{{$company->name}}" id="name" name="name" required>
+                                @if ($errors->has('name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('job_name') }}</strong>
+                                        <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
                             </div>
 
-                            <div class="form-group {{ $errors->has('job_place') ? ' has-error' : '' }}">
+                            <div class="form-group {{ $errors->has('image') ? ' has-error' : '' }}">
+                                <label>image</label>
+                                <img class="profile-user-img img-responsive img-circle" src="{{asset($company->image)}}"
+                                     alt="User profile picture">
+                                <input type="file" class="form-control" placeholder="Enter ... "
+                                       value="" id="image" name="image">
+                            </div>
+                            <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
+                                <label>Category</label>
+                                <select class="form-control" id="category_id" name="category_id">
+                                    @foreach($categories->getDescendants() as $category)
+                                        <option  value="{{$category->id}}" {{$category->id == $company->category_id? "selected" : ""}}>
+                                            {{$category->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('category_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('category_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group {{ $errors->has('location') ? ' has-error' : '' }}">
                                 <label>location</label>
                                 <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="{{$job->job_place}}" id="job_place" name="job_place" required>
-                                @if ($errors->has('job_place'))
+                                       value="{{$company->location}}" id="location" name="location" required>
+                                @if ($errors->has('location'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('job_place') }}</strong>
+                                        <strong>{{ $errors->first('location') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-
-                            <div class="form-group {{ $errors->has('job_salary') ? ' has-error' : '' }}">
-                                <label>salary</label>
-                                <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="{{$job->job_salary}}" id="job_salary" name="job_salary" required>
-                                @if ($errors->has('job_salary'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('job_salary') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-                            <div class="form-group {{ $errors->has('updated_at') ? ' has-error' : '' }}">
-                                <label>public</label>
-
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input type="text" value="{{$job->updated_at}}" class="form-control pull-right"
-                                           id="datepicker" name="updated_at" required>
-                                    @if ($errors->has('updated_at'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('updated_at') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                                <!-- /.input group -->
                             </div>
 
                             <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
@@ -92,7 +85,7 @@
                                     </div>
                                     <input type="text" class="form-control"
                                            data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask=""
-                                           value="{{$job->phone}}" id="phone" name="phone" required>
+                                           value="{{$company->phone}}" id="phone" name="phone" required>
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -102,17 +95,6 @@
                                 <!-- /.input group -->
                             </div>
 
-                            <!-- textarea -->
-                            <div class="form-group {{ $errors->has('job_desc') ? ' has-error' : '' }}">
-                                <label>describe</label>
-                                <textarea class="form-control" rows="3"
-                                          id="job_desc" name="job_desc" required>{{ $job->job_desc}}</textarea>
-                                @if ($errors->has('job_desc'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('job_desc') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -125,84 +107,85 @@
                     <!-- general form elements -->
                     <div class="box box-warning">
                         <div class="box-header with-border">
-                            <h3 class="box-title">About me</h3>
+                            <h3 class="box-title"></h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
 
-                            <div class="form-group {{ $errors->has('job_contact') ? ' has-error' : '' }}">
-                                <label>contact</label>
+                            <div class="form-group {{ $errors->has('founded_on') ? ' has-error' : '' }}">
+                                <label>founded_on</label>
                                 <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="{{$job->job_contact}}" id="job_contact" name="job_contact" required>
-                                @if ($errors->has('job_contact'))
+                                       value="{{$company->founded_on}}" id="founded_on" name="founded_on" required>
+                                @if ($errors->has('founded_on'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('job_contact') }}</strong>
+                                        <strong>{{ $errors->first('founded_on') }}</strong>
                                     </span>
                                 @endif
                             </div>
 
-                            <div class="form-group {{ $errors->has('job_type') ? ' has-error' : '' }}">
-                                <label>job_type</label>
-                                <select class="form-control" id="job_type" name="job_type">
-                                    <option value="3"
-                                            @if($job->job_type == \App\Contracts\Constant::FULL_TIME) selected @endif>
-                                        Full time
-                                    </option>
-                                    <option value="4"
-                                            @if($job->job_type == \App\Contracts\Constant::PART_TIME) selected @endif>
-                                        Part time
-                                    </option>
+                            <div class="form-group {{ $errors->has('website_url') ? ' has-error' : '' }}">
+                                <label>website url</label>
+                                <input type="text" class="form-control" placeholder="Enter ... "
+                                       value="{{$company->website_url}}" id="website_url" name="website_url" required>
+                                @if ($errors->has('website_url'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('website_url') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label>email</label>
+                                <input type="email" class="form-control" placeholder="Enter ... " id="email" name="email"
+                                       value="{{$company->email}}" required>
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group {{ $errors->has('employer_num') ? ' has-error' : '' }}">
+                                <label>employer_num</label>
+                                <select class="form-control" id="employer_num" name="employer_num">
+                                    <option value="0 - 9"  {{$company->employer_num == "0 - 9"? "selected" : ""}}>0 - 9</option>
+                                    <option value="10 - 99" {{$company->employer_num == "10 - 99"? "selected" : ""}}>10 - 99</option>
+                                    <option value="100 - 999" {{$company->employer_num == "100 - 999"? "selected" : ""}}>100 - 999</option>
+                                    <option value="1,000 - 9,999" {{$company->employer_num == "1,000 - 9,999"? "selected" : ""}}> 1,000 - 9,999</option>
+                                    <option value="10,000 - 99,999" {{$company->employer_num == "10,000 - 99,999"? "selected" : ""}}>10,000 - 99,999</option>
+                                    <option value="100,000 - 999,999" {{$company->employer_num == "100,000 - 999,999"? "selected" : ""}}> 100,000 - 999,999</option>
                                 </select>
-                                @if ($errors->has('job_type'))
+                                @if ($errors->has('employer_num'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('job_type') }}</strong>
+                                        <strong>{{ $errors->first('employer_num') }}</strong>
                                     </span>
                                 @endif
                             </div>
 
-                            <div class="form-group {{ $errors->has('job_status') ? ' has-error' : '' }}">
-                                <label>Pending_status</label>
-                                <select class="form-control" id="job_status" name="job_status">
-                                    <option value="1"
-                                            @if($job->job_status == \App\Contracts\Constant::JOB_FILLED) selected @endif>
-                                        FILLED
-                                    </option>
-                                    <option value="0"
-                                            @if($job->job_status == \App\Contracts\Constant::JOB_EMPTY) selected @endif>
-                                        EMPTY
-                                    </option>
-                                </select>
-                                @if ($errors->has('job_status'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('job_status') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-                            <div class="form-group {{ $errors->has('job_level') ? ' has-error' : '' }}">
-                                <label>job_level</label>
+                            <div class="form-group {{ $errors->has('social_media') ? ' has-error' : '' }}">
+                                <label>social_media</label>
                                 <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="{{$job->job_level}}" id="job_level" name="job_level" required>
-                                @if ($errors->has('job_level'))
+                                       value="{{$company->social_media}}" id="social_media" name="social_media" required>
+                                @if ($errors->has('social_media'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('job_level') }}</strong>
+                                        <strong>{{ $errors->first('social_media') }}</strong>
                                     </span>
                                 @endif
                             </div>
-
-                            <div class="form-group {{ $errors->has('job_category') ? ' has-error' : '' }}">
-                                <label>job_category</label>
-                                <input type="text" class="form-control" placeholder="Enter ... "
-                                       value="{{$job->job_category}}" id="job_category" name="job_category" required>
-                                @if ($errors->has('job_category'))
+                            <!-- textarea -->
+                            <div class="form-group {{ $errors->has('short_desc') ? ' has-error' : '' }}">
+                                <label>describe</label>
+                                <textarea class="form-control" rows="3"
+                                          id="short_desc" name="short_desc" required>{{$company->short_desc}}</textarea>
+                                @if ($errors->has('short_desc'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('job_category') }}</strong>
+                                        <strong>{{ $errors->first('short_desc') }}</strong>
                                     </span>
                                 @endif
                             </div>
                             <!-- footer -->
                             <div class="box-footer">
-                                <button type="submit" id="btn1" class="btn btn-flat btn-primary" data-stuff='[{"posturl":"{{url("admin/job").'/'.$job->id}}","title":"updated", "type":"POST"}]'>Submit</button>
+                                <button type="submit" class="btn btn-flat btn-primary">Submit</button>
                             </div>
 
                         </div>
@@ -215,7 +198,4 @@
         </div>
         <!-- /.row -->
     </section>
-@endsection
-@section('js')
-    <script src="{{ config("app.url") . "/js/sweetswal.js" }}"></script>
 @endsection
