@@ -35,6 +35,8 @@ class UserManageController extends Controller
             $pageInfo = DataUtility::pageInfo(10 , $request->all());
             $pathUrl = $request->path();
             $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+            $pathUrl = str_replace('&show=Simple','',$pathUrl);
+
             $jobs = $this->users->find(Auth::user()->id)->jobs();
             if ($request->expectsJson()) {
                 $jobs = $this->users->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);

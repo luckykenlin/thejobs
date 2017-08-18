@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers\Pages;
 
-use App\Models\Category;
 use App\Models\Job;
-use App\Models\User;
 use App\Utility\DataUtility;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Contracts\Job\JobRepository;
 use App\Utility\DateUtility;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
-use function MongoDB\BSON\toJSON;
 
 class JobController extends Controller
 {
@@ -39,12 +34,12 @@ class JobController extends Controller
             $pageInfo = DataUtility::pageInfo(10 , $request->all());
             $pathUrl = $request->path();
             $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+//            dd($pathUrl);
             //show status  == unfill positions!  query built
             $jobs = Job::query()->where('job_status', '=', 0);
 
             if ($request->expectsJson()) {
                 $jobs = $this->jobs->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
-
                 return view('front.job.load' , ['jobs' => $jobs])->render();
             }
 

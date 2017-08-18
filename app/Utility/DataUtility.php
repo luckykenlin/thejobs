@@ -10,6 +10,8 @@ namespace App\Utility;
 
 
 
+use Illuminate\Support\Facades\Session;
+
 class DataUtility
 {
     /**
@@ -79,6 +81,12 @@ class DataUtility
         if (array_key_exists("page", $data))
              $pageInfo['page'] = $data['page'];
 
+        if (array_key_exists("show", $data))
+        {
+            Session::flash('show', $data['show']);
+            $pageInfo['show'] = $data['show'];
+        }   else  $pageInfo['show'] = 'Simple';
+
         return $pageInfo;
     }
 
@@ -92,8 +100,10 @@ class DataUtility
         $pathUrl = $pathUrl.'?';
         for (; $value = current($pageInfo); next($pageInfo))
         {
-            if (key($pageInfo) == 'page') next($pageInfo);
-            else $pathUrl = $pathUrl . key($pageInfo) . "=" . $value;
+            if (key($pageInfo) != 'page')  {
+                $pathUrl = $pathUrl . key($pageInfo) . "=" . $value;
+                if(last($pageInfo) != $value ) $pathUrl  = $pathUrl.'&';
+            }
         }
         return $pathUrl;
     }

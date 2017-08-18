@@ -9,9 +9,7 @@
     <main>
         <section class="padding-top-20 bg-alt">
             <div class="container">
-                <div class=" text-right ">
-                    <a class="btn btn-primary btn-sm" href="{{url('job/create')}}">Add new job</a>
-                </div>
+
 
                 <div class="pull-left padding-top-20">
                     <select class="selectpicker show-menu-arrow" id="numPicker">
@@ -22,10 +20,9 @@
                     </select>
                 </div>
                 <div class="pull-right padding-top-20">
-                    <select class="selectpicker show-menu-arrow"  id="stylePicker">
-                        <option title="Style Simple" value="Simple">Simple</option>
-                        <option title="Style Detail" value="Detail">Detail</option>
-                    </select>
+                    <div class=" text-right ">
+                        <a class="btn btn-primary btn-sm" href="{{url('job/create')}}">Add new job</a>
+                    </div>
                 </div>
             </div>
 
