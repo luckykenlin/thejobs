@@ -78,12 +78,12 @@
                 </ul>
             </li>
             <li>
-                <a class="{{ Request::is('resume') ? 'active' : '' }}" href="#">Resume</a>
+                <a class="{{ Request::is('resume') ? 'active' : '' }}" href="{{url('resume')}}">Resume</a>
                 <ul>
-                    <li><a href="#">Browse resumes</a></li>
-                    <li><a href="#">Create a resume</a></li>
+                    <li><a href="{{url('resume')}}">Browse resumes</a></li>
+                    <li><a href="{{url('resume/create')}}">Create a resume</a></li>
                     @if(Auth::check())
-                        <li><a href="#">Manage resumes</a></li>
+                        <li><a href="{{url('resume-manage')}}">Manage resumes</a></li>
                     @endif
                 </ul>
             </li>

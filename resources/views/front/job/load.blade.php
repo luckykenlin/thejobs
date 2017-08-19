@@ -14,8 +14,8 @@
                             <img src="{{config('app.url')."/assets/img/job.png"}}" alt="job_logo">
                             <div class="hgroup">
                                 <h4>{{$job->job_name}}</h4>
-                                <h5>{{$job->companies->name}} <span
-                                            class="{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "label label-success" : "label label-warning"}}">{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "full time" : "part time"}}</span>
+                                <h5>{{$job->companies->name}} <span class="{{   \App\Utility\DataUtility::jobType($job->job_type)['lable_style'] }}">
+                                        {{  \App\Utility\DataUtility::jobType($job->job_type)['lable']}}</span>
                                 </h5>
                             </div>
                             <time datetime="2016-03-10 20:00">{{App\Utility\DateUtility::timemaker($job->updated_at)}}</time>
@@ -58,26 +58,28 @@
                             </div>
                             <div class="header-meta">
                                 <span class="location">{{$job->job_place}}</span>
-                                <span class="{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "label label-success" : "label label-warning"}}">{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "full time" : "part time"}}</span>
+                                <<span class="{{   \App\Utility\DataUtility::jobType($job->job_type)['lable_style'] }}">
+                                        {{  \App\Utility\DataUtility::jobType($job->job_type)['lable']}}</span>
                             </div>
                         </header>
                     </div>
                 </div>
                 <!-- END Job item -->
-            @endif
+        @endif
     @else
         <!-- Job item -->
             <div class="col-xs-12">
                 <div class="item-block" style="cursor: pointer" onclick="window.location.href = '{{url('job/'.$job->id)}}'">
                     <header>
-                        <img src="{{config('app.url')."/assets/img/job.png"}}"bbbb alt="job_logo">
+                        <img src="{{config('app.url')."/assets/img/job.png"}}" alt="job_logo">
                         <div class="hgroup">
                             <h4>{{$job->job_name}}</h4>
                             <h5><a href="tel:{{$job->phone}}">{{$job->job_contact}} : {{$job->phone}}</a></h5>
                         </div>
                         <div class="header-meta">
                             <span class="location">{{$job->job_place}}</span>
-                            <span class="{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "label label-success" : "label label-warning"}}">{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "full time" : "part time"}}</span>
+                            <span class="{{   \App\Utility\DataUtility::jobType($job->job_type)['lable_style'] }}">
+                                        {{  \App\Utility\DataUtility::jobType($job->job_type)['lable']}}</span>
                         </div>
                     </header>
                 </div>

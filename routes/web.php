@@ -15,27 +15,31 @@ Route::group(/**
  *    namespace: namespace
  */
     ['namespace' => 'Pages'] , function () {
-        Route::get('/' , 'HomeController@index')->name('front.home');
-        Route::get('home' , 'HomeController@index');
-        Route::get('test', function () {
-            return view('test');
-        });
+    Route::get('/' , 'HomeController@index')->name('front.home');
+    Route::get('home' , 'HomeController@index');
+    Route::get('test' , function () {
+        return view('test');
+    });
 
-        //---------- Usermanage action ------------------------------
-            //----------------   Job -------------------------------
-            Route::get('job-manage' , 'UserManageController@jobManage');  //  Job's management by user
-            Route::delete('job-manage/{id}', 'UserManageController@jobDestroy')->name('job.delete');// Job's deletion by user
+    //---------- Usermanage action ------------------------------
+    //----------------   Job -------------------------------
+    Route::get('job-manage' , 'UserManageController@jobManage');  //  Job's management by user
+    Route::delete('job-manage/{id}' , 'UserManageController@jobDestroy')->name('job.delete');// Job's deletion by user
 
-            Route::post('job-mark/{id}' , 'UserManageController@jobMark')->name('job.mark');  //  Mark a job's status
-            //----------------   company ----------------------------
-            Route::get('company-manage' , 'UserManageController@companyManage');  //  Job's management by user
-            Route::delete('company-manage/{id}', 'UserManageController@companyDestroy')->name('company.delete');// Job's deletion by user
+    Route::post('job-mark/{id}' , 'UserManageController@jobMark')->name('job.mark');  //  Mark a job's status
+    //----------------   company ----------------------------
+    Route::get('company-manage' , 'UserManageController@companyManage');
+    Route::delete('company-manage/{id}' , 'UserManageController@companyDestroy')->name('company.delete');
+    //----------------   resume ----------------------------
+    Route::get('resume-manage' , 'UserManageController@resumeManage');
+    Route::delete('resume-manage/{id}' , 'UserManageController@resumeDestroy')->name('resume.delete');
 
-        //----------- END ------------------------
+    //----------- END ------------------------
 
-        Route::resource('job' , 'JobController');
-        Route::resource('company' , 'CompanyController');
-        Route::resource('comment' , 'CommentController');
+    Route::resource('job' , 'JobController');
+    Route::resource('company' , 'CompanyController');
+    Route::resource('comment' , 'CommentController');
+    Route::resource('resume' , 'ResumeController');
 });
 
 

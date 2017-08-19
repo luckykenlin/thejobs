@@ -30,4 +30,10 @@ return [
         'contracts' => 'App\Contracts\Company\CompanyRepository' ,
         'repository' => 'App\Repositories\CompanyRepository'
     ],
+
+
+    'resume' => [
+        'contracts' => 'App\Contracts\Resume\ResumeRepository' ,
+        'repository' => 'App\Repositories\ResumeRepository'
+    ],
 ];

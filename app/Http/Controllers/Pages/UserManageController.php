@@ -6,6 +6,7 @@ use App\Contracts\Constant;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Job;
+use App\Models\Resume;
 use App\Utility\DataUtility;
 use Illuminate\Http\Request;
 use \App\Contracts\User\UserRepository;
@@ -45,6 +46,26 @@ class UserManageController extends Controller
 
             $jobs = $this->users->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
             return view('front.job.jobManage' , compact('jobs'));
+
+        } else return abort(403);
+    }
+
+    public function resuemeManage(Request $request)
+    {
+        if (Auth::check()) {
+            $pageInfo = DataUtility::pageInfo(10 , $request->all());
+            $pathUrl = $request->path();
+            $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+            $pathUrl = str_replace('&show=Simple','',$pathUrl);
+
+            $resumes = $this->users->find(Auth::user()->id)->resumes();
+            if ($request->expectsJson()) {
+                $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
+                return view('front.resume.ownload' , ['resumes' => $resumes])->render();
+            }
+
+            $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
+            return view('front.resume.resumeManage' , compact('resumes'));
 
         } else return abort(403);
     }
@@ -100,6 +121,33 @@ class UserManageController extends Controller
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function resumeDestroy($id , Request $request)
+    {
+
+        if (isset($id)) $result = Resume::destroy($id);
+        if ($result) {
+            $pageInfo = DataUtility::pageInfo(10 , $request->all());
+            $pathUrl = explode('/', $request->path())[0];
+            $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+            $resumes = $this->users->find(Auth::user()->id)->resumes();
+
+            if ($request->expectsJson()) {
+                $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
+                return view('front.resume.ownLoad' , ['resume' => $resumes])->render();
+            }
+            $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
+            return view('front.resume.ownLoad' , ['resume' => $resumes])->render();
+        } else {
+            return abort('403');
+        }
+    }
 
     /**
      * Remove the specified resource from storage.

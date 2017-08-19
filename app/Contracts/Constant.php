@@ -27,9 +27,14 @@ interface Constant
     const JOB_PENDED_SUCCESSFUL = 1;
     const JOB_EMPTY = 0;
     const JOB_FILLED = 1;
-    const FULL_TIME = 3;
-    const PART_TIME = 4;
+    const FULL_TIME = 1;
 
-
+    const JOB_TYPE = [
+        "FULL_TIME" => 3,
+        "PART_TIME" => 4,
+        "FREELANCE" => 5,
+        "INTERNSHIP" => 6,
+        "REMOTE" => 7,
+        ];
 
 }

@@ -47,6 +47,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Company');
     }
+
+    public function resumes()
+    {
+        return $this->hasMany('App\Models\Resume');
+    }
+
     /** Is User A Administrator
      * @return bool
      */

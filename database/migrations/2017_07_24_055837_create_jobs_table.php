@@ -31,17 +31,9 @@ class CreateJobsTable extends Migration
             $table->string('job_level')->nullable();
             $table->timestamps();
 
-//            $table->integer('user_id')->unsigned();
-//            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-//            $table->integer('category_id')->unsigned();
-//            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-
             $table->integer('company_id')->unsigned();
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->integer('candidate_id')->unsigned()->nullable();
-            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -10,6 +10,7 @@ namespace App\Utility;
 
 
 
+use App\Contracts\Constant;
 use Illuminate\Support\Facades\Session;
 
 class DataUtility
@@ -106,5 +107,38 @@ class DataUtility
             }
         }
         return $pathUrl;
+    }
+
+    /**
+     * @param $job_type
+     * @return array
+     * @internal param $jobType
+     */
+    public static function jobType($job_type)
+    {
+        $jobType = [];
+        switch ($job_type){
+            case Constant::JOB_TYPE['FULL_TIME']:
+                $jobType['lable_style'] = 'label label-success';
+                $jobType['lable'] = 'FULL_TIME';
+                break;
+            case Constant::JOB_TYPE['PART_TIME']:
+                $jobType['lable_style'] = 'label label-warning';
+                $jobType['lable'] = 'PART_TIME';
+                break;
+            case Constant::JOB_TYPE['INTERNSHIP']:
+                $jobType['lable_style'] = 'label label-danger';
+                $jobType['lable'] = 'INTERNSHIP';
+                break;
+            case Constant::JOB_TYPE['FREELANCE']:
+                $jobType['lable_style'] = 'label label-info';
+                $jobType['lable'] = 'FREELANCE';
+                break;
+            case Constant::JOB_TYPE['REMOTE']:
+                $jobType['lable_style'] = 'label label-success';
+                $jobType['lable'] = 'label label-success';
+                break;
+        }
+        return $jobType;
     }
 }

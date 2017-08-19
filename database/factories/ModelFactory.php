@@ -40,7 +40,7 @@ $factory->define(App\Models\Job::class , function (Faker\Generator $faker) {
         'job_name' => $faker->jobTitle ,
         'job_place' => $faker->city ,
         'working_days' =>  6,
-        'job_type' => \App\Contracts\Constant::FULL_TIME ,
+        'job_type' => \App\Contracts\Constant::JOB_TYPE['FULL_TIME'] ,
         'job_status' => \App\Contracts\Constant::JOB_EMPTY ,
         'job_contact' => $faker->name ,
         'phone' => $faker->phoneNumber ,
@@ -73,3 +73,25 @@ $factory->define(App\Models\Company::class , function (Faker\Generator $faker) {
     ];
     return $info;
 });
+
+
+$factory->define(App\Models\Resume::class , function (Faker\Generator $faker) {
+    $info = [
+        'name' => $faker->lastName ,
+        'job_title' => $faker->jobTitle ,
+        'image' => 'assets/img/job.png',
+        'website_url' => $faker->url,
+//        'social_media' => $faker->shuffleArray(),
+        'hourly_rate' =>  $faker->numberBetween(200,500) ,
+        'phone' => $faker->phoneNumber ,
+        'location' => $faker->city ,
+        'email' => $faker->email ,
+        'short_desc' => $faker->text('100') ,
+        'age' => $faker->numberBetween(20,50) ,
+        'cv_url' => 'storage/1/cv.doc' ,
+        'job_id' => 1,
+
+    ];
+    return $info;
+});
+
