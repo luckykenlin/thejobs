@@ -29,4 +29,9 @@ class Company extends Model
     {
         return $this->hasMany('App\Models\Job');
     }
+
+    public function medias()
+    {
+        return $this->hasMany('App\Models\Media');
+    }
 }

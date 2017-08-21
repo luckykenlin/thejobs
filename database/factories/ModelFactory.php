@@ -89,9 +89,17 @@ $factory->define(App\Models\Resume::class , function (Faker\Generator $faker) {
         'short_desc' => $faker->text('100') ,
         'age' => $faker->numberBetween(20,50) ,
         'cv_url' => 'storage/1/cv.doc' ,
-        'job_id' => 1,
-
     ];
     return $info;
 });
+
+
+$factory->define(App\Models\Tag::class , function (Faker\Generator $faker) {
+    $tag = ['HTML' , 'JAVASCRIPT' , 'CSS'];
+    $info = [
+        'name' => $faker->randomElement($tag) ,
+    ];
+    return $info;
+});
+
 

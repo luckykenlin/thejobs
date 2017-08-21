@@ -39,7 +39,7 @@ $(function() {
         let pageSize  = $('#numPicker').val();
         let show = $('#stylePicker').val();
         let url = '?'+"pageSize=" + pageSize;
-        if ($('#stylePicker').val() == 'undefined')  url = url +"&show=" + $('#stylePicker').val();
+        url = url +"&show=" + $('#stylePicker').val();
         $.pjax({
             type:"GET",
             dataType:"html",

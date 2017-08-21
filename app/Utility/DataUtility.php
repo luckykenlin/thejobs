@@ -86,7 +86,7 @@ class DataUtility
         {
             Session::flash('show', $data['show']);
             $pageInfo['show'] = $data['show'];
-        }   else  $pageInfo['show'] = 'Simple';
+        }
 
         return $pageInfo;
     }

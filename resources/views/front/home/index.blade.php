@@ -32,7 +32,8 @@
                                     </div>
                                     <div class="header-meta">
                                         <span class="location">{{$job->job_place}}</span>
-                                        <span class="{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "label label-success" : "label label-warning"}}">{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "full time" : "part time"}}</span>
+                                        <span class="{{   \App\Utility\DataUtility::jobType($job->job_type)['lable_style'] }}">
+                                        {{  \App\Utility\DataUtility::jobType($job->job_type)['lable']}}</span>
                                     </div>
                                 </header>
                             </div>

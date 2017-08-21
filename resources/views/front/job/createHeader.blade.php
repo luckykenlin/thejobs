@@ -41,12 +41,11 @@
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
                     <select class="form-control" id="job_type" name="job_type">
-                        <option value="{{\App\Contracts\Constant::FULL_TIME}}">
-                            Full time
-                        </option>
-                        <option value="{{\App\Contracts\Constant::PART_TIME}}">
-                            Part time
-                        </option>
+                        @foreach(\App\Contracts\Constant::JOB_TYPE as $key => $jobType)
+                            <option value="{{$jobType}}">
+                                {{$key}}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
             </div>

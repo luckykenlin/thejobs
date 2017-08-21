@@ -1,9 +1,9 @@
 @extends('layouts.front')
 @section('title')
-    <title> company - manage </title>
+    <title> resume - manage </title>
 @endsection
 @section('header')
-    @include('front.company.manageHeader')
+    @include('front.resume.manageHeader')
 @endsection
 @section('content')
     <main>
@@ -19,13 +19,13 @@
                 </div>
 
                 <div class="pull-right padding-top-20">
-                    <a class="btn btn-primary btn-sm" href="{{url('company/create')}}">Add new company</a>
+                    <a class="btn btn-primary btn-sm" href="{{url('resume/create')}}">Add new company</a>
                 </div>
             </div>
             <div class="container">
                 <div class="row item-blocks-condensed" id="loader">
                     <!-- ajax --loader -->
-                @include('front.company.ownLoad')
+                @include('front.resume.ownLoad')
                 <!-- END loader -->
                 </div>
             </div>

@@ -50,21 +50,22 @@ class UserManageController extends Controller
         } else return abort(403);
     }
 
-    public function resuemeManage(Request $request)
+    public function resumeManage(Request $request)
     {
         if (Auth::check()) {
             $pageInfo = DataUtility::pageInfo(10 , $request->all());
             $pathUrl = $request->path();
             $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
-            $pathUrl = str_replace('&show=Simple','',$pathUrl);
-
             $resumes = $this->users->find(Auth::user()->id)->resumes();
+
             if ($request->expectsJson()) {
                 $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
+                dd($resumes);
                 return view('front.resume.ownload' , ['resumes' => $resumes])->render();
             }
 
             $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
+
             return view('front.resume.resumeManage' , compact('resumes'));
 
         } else return abort(403);
@@ -137,13 +138,12 @@ class UserManageController extends Controller
             $pathUrl = explode('/', $request->path())[0];
             $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
             $resumes = $this->users->find(Auth::user()->id)->resumes();
-
             if ($request->expectsJson()) {
                 $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
-                return view('front.resume.ownLoad' , ['resume' => $resumes])->render();
+                return view('front.resume.ownLoad' , ['resumes' => $resumes])->render();
             }
             $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
-            return view('front.resume.ownLoad' , ['resume' => $resumes])->render();
+            return view('front.resume.ownLoad' , ['resumes' => $resumes])->render();
         } else {
             return abort('403');
         }
@@ -176,6 +176,7 @@ class UserManageController extends Controller
             return abort('403');
         }
     }
+
 
     /**
      * Mark job_status to be available for can

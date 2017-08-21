@@ -1,27 +1,36 @@
-@foreach($companies as $company)
-    <!-- Company item -->
+@foreach($resumes as $resume)
+    <!-- Resume item -->
     <div class="col-xs-12">
         <div class="item-block">
             <header>
-                <a href="{{url('company/'.$company->id)}}"><img src="{{config('app.url')."/".$company->image}}" alt=""></a>
+                <a href="{{url('resume', $resume->id)}}"><img class="resume-avatar" src="{{config('app.url').'/'.$resume->image}}" alt=""></a>
                 <div class="hgroup">
-                    <h4><a href="{{url('company/'.$company->id)}}">{{$company->name}}</a></h4>
-                    <h5>{{$company->categories->name}}<a href="{{route('company.show',$company->id)}}#open-positions"><span
-                                    class="label label-info">{{count($company->jobs)}} jobs</span></a></h5>
+                    <h4><a href="resume-detail.html">{{$resume->name}}</a></h4>
+                    <h5>{{$resume->job_title}}</h5>
                 </div>
-                <div class="action-btn">
-                    <a class="btn btn-xs btn-gray" href="{{url('company/'.$company->id).'/edit'}}">Edit</a>
-                    <a class="btn btn-xs btn-danger" href="{{route('company.delete', $company->id)}}">Delete</a>
+                <div class="header-meta">
+                    <span class="location">{{$resume->location}}</span>
+                    <span class="rate">${{$resume->hourly_rate}} / hour</span>
                 </div>
             </header>
+
+            <footer>
+                <p class="status"><strong>Updated on:</strong> {{$resume->updated_at->format('M d ,  Y')}}</p>
+
+                <div class="action-btn">
+                    <a class="btn btn-xs btn-gray" href="#">Hide</a>
+                    <a class="btn btn-xs btn-gray" href="{{url('resume/'.$resume->id).'/edit'}}">Edit</a>
+                    <a class="btn btn-xs btn-danger" href="{{route('resume.delete', $resume->id)}}">Delete</a>
+                </div>
+            </footer>
         </div>
     </div>
-    <!-- END Company item -->
+    <!-- END Resume item -->
 @endforeach
 
 <!-- Page navigation -->
 <nav class="text-center">
-    {{$companies->links()}}
+    {{$resumes->links()}}
 </nav>
 <!-- END Page navigation -->
 <script src="{{asset('js/dataUtility.js')}}"></script>

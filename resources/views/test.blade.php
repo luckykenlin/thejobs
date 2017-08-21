@@ -1,1 +1,0 @@
-{{  \App\Utility\DataUtility::jobType(3)['lable_style'] }}

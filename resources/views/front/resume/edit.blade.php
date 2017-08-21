@@ -1,16 +1,16 @@
 @extends('layouts.front')
 @section('title')
-    <title>Edit company </title>
+    <title>Edit resume </title>
 @endsection
 @section('header')
-    <form role="form" class="editForm" action="{{url('company')."/".$company->id}}"
+    <form role="form" class="editForm" action="{{url('resume')."/".$resume->id}}"
           method="post" enctype="multipart/form-data">
         {{ method_field('PATCH') }}
         {{ csrf_field() }}
-        @include('front.company.editHeader')
+        @include('front.resume.editHeader')
         @endsection
         @section('content')
-            <main>
+     /       <main>
 
                 <!-- Social media -->
                 <section>
@@ -123,7 +123,7 @@
                 <!-- END Submit -->
 
 
-            </main>
+                <main>
         @endsection
     </form>
 @section('js')

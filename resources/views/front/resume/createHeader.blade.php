@@ -1,95 +1,75 @@
 <header class="page-header bg-img" style="background-image: url({{asset('assets/img/bg-banner1.jpg')}})">
     <div class="container page-name">
-        <h1 class="text-center">Add your company</h1>
-        <p class="lead text-center">Create a profile for your company and put it online.</p>
+        <h1 class="text-center">Add your resume</h1>
+        <p class="lead text-center">Create your resume and put it online.</p>
     </div>
 
     <div class="container">
+
         <div class="row">
-            <div class="col-xs-12">
-                <div class="row">
-
-                    <div class="col-xs-12 col-sm-4 col-lg-2">
-                        <div class="form-group">
-                            <input type="file" class="dropify" id="image" name="image"
-                                   data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
-                            <span class="help-block">A square logo</span>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-8 col-lg-10">
-                        <div class="form-group">
-                            <input type="text" class="form-control input-lg" name="name" placeholder="Comapny name">
-                        </div>
-                        <select title="Category:&nbsp;&nbsp; Choose one of the following..."
-                                class="form-control selectpicker" id="category_id"
-                                name="category_id">
-                            @foreach($categories->getDescendants() as $category)
-                                <option value="{{$category->id}}">
-                                    {{$category->name}}
-                                </option>
-                            @endforeach
-                        </select>
-
-                        <div class="form-group">
-                                <textarea class="form-control" name="short_desc" rows="3"
-                                          placeholder="Short description"></textarea>
-                        </div>
-                    </div>
-
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    <input type="file" class="dropify" data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
+                    <span class="help-block">Please choose a 4:6 profile picture.</span>
                 </div>
             </div>
 
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-sm-8">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control input-lg" placeholder="Name">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="job_title" class="form-control" placeholder="Headline (e.g. Front-end developer)">
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" name="short_desc" rows="3" placeholder="Short description about you"></textarea>
+                </div>
+
+                <hr class="hr-lg">
+
+                <h6>Basic information</h6>
                 <div class="row">
 
-                    <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group col-xs-12 col-sm-6">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            <input type="text" class="form-control" name="location"
-                                   placeholder="Location, e.g. Melon Park, CA">
+                            <input type="text" name="location" class="form-control" placeholder="Location, e.g. Melon Park, CA">
                         </div>
                     </div>
 
-                    <div class="form-group col-xs-12 col-sm-6 col-md-4">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                            <select class="form-control selectpicker" name="employer_num">
-                                <option value="0 - 9">0 - 9</option>
-                                <option value="10 - 99" selected>10 - 99</option>
-                                <option value="100 - 999">100 - 999</option>
-                                <option value="1,000 - 9,999"> 1,000 - 9,999</option>
-                                <option value="10,000 - 99,999">10,000 - 99,999</option>
-                                <option value="100,000 - 999,999"> 100,000 - 999,999</option>
-                            </select>
-                            <span class="input-group-addon">Employer</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group col-xs-12 col-sm-6">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-                            <input type="text" name="website_url" class="form-control"
-                                   placeholder="Website address">
+                            <input type="text" name="website_url" class="form-control" placeholder="Website address">
                         </div>
                     </div>
 
-                    <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                            <input type="text" name="hourly_rate" class="form-control" placeholder="Salary, e.g. 85">
+                            <span class="input-group-addon">Per hour</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-6">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
-                            <input type="text" class="form-control" name="founded_on"
-                                   placeholder="Founded on, e.g. 2013">
+                            <input type="text" name="age" class="form-control" placeholder="Age">
+                            <span class="input-group-addon">Years old</span>
                         </div>
                     </div>
 
-                    <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group col-xs-12 col-sm-6">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                             <input type="text" name="phone" class="form-control" placeholder="Phone number">
                         </div>
                     </div>
 
-                    <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                    <div class="form-group col-xs-12 col-sm-6">
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                             <input type="text" name="email" class="form-control" placeholder="Email address">
@@ -97,17 +77,27 @@
                     </div>
 
                 </div>
-            </div>
 
+                <hr class="hr-lg">
+
+                <h6>Tags list</h6>
+                <div class="form-group">
+                    <input type="text" name="tags" value="HTML,CSS,Javascript" data-role="tagsinput" placeholder="Tag name">
+                    <span class="help-block" >Write tag name and press enter</span>
+                </div>
+
+            </div>
         </div>
 
         <div class="button-group">
             <div class="action-buttons">
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-flat btn-primary">Quick Submit</button>
+
+                <div class="upload-button">
+                    <button class="btn btn-block btn-primary">Choose a resume file</button>
+                    <input type="file" name="cv_url">
                 </div>
+
             </div>
         </div>
-
     </div>
 </header>
