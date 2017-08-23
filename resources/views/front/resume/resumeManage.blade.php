@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="pull-right padding-top-20">
-                    <a class="btn btn-primary btn-sm" href="{{url('resume/create')}}">Add new company</a>
+                    <a class="btn btn-primary btn-sm" href="{{url('resume/create')}}">Add new resume</a>
                 </div>
             </div>
             <div class="container">

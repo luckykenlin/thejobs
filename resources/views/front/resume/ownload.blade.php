@@ -5,7 +5,7 @@
             <header>
                 <a href="{{url('resume', $resume->id)}}"><img class="resume-avatar" src="{{config('app.url').'/'.$resume->image}}" alt=""></a>
                 <div class="hgroup">
-                    <h4><a href="resume-detail.html">{{$resume->name}}</a></h4>
+                    <h4><a href="{{url('resume', $resume->id)}}">{{$resume->name}}</a></h4>
                     <h5>{{$resume->job_title}}</h5>
                 </div>
                 <div class="header-meta">

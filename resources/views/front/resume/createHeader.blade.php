@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-4">
                 <div class="form-group">
-                    <input type="file" class="dropify" data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
+                    <input type="file" class="dropify" name="image" data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
                     <span class="help-block">Please choose a 4:6 profile picture.</span>
                 </div>
             </div>

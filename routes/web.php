@@ -11,6 +11,8 @@
 |
 */
 //** ------------------------------ ----------------------------------   front
+use Illuminate\Support\Facades\Route;
+
 Route::group(/**
  *    namespace: namespace
  */
@@ -40,6 +42,7 @@ Route::group(/**
     Route::resource('company' , 'CompanyController');
     Route::resource('comment' , 'CommentController');
     Route::resource('resume' , 'ResumeController');
+    Route::get('/download/{file}', 'ResumeController@getDownload');
 });
 
 

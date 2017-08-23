@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Contracts\Base;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 /**
  * Created by PhpStorm.
@@ -57,7 +58,6 @@ interface BaseRepository
     public function fetchById($pageSize , $id , $searchColumn = [] , $orderColumn = []);
 
     /** Create Table Record
-     * @param $id
      * @return true of false
      */
     public function create();
@@ -82,14 +82,13 @@ interface BaseRepository
     public function delete($id);
 
     /** Find  Info By Id
-     * @param Request $request
      * @param $id
      * @return mixed
      */
     public function find($id);
 
     /** Delete Records
-     * @param Request $request
+     * @param array $data
      * @return bool
      */
     public function deleteGroup(array $data);
@@ -100,5 +99,11 @@ interface BaseRepository
      * @return void
      */
     public function validator(array $data);
+
+    /**
+     * @param UploadedFile $file
+     * @param $filename
+     */
+    public function fileUpload(UploadedFile $file, $filename);
 
 }

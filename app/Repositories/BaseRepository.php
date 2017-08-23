@@ -9,8 +9,10 @@
 namespace App\Repositories;
 use \App\Contracts\Base\BaseRepository as BaseRepositoryImpl;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class BaseRepository implements BaseRepositoryImpl
 {
@@ -174,7 +176,8 @@ class BaseRepository implements BaseRepositoryImpl
      */
     public function save($data)
     {
-        $this->model->create($data);
+        $model =  $this->model->create($data);
+        return $model;
     }
     /** Delete User
      * @param $id
@@ -230,5 +233,17 @@ class BaseRepository implements BaseRepositoryImpl
         $result = $query->latest('created_at')->paginate($pageInfo['pageSize']);
         $result->withPath($pathUrl);
         return $result;
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @param $filename
+     */
+    public function fileUpload(UploadedFile $file, $filename)
+    {
+        $file->storeAs(
+            'public/images/' . Auth::user()->id , $filename . '.' . $file->extension());
+        $url = 'storage/images/' .Auth::user()->id  . '/' . $filename . '.' . $file->extension();
+        return $url;
     }
 }

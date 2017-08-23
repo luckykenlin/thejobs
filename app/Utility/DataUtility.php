@@ -141,4 +141,22 @@ class DataUtility
         }
         return $jobType;
     }
+
+    /**
+     * @param array $data
+     * @return array|bool
+     */
+    public static function requestDataReset(Array $data)
+    {
+        $result = [];
+        if (isset($data)) {
+            foreach ($data as $key => $values) {
+                foreach ($values as $k => $value) {
+                    $result[$k][$key] = $value;
+                }
+            }
+            return $result;
+        }
+        else return false;
+    }
 }
