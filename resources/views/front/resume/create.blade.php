@@ -113,8 +113,7 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-4">
                                                 <div class="form-group">
-                                                    <input type="file" class="dropify" name="education[image][]"
-                                                           data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
+                                                    <input type="file" class="dropify" name="education[image][]">
                                                     <span class="help-block">Please choose a square logo</span>
                                                 </div>
                                             </div>
@@ -160,8 +159,7 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-4">
                                                 <div class="form-group">
-                                                    <input type="file" class="dropify" name="education[image][]"
-                                                           data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
+                                                    <input type="file" class="dropify-copy" name="education[image][]">
                                                     <span class="help-block">Please choose a square logo</span>
                                                 </div>
                                             </div>
@@ -433,6 +431,7 @@
 @section('js')
     <script src="{{asset("assets/vendors/summernote/summernote.js")}}"></script>
     <script src="{{asset('plugins/datepicker/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('assets/vendors/dropify/js/dropify.js')}}"></script>
     <script>
         $('.datepicker').datepicker();
     </script>

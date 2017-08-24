@@ -125,18 +125,18 @@ class ResumeController extends Controller
             }
 
             if (isset($education)) {
-                foreach ($education as $item) {
+                foreach ($education as $key => $item) {
                    if ($item !== last($education)) {
-                       if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'], Carbon::now()->format('hs').'edu');
+                       if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'], Carbon::now()->format('hs').'edu'.$key);
                        $resume->educations()->save(new Education($item));
                    }
                 }
             }
 
             if (isset($experience)) {
-                foreach ($experience as $item) {
+                foreach ($experience as $key => $item) {
                     if ($item !== last($experience)) {
-                        if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'], Carbon::now()->format('hs').'exp');
+                        if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'], Carbon::now()->format('hs').'exp'.$key);
                         $resume->educations()->save(new Experience($item));
                     }
                 }

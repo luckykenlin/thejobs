@@ -24,7 +24,7 @@
                             <div class="col-xs-12">
                                 <div class="item-block">
                                     <header>
-                                        <img src="{{config('app.url'."/".$education->image)}}" alt="">
+                                        <img src="{{config('app.url')."/".$education->image}}" alt="">
                                         <div class="hgroup">
                                             <h4>{{$education->degree}}
                                                 <small>{{$education->major}}</small>
