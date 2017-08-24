@@ -125,8 +125,9 @@
 
 
             </main>
-        @endsection
     </form>
+@endsection
+
 
 @section('js')
     <script src="{{asset("assets/vendors/summernote/summernote.js")}}"></script>

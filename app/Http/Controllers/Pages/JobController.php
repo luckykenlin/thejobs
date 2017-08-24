@@ -34,7 +34,7 @@ class JobController extends Controller
             $pageInfo = DataUtility::pageInfo(10 , $request->all());
             $pathUrl = $request->path();
             $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
-//            dd($pageInfo);
+//            dd($pathUrl);
             //show status  == unfill positions!  query built
             $jobs = Job::query()->where('job_status', '=', 0);
 

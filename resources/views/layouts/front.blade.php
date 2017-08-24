@@ -7,6 +7,9 @@
     {{--Title--}}
     @yield('title')
     {{--End title--}}
+    {{--  Css ---}}
+    @yield('css')
+    {{-- End css ---}}
 </head>
 <body class="nav-on-header smart-nav">
 <!-- Navigation bar -->

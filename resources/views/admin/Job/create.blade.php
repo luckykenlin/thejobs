@@ -142,12 +142,11 @@
                             <div class="form-group {{ $errors->has('job_type') ? ' has-error' : '' }}">
                                 <label>job_type</label>
                                 <select class="form-control" id="job_type" name="job_type">
-                                    <option value="{{\App\Contracts\Constant::FULL_TIME}}">
-                                        Full time
-                                    </option>
-                                    <option value="{{\App\Contracts\Constant::PART_TIME}}">
-                                        Part time
-                                    </option>
+                                    @foreach(\App\Contracts\Constant::JOB_TYPE as $key => $jobType)
+                                        <option value="{{$jobType}}">
+                                            {{$key}}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @if ($errors->has('job_type'))
                                     <span class="help-block">

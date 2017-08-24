@@ -91,7 +91,7 @@ class DataUtility
         return $pageInfo;
     }
 
-    /**
+    /** reset path url
      * @param $pageInfo
      * @param $pathUrl
      * @return array
@@ -106,6 +106,7 @@ class DataUtility
                 if(last($pageInfo) != $value ) $pathUrl  = $pathUrl.'&';
             }
         }
+        $pathUrl = rtrim($pathUrl, '&');
         return $pathUrl;
     }
 

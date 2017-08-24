@@ -61,7 +61,7 @@
             </ul>
 
             <div class="action-buttons">
-                <a class="btn btn-gray" href="{{url('download' ,urlencode($resume->cv_url)) }}">Download CV</a>
+                <a class="btn btn-gray" href="{{$resume->cv_url? url('download' ,urlencode($resume->cv_url)) : '#'}}">Download CV</a>
                 <a class="btn btn-success" data-toggle="modal" data-target="#modal-contact" href="#">Contact me</a>
             </div>
         </div>

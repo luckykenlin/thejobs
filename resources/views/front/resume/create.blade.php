@@ -1,4 +1,7 @@
 @extends('layouts.front')
+@section('css')
+    <link rel="stylesheet" href="{{asset('plugins/datepicker/datepicker3.css')}}">
+@endsection
 @section('title')
     <title>Post resume </title>
 @endsection
@@ -110,7 +113,8 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-4">
                                                 <div class="form-group">
-                                                    <input type="file" class="dropify" name="education[image][]" data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
+                                                    <input type="file" class="dropify" name="education[image][]"
+                                                           data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
                                                     <span class="help-block">Please choose a square logo</span>
                                                 </div>
                                             </div>
@@ -131,9 +135,9 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Date from</span>
-                                                        <input type="text" name="education[dateScopeFrom][]" class="form-control" placeholder="e.g. 2012">
+                                                        <input type="text" name="education[dateScopeFrom][]" class="form-control datepicker" placeholder="e.g. 2012">
                                                         <span class="input-group-addon">Date to</span>
-                                                        <input type="text" name="education[dateScopeEnd][]" class="form-control" placeholder="e.g. 2016">
+                                                        <input type="text" name="education[dateScopeEnd][]" class="form-control datepicker" placeholder="e.g. 2016">
                                                     </div>
                                                 </div>
 
@@ -156,7 +160,8 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-4">
                                                 <div class="form-group">
-                                                    <input type="file" class="dropify" name="education[image][]" data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
+                                                    <input type="file" class="dropify" name="education[image][]"
+                                                           data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
                                                     <span class="help-block">Please choose a square logo</span>
                                                 </div>
                                             </div>
@@ -177,9 +182,9 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Date from</span>
-                                                        <input type="text" name="education[dateScopeFrom][]" class="form-control" placeholder="e.g. 2012">
+                                                        <input type="text" name="education[dateScopeFrom][]" class="form-control datepicker" placeholder="e.g. 2012">
                                                         <span class="input-group-addon">Date to</span>
-                                                        <input type="text" name="education[dateScopeEnd][]" class="form-control" placeholder="e.g. 2016">
+                                                        <input type="text" name="education[dateScopeEnd][]" class="form-control datepicker" placeholder="e.g. 2016">
                                                     </div>
                                                 </div>
 
@@ -224,7 +229,8 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-4">
                                                 <div class="form-group">
-                                                    <input type="file" class="dropify" name="experience[image][]" data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
+                                                    <input type="file" class="dropify" name="experience[image][]"
+                                                           data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
                                                     <span class="help-block">Please choose a square logo</span>
                                                 </div>
                                             </div>
@@ -241,9 +247,9 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Date from</span>
-                                                        <input type="text" name="experience[dateScopeFrom][]" class="form-control" placeholder="e.g. 2012">
+                                                        <input type="text" name="experience[dateScopeFrom][]" class="form-control datepicker" placeholder="e.g. 2012">
                                                         <span class="input-group-addon">Date to</span>
-                                                        <input type="text" name="experience[dateScopeEnd][]" class="form-control" placeholder="e.g. 2016">
+                                                        <input type="text" name="experience[dateScopeEnd][]" class="form-control datepicker" placeholder="e.g. 2016">
                                                     </div>
                                                 </div>
 
@@ -269,7 +275,8 @@
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-4">
                                                 <div class="form-group">
-                                                    <input type="file" class="dropify" name="experience[image][]" data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
+                                                    <input type="file" class="dropify" name="experience[image][]"
+                                                           data-default-file="{{config('app.url'.'/assets/img/logo-default.png')}}">
                                                     <span class="help-block">Please choose a square logo</span>
                                                 </div>
                                             </div>
@@ -286,9 +293,9 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon">Date from</span>
-                                                        <input type="text" name="experience[dateScopeFrom][]" class="form-control" placeholder="e.g. 2012">
+                                                        <input type="text" name="experience[dateScopeFrom][]" class="form-control datepicker" placeholder="e.g. 2012">
                                                         <span class="input-group-addon">Date to</span>
-                                                        <input type="text" name="experience[dateScopeEnd][]" class="form-control" placeholder="e.g. 2016">
+                                                        <input type="text" name="experience[dateScopeEnd][]" class="form-control datepicker" placeholder="e.g. 2016">
                                                     </div>
                                                 </div>
 
@@ -401,7 +408,7 @@
 
 
                 <!-- Submit -->
-                <section class=" bg-img" style="background-image: url(assets/img/bg-facts.jpg);">
+                <section class="bg-img text-center" style="background-image: url({{asset("assets/img/bg-facts.jpg")}})">
                     <div class="container">
                         <header class="section-header">
                             <span>Are you done?</span>
@@ -419,9 +426,14 @@
 
 
             </main>
-        @endsection
     </form>
+@endsection
+
 
 @section('js')
     <script src="{{asset("assets/vendors/summernote/summernote.js")}}"></script>
+    <script src="{{asset('plugins/datepicker/bootstrap-datepicker.js')}}"></script>
+    <script>
+        $('.datepicker').datepicker();
+    </script>
 @endsection

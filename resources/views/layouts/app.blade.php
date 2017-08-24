@@ -3,6 +3,7 @@
 <head>
     @include('admin.incs.head')
     @yield("title")
+
     <script>
         window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};
     </script>
