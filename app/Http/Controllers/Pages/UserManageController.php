@@ -18,7 +18,8 @@ class UserManageController extends Controller
 
     /**
      * UserManageController constructor.
-     * @param UserRepository $user
+     * @param UserRepository $users
+     * @internal param UserRepository $user
      */
     function __construct(UserRepository $users)
     {

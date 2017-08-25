@@ -12,7 +12,7 @@ class Experience extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'positon','dateScopeFrom','dateScopeEnd', 'image','desc',
+        'name', 'position','dateScopeFrom','dateScopeEnd', 'image','desc',
     ];
 
     public function resumes()

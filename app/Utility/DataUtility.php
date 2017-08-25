@@ -102,11 +102,12 @@ class DataUtility
         for (; $value = current($pageInfo); next($pageInfo))
         {
             if (key($pageInfo) != 'page')  {
-                $pathUrl = $pathUrl . key($pageInfo) . "=" . $value;
+                if($value != 'undefined') $pathUrl = $pathUrl . key($pageInfo) . "=" . $value;
                 if(last($pageInfo) != $value ) $pathUrl  = $pathUrl.'&';
             }
         }
         $pathUrl = rtrim($pathUrl, '&');
+
         return $pathUrl;
     }
 

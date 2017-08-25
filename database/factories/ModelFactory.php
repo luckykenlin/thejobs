@@ -79,7 +79,7 @@ $factory->define(App\Models\Resume::class , function (Faker\Generator $faker) {
     $info = [
         'name' => $faker->lastName ,
         'job_title' => $faker->jobTitle ,
-        'image' => 'assets/img/job.png',
+        'image' => 'storage/images/default/avatar.jpg',
         'website_url' => $faker->url,
 //        'social_media' => $faker->shuffleArray(),
         'hourly_rate' =>  $faker->numberBetween(200,500) ,
@@ -88,7 +88,7 @@ $factory->define(App\Models\Resume::class , function (Faker\Generator $faker) {
         'email' => $faker->email ,
         'short_desc' => $faker->text('100') ,
         'age' => $faker->numberBetween(20,50) ,
-        'cv_url' => 'storage/1/cv.doc' ,
+        'cv_url' => 'storage/images/default/cv.doc' ,
     ];
     return $info;
 });
@@ -98,6 +98,47 @@ $factory->define(App\Models\Tag::class , function (Faker\Generator $faker) {
     $tag = ['HTML' , 'JAVASCRIPT' , 'CSS'];
     $info = [
         'name' => $faker->randomElement($tag) ,
+    ];
+    return $info;
+});
+
+$factory->define(App\Models\Education::class , function (Faker\Generator $faker) {
+    $degree = ['MASTER' , 'BACHELOR' , 'DOCTOR'];
+    $info = [
+        'degree' => $faker->randomElement($degree) ,
+        'major' => 'Computer Science',
+        'school' => 'New York University',
+        'dateScopeFrom' => $faker->dateTimeBetween('-14 years','-10 years')->format('Y-M'),
+        'dateScopeEnd' => $faker->dateTimeBetween('-10 years','now')->format('Y-M'),
+        'short_desc' => $faker->paragraph(),
+        'image' => $faker->randomElement([
+            'storage/images/default/logo-envato.png',
+            'storage/images/default/logo-mit.png',
+            ]),
+        ];
+    return $info;
+});
+
+$factory->define(App\Models\Experience::class , function (Faker\Generator $faker) {
+    $info = [
+        'name' => $faker->company,
+        'position' => $faker->jobTitle,
+        'dateScopeFrom' => $faker->dateTimeBetween('-14 years','-10 years')->format('Y-M'),
+        'dateScopeEnd' => $faker->dateTimeBetween('-10 years','now')->format('Y-M'),
+        'desc' => $faker->paragraph(),
+        'image' => $faker->randomElement([
+            'storage/images/default/logo-envato.png',
+            'storage/images/default/logo-facebook.png',
+            'storage/images/default/logo-google.jpg',
+            ]),
+    ];
+    return $info;
+});
+$factory->define(App\Models\Skill::class , function (Faker\Generator $faker) {
+    $tag = ['HTML' , 'JAVASCRIPT' , 'CSS' , 'REACTJS' , 'PHP' , 'VUEJS'];
+    $info = [
+        'name' => $faker->randomElement($tag),
+        'rate' => $faker->numberBetween(50 , 100),
     ];
     return $info;
 });

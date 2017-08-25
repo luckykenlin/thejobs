@@ -62,7 +62,7 @@
                             <div class="col-xs-12">
                                 <div class="item-block">
                                     <header>
-                                        <img src="{{config('app.url'."/".$experience->image)}}" alt="">
+                                        <img src="{{config('app.url')."/".$experience->image}}" alt="">
                                         <div class="hgroup">
                                             <h4>{{$experience->name}}</h4>
                                             <h5>{{$experience->positon}}</h5>

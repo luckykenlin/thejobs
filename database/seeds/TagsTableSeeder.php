@@ -11,10 +11,6 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Resume::class, 50)->create([
-            'user_id' => 4,
-        ])->each(function ($u) {
-            $u->tags()->save(factory(App\Models\Tag::class)->make());
-        });
+
     }
 }

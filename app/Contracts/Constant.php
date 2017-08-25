@@ -37,4 +37,9 @@ interface Constant
         "REMOTE" => 7,
         ];
 
+    // Education degree
+    const BACHELOR = 1;
+    const MASTER = 2;
+    const DOCTOR = 3;
+
 }

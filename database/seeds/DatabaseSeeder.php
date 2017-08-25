@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
          Category::create(['name' => 'Root category'])->children()->create(['name' => 'restaurant']);
          $this->call(CompaniesTableSeeder::class);
          $this->call(JobsTableSeeder::class);
-//         $this->call(ResumesTableSeeder::class);
-         $this->call(TagsTableSeeder::class);
+         $this->call(ResumesTableSeeder::class);
+//         $this->call(TagsTableSeeder::class);
     }
 }
