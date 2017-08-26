@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 use \App\Contracts\Base\BaseRepository as BaseRepositoryImpl;
+use App\Models\Resume;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -191,11 +192,12 @@ class BaseRepository implements BaseRepositoryImpl
     /** Find User Info By Id
      * @param Request $request
      * @param $id
-     * @return mixed
+     * @return $model
      */
     public function find($id)
     {
-        return $this->model->findOrFail($id);
+        $model =  $this->model->findOrFail($id);
+        return $model;
     }
 
     /** Delete records

@@ -1,131 +1,65 @@
 @extends('layouts.front')
-@section('title')
-    <title>Edit resume </title>
+@section('css')
+    <link rel="stylesheet" href="{{asset('plugins/datepicker/datepicker3.css')}}">
 @endsection
+@section('title')
+    <title>Create Resume </title>
+@endsection
+
 @section('header')
     <form role="form" class="editForm" action="{{url('resume')."/".$resume->id}}"
           method="post" enctype="multipart/form-data">
         {{ method_field('PATCH') }}
         {{ csrf_field() }}
         @include('front.resume.editHeader')
+
         @endsection
         @section('content')
-     /       <main>
+            <main>
 
-                <!-- Social media -->
-                <section>
-                    <div class="container">
+            <!-- Social media -->
+                @include('front.media.edit')
+            <!-- Social media -->
 
-                        <header class="section-header">
-                            <span>Get connected</span>
-                            <h2>Social media</h2>
-                        </header>
+            <!-- Education -->
+                @include('front.education.edit')
+            <!-- END Education -->
 
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
-                                        <input type="text" class="form-control" placeholder="Profile URL">
-                                    </div>
-                                </div>
+            <!-- Work Experience -->
+                @include('front.experience.edit')
+            <!-- END Work Experience -->
 
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-google-plus"></i></span>
-                                        <input type="text" class="form-control" placeholder="Profile URL">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-dribbble"></i></span>
-                                        <input type="text" class="form-control" placeholder="Profile URL">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-pinterest"></i></span>
-                                        <input type="text" class="form-control" placeholder="Profile URL">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
-                                        <input type="text" class="form-control" placeholder="Profile URL">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-github"></i></span>
-                                        <input type="text" class="form-control" placeholder="Profile URL">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-instagram"></i></span>
-                                        <input type="text" class="form-control" placeholder="Profile URL">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-youtube"></i></span>
-                                        <input type="text" class="form-control" placeholder="Profile URL">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-                <!-- Social media -->
-
-                <!-- Company detail -->
-                <section class=" bg-alt">
-                    <div class="container">
-
-                        <header class="section-header">
-                            <span>About</span>
-                            <h2>Company detail</h2>
-                            <p>Write about your company, culture, benefits of working there, etc.</p>
-                        </header>
-
-                        <textarea class="summernote-editor" name="detail" style="display: none;">{{$company->detail}}</textarea>
-
-                    </div>
-                </section>
-                <!-- END Company detail -->
+            <!-- Skills -->
+                @include('front.skill.edit')
+            <!-- END Skills -->
 
 
                 <!-- Submit -->
-                <section>
+                <section class="bg-img text-center" style="background-image: url({{asset("assets/img/bg-facts.jpg")}})">
                     <div class="container">
                         <header class="section-header">
                             <span>Are you done?</span>
-                            <h2>Submit it</h2>
-                            <p>Please review your information once more and press the below button to put your company
-                                online.</p>
+                            <h2>Submit resume</h2>
+                            <p>Please review your information once more and press the below button to put your resume online.</p>
                         </header>
 
                         <p class="text-center">
-                            <button class="btn btn-success btn-xl btn-round">Submit your company</button>
+                            <button class="btn btn-success btn-xl btn-round">Submit your resume</button>
                         </p>
 
                     </div>
                 </section>
                 <!-- END Submit -->
-
-
-                <main>
-        @endsection
+            </main>
     </form>
+@endsection
+
 @section('js')
     <script src="{{asset("assets/vendors/summernote/summernote.js")}}"></script>
+    <script src="{{asset('plugins/datepicker/bootstrap-datepicker.js')}}"></script>
+    <script>
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yy'
+        });
+    </script>>
 @endsection

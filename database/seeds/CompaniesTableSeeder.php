@@ -15,6 +15,11 @@ class CompaniesTableSeeder extends Seeder
             'user_id' => 4,
         ])->each(function ($u) {
             $u->jobs()->save(factory(App\Models\Job::class)->make());
+            $u->medias()->save(factory(App\Models\Media::class)->make());
+            $u->medias()->save(factory(App\Models\Media::class)->make());
+            $u->medias()->save(factory(App\Models\Media::class)->make());
+            $u->medias()->save(factory(App\Models\Media::class)->make());
+
         });
     }
 }

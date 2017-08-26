@@ -73,9 +73,16 @@ class CompanyController extends Controller
             if ($request->hasFile('image')) {
                 $request->file('image')->storeAs(
                     'public/images/' . $data['user_id'] , 'company' . '.' . $request->file('image')->extension());
-            $data['image'] = 'storage/images/' . $data['user_id'] . '/' . 'company' . '.' . $request->file('image')->extension();
-        }
-            $this->companies->save($data);
+                $data['image'] = 'storage/images/' . $data['user_id'] . '/' . 'company' . '.' . $request->file('image')->extension();
+            }
+            $company = $this->companies->save($data);
+
+            if (isset($data['medias'])) {
+                foreach ($data['medias'] as $key => $value) {
+                    if ($value != null) $company->medias()->save(new Media(['name' => $key , 'url' => $value]));
+                }
+            }
+
             return redirect('company');
         } else
             return abort('403');
@@ -105,9 +112,15 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company = $this->companies->find($id);
-        $categories = Category::where('name' , '=' , 'Root Category')->first();
-        return view('front.company.edit' , compact('company','categories'));
+        if (Auth::check()) {
+            $company = $this->companies->find($id);
+            $medias = [];
+            foreach ($company->medias as $media) {
+                $medias[$media->name] = $media->url;
+            }
+            $categories = Category::where('name' , '=' , 'Root Category')->first();
+            return view('front.company.edit' , compact('company' , 'categories'))->with('medias' , $medias);
+        } else return abort(403);
     }
 
     /**
@@ -119,15 +132,17 @@ class CompanyController extends Controller
      */
     public function update(Request $request , $id)
     {
-        $data = $request->all();
-        if (isset($data['detail'])) $data['detail'] = htmlspecialchars($data['detail']);
-        if ($request->hasFile('image')) {
-            $request->file('image')->storeAs(
-                'public/images/' . $data['user_id'] , 'company' . '.' . $request->file('image')->extension());
-            $data['image'] = 'storage/images/' . $data['user_id'] . '/' . 'company' . '.' . $request->file('image')->extension();
-        }
-        $this->companies->update($data , $id);
-        return redirect('company-manage');
+        if (Auth::check()) {
+            $data = $request->all();
+            if (isset($data['detail'])) $data['detail'] = htmlspecialchars($data['detail']);
+            if ($request->hasFile('image')) {
+                $request->file('image')->storeAs(
+                    'public/images/' . $data['user_id'] , 'company' . '.' . $request->file('image')->extension());
+                $data['image'] = 'storage/images/' . $data['user_id'] . '/' . 'company' . '.' . $request->file('image')->extension();
+            }
+            $this->companies->update($data , $id);
+            return redirect('company-manage');
+        } else return abort(403);
     }
 
 }

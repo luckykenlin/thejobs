@@ -31,20 +31,20 @@ class JobController extends Controller
      */
     public function index(Request $request)
     {
-            $pageInfo = DataUtility::pageInfo(10 , $request->all());
-            $pathUrl = $request->path();
-            $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+        $pageInfo = DataUtility::pageInfo(10 , $request->all());
+        $pathUrl = $request->path();
+        $pathUrl = DataUtility::pathUrl($pageInfo , $pathUrl);
 //            dd($pathUrl);
-            //show status  == unfill positions!  query built
-            $jobs = Job::query()->where('job_status', '=', 0);
+        //show status  == unfill positions!  query built
+        $jobs = Job::query()->where('job_status' , '=' , 0);
 
-            if ($request->expectsJson()) {
-                $jobs = $this->jobs->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
-                return view('front.job.load' , ['jobs' => $jobs])->render();
-            }
+        if ($request->expectsJson()) {
+            $jobs = $this->jobs->fetchByPageInfo($jobs , $pageInfo , null , null , null , null , $pathUrl);
+            return view('front.job.load' , ['jobs' => $jobs])->render();
+        }
 
-            $jobs = $this->jobs->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
-            return view('front.job.index' , compact('jobs'));
+        $jobs = $this->jobs->fetchByPageInfo($jobs , $pageInfo , null , null , null , null , $pathUrl);
+        return view('front.job.index' , compact('jobs'));
     }
 
 
@@ -55,11 +55,9 @@ class JobController extends Controller
      */
     public function create()
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             return view("front.job.create");
-        }
-        else return abort(403);
+        } else return abort(403);
     }
 
 
@@ -71,14 +69,13 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-       if(Auth::check())
-       {
-           $data = $request->all();
-           if (isset(  $data['job_desc'])) $data['job_desc'] = htmlspecialchars($data['job_desc']);
-           $this->jobs->save($data);
-           return redirect('job-manage');
-       }else
-           return abort('403');
+        if (Auth::check()) {
+            $data = $request->all();
+            if (isset($data['job_desc'])) $data['job_desc'] = htmlspecialchars($data['job_desc']);
+            $this->jobs->save($data);
+            return redirect('job-manage');
+        } else
+            return abort('403');
 
     }
 
@@ -103,8 +100,10 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        $job = $this->jobs->find($id);
-        return view('front.job.edit' , compact('job'));
+        if (Auth::check()) {
+            $job = $this->jobs->find($id);
+            return view('front.job.edit' , compact('job'));
+        } else abort(403);
     }
 
     /**
@@ -116,13 +115,13 @@ class JobController extends Controller
      */
     public function update(Request $request , $id)
     {
-        $data = $request->all();
-        $data['job_desc'] = htmlspecialchars($data['job_desc']);
-        $this->jobs->update($data , $id);
-        return redirect('job-manage');
+        if(Auth::check()) {
+            $data = $request->all();
+            $data['job_desc'] = htmlspecialchars($data['job_desc']);
+            $this->jobs->update($data , $id);
+            return redirect('job-manage');
+        } else abort(403);
     }
-
-
 
 
 }

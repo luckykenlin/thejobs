@@ -27,6 +27,13 @@ class ResumesTableSeeder extends Seeder
             $u->skills()->save(factory(App\Models\Skill::class)->make());
             $u->skills()->save(factory(App\Models\Skill::class)->make());
             $u->skills()->save(factory(App\Models\Skill::class)->make());
+            $u->skills()->save(factory(App\Models\Skill::class)->make());
+            $u->medias()->save(factory(App\Models\Media::class)->make());
+            $u->medias()->save(factory(App\Models\Media::class)->make());
+            $u->medias()->save(factory(App\Models\Media::class)->make());
+            $u->medias()->save(factory(App\Models\Media::class)->make());
+            $u->medias()->save(factory(App\Models\Media::class)->make());
+            $u->medias()->save(factory(App\Models\Media::class)->make());
         });
     }
 }
