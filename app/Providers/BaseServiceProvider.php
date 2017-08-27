@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\BaseRepository;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -13,6 +14,8 @@ use Illuminate\Support\ServiceProvider;
  */
 class BaseServiceProvider extends ServiceProvider
 {
+
+    protected $defer = true;
     /**
      * Bootstrap the application services.
      *
@@ -38,5 +41,15 @@ class BaseServiceProvider extends ServiceProvider
                 $item['repository']
             );
         }
+    }
+
+    /**
+     * 获取提供者提供的服务
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [BaseRepository::class];
     }
 }

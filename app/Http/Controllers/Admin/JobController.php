@@ -95,6 +95,7 @@ class JobController extends Controller
     public function store(Request $request)
     {
         $this->authorize('store' , User::class);
+
         $validator = $this->jobs->validator($request->all());
 
         if ($validator->fails()) {

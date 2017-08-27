@@ -6,7 +6,7 @@
     @include('front.company.manageHeader')
 @endsection
 @section('content')
-    <main>
+    <main id="scroll-mian">
         <section class="padding-top-20 bg-alt">
             <div class="container">
                 <div class="pull-left padding-top-20">

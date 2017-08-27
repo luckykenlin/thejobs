@@ -18,7 +18,7 @@
 
                 <li>
                     <i class="fa fa-briefcase"></i>
-                    <span>{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "Full time" : "P  art time"}}</span>
+                    <span>{{  \App\Utility\DataUtility::jobType($job->job_type)['lable']}}</span>
                 </li>
 
                 <li>

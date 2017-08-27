@@ -25,7 +25,7 @@
 @endforeach
 <!-- Page navigation -->
     <nav class="text-center">
-        {{$companies->links()}}
+        {{$companies->fragment('scroll-mian')->links()}}
     </nav>
     <!-- END Page navigation -->
 

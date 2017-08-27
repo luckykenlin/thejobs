@@ -11,6 +11,7 @@ use App\Utility\DataUtility;
 use Illuminate\Http\Request;
 use \App\Contracts\User\UserRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class UserManageController extends Controller
 {
@@ -201,6 +202,33 @@ class UserManageController extends Controller
             $jobs = $this->users->find(Auth::user()->id)->jobs();
             $jobs = $this->users->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
             return view('front.job.ownload' , ['jobs' => $jobs])->render();
+        }
+
+    }
+
+
+    /**
+     * Mark resume_status to be available for can
+     * @param Request $request
+     * @param $id
+     * @return View
+     */
+    public function resumeMark(Request $request , $id)
+    {
+        if (isset($id)) {
+            $data = $request->all();
+            if ($data['status'] == 'Hide')
+                Resume::find($id)->update(['status' => Constant::HIDE]);
+            else
+                Resume::find($id)->update(['status' => Constant::SHOW]);
+        }
+        if ($request->ajax()) {
+            $pageInfo = DataUtility::pageInfo(10 , $request->all());
+            $pathUrl = explode('/', $request->path())[0];
+            $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
+            $resumes = $this->users->find(Auth::user()->id)->resumes();
+            $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
+            return view('front.resume.ownload' , ['resumes' => $resumes])->render();
         }
 
     }

@@ -84,6 +84,7 @@ $factory->define(App\Models\Resume::class , function (Faker\Generator $faker) {
         'name' => $faker->lastName ,
         'job_title' => $faker->jobTitle ,
         'image' => 'storage/images/default/avatar.jpg',
+        'status' => \App\Contracts\Constant::SHOW,
         'website_url' => $faker->url,
 //        'social_media' => $faker->shuffleArray(),
         'hourly_rate' =>  $faker->numberBetween(200,500) ,

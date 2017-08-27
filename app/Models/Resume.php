@@ -12,7 +12,7 @@ class Resume extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'job_title','short_desc','image', 'location', 'website_url' ,'hourly_rate', 'age' ,'phone' ,'email' ,'cv_url' ,'user_id' ,
+        'name', 'job_title','short_desc','image', 'location', 'website_url' ,'status' ,'hourly_rate', 'age' ,'phone' ,'email' ,'cv_url' ,'user_id' ,
     ];
 
     public function users()

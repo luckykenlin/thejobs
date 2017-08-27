@@ -27,7 +27,6 @@ interface Constant
     const JOB_PENDED_SUCCESSFUL = 1;
     const JOB_EMPTY = 0;
     const JOB_FILLED = 1;
-    const FULL_TIME = 1;
 
     const JOB_TYPE = [
         "FULL_TIME" => 3,
@@ -41,5 +40,9 @@ interface Constant
     const BACHELOR = 1;
     const MASTER = 2;
     const DOCTOR = 3;
+
+    //Resume
+    const SHOW = 1;
+    const HIDE = 0;
 
 }

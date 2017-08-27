@@ -46,7 +46,7 @@ $(document).ready(function () {
         let taken = document.querySelector("#token").getAttribute("content");
         let pageSize  =$('#numPicker').val();
         let page = $('.pagination .active span').text();
-        jQuery("#load").show("slow");
+        jQuery("#load").show();
         $.ajax({
             method: "POST",
             url: url,

@@ -145,7 +145,7 @@
 
 <!-- Page navigation -->
 <nav class="text-center">
-    {{$resumes->links()}}
+    {{$resumes->fragment('scroll-mian')->links()}}
 </nav>
 <!-- END Page navigation -->
 

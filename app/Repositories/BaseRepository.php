@@ -8,7 +8,6 @@
 
 namespace App\Repositories;
 use \App\Contracts\Base\BaseRepository as BaseRepositoryImpl;
-use App\Models\Resume;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;

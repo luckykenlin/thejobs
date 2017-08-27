@@ -89,7 +89,7 @@
 @endforeach
 <!-- Page navigation -->
     <nav class="text-center">
-        {{$jobs->links()}}
+        {{$jobs->fragment('scroll-mian')->links()}}
     </nav>
     <!-- END Page navigation -->
 </div>

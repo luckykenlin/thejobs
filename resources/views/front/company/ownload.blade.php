@@ -21,7 +21,7 @@
 
 <!-- Page navigation -->
 <nav class="text-center">
-    {{$companies->links()}}
+    {{$companies->fragment('scroll-mian')->links()}}
 </nav>
 <!-- END Page navigation -->
 <script src="{{asset('js/dataUtility.js')}}"></script>

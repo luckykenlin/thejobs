@@ -31,9 +31,13 @@ return [
         'repository' => 'App\Repositories\CompanyRepository'
     ],
 
-
     'resume' => [
         'contracts' => 'App\Contracts\Resume\ResumeRepository' ,
         'repository' => 'App\Repositories\ResumeRepository'
+    ],
+
+    'test' => [
+        'contracts' => 'App\Contracts\Test\TestRepository' ,
+        'repository' => 'App\Repositories\TestRepository'
     ],
 ];

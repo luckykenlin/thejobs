@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pages;
 
+use App\Contracts\Constant;
 use App\Models\Job;
 use App\Utility\DataUtility;
 use Illuminate\Http\Request;
@@ -34,9 +35,8 @@ class JobController extends Controller
         $pageInfo = DataUtility::pageInfo(10 , $request->all());
         $pathUrl = $request->path();
         $pathUrl = DataUtility::pathUrl($pageInfo , $pathUrl);
-//            dd($pathUrl);
         //show status  == unfill positions!  query built
-        $jobs = Job::query()->where('job_status' , '=' , 0);
+        $jobs = Job::query()->where('job_status' , '=' , Constant::JOB_EMPTY);
 
         if ($request->expectsJson()) {
             $jobs = $this->jobs->fetchByPageInfo($jobs , $pageInfo , null , null , null , null , $pathUrl);

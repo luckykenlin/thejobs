@@ -27,10 +27,13 @@ $(function() {
 
     //选项卡实现异步刷新列表数据个数
     $('#numPicker').change(function() {
+        var url = '?';
+        if (typeof($('#numPicker').val()) != 'undefined') url = url +'pageSize=' + $('#numPicker').val();
+        if (typeof($('#stylePicker').val()) != 'undefined')  url = url +"&show=" + $('#stylePicker').val();
         $.pjax({
             type:"GET",
             dataType:"html",
-            url:initurl(),
+            url:url,
             scrollTo: false,
             container: '#loader',
             timeout: 2000,

@@ -6,7 +6,7 @@
                 <a href="{{url('resume', $resume->id)}}"><img class="resume-avatar" src="{{config('app.url').'/'.$resume->image}}" alt=""></a>
                 <div class="hgroup">
                     <h4><a href="{{url('resume', $resume->id)}}">{{$resume->name}}</a></h4>
-                    <h5>{{$resume->job_title}}</h5>
+                    <h5>{{$resume->job_title}}@if($resume->status == \App\Contracts\Constant::HIDE) <span class="label label-info">Hidden</span> @endif</h5>
                 </div>
                 <div class="header-meta">
                     <span class="location">{{$resume->location}}</span>
@@ -18,7 +18,8 @@
                 <p class="status"><strong>Updated on:</strong> {{$resume->updated_at->format('M d ,  Y')}}</p>
 
                 <div class="action-btn">
-                    <a class="btn btn-xs btn-gray" href="#">Hide</a>
+                    <a class="btn btn-xs btn-gray mark"
+                       href="{{url('resume-mark', $resume->id)}}">{{$resume->status == \App\Contracts\Constant::SHOW? 'Hide' : 'Show'}}</a>
                     <a class="btn btn-xs btn-gray" href="{{url('resume/'.$resume->id).'/edit'}}">Edit</a>
                     <a class="btn btn-xs btn-danger" href="{{route('resume.delete', $resume->id)}}">Delete</a>
                 </div>
@@ -30,7 +31,7 @@
 
 <!-- Page navigation -->
 <nav class="text-center">
-    {{$resumes->links()}}
+    {{$resumes->fragment('scroll-mian')->links()}}
 </nav>
 <!-- END Page navigation -->
 <script src="{{asset('js/dataUtility.js')}}"></script>

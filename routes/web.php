@@ -12,22 +12,18 @@
 */
 //** ------------------------------ ----------------------------------   front
 use Illuminate\Support\Facades\Route;
-
+Route::get('test' , 'TestController@index');
 Route::group(/**
  *    namespace: namespace
  */
     ['namespace' => 'Pages'] , function () {
     Route::get('/' , 'HomeController@index')->name('front.home');
     Route::get('home' , 'HomeController@index');
-    Route::get('test' , function () {
-        return view('test');
-    });
 
     //---------- Usermanage action ------------------------------
     //----------------   Job -------------------------------
     Route::get('job-manage' , 'UserManageController@jobManage');  //  Job's management by user
     Route::delete('job-manage/{id}' , 'UserManageController@jobDestroy')->name('job.delete');// Job's deletion by user
-
     Route::post('job-mark/{id}' , 'UserManageController@jobMark')->name('job.mark');  //  Mark a job's status
     //----------------   company ----------------------------
     Route::get('company-manage' , 'UserManageController@companyManage');
@@ -35,6 +31,7 @@ Route::group(/**
     //----------------   resume ----------------------------
     Route::get('resume-manage' , 'UserManageController@resumeManage');
     Route::delete('resume-manage/{id}' , 'UserManageController@resumeDestroy')->name('resume.delete');
+    Route::post('resume-mark/{id}' , 'UserManageController@resumeMark')->name('resume.mark');  //  Mark a resume's status
 
     //----------- END ------------------------
 

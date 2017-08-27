@@ -1746,7 +1746,7 @@ $(document).ready(function () {
         var taken = document.querySelector("#token").getAttribute("content");
         var pageSize = $('#numPicker').val();
         var page = $('.pagination .active span').text();
-        jQuery("#load").show("slow");
+        jQuery("#load").show();
         $.ajax({
             method: "POST",
             url: url,

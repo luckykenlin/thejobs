@@ -17,6 +17,7 @@ class CreateResumesTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable()->index();
             $table->string('image')->nullable()->index();
+            $table->tinyInteger('status')->index();
             $table->string('job_title')->nullable()->index();
             $table->text('short_desc')->nullable();
             $table->string('location')->nullable()->index();

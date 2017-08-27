@@ -8,7 +8,6 @@
         <div class="row">
         @if($resume->skills->isNotEmpty())
             <!-- Skill -->
-
                 <!--  Skill item --->
                  @foreach($resume->skills as $key => $skill)
                     <input type="hidden" name="skill[id][{{$key}}]" value="{{$skill->id}}" >

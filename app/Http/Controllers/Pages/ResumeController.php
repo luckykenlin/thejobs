@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pages;
 
+use App\Contracts\Constant;
 use App\Contracts\Resume\ResumeRepository;
 use App\Models\Education;
 use App\Models\Experience;
@@ -41,7 +42,7 @@ class ResumeController extends Controller
         $pathUrl = $request->path();
         $pathUrl = DataUtility::pathUrl($pageInfo , $pathUrl);
 
-        $resumes = Resume::query();
+        $resumes = Resume::query()->where('status' , '=' , Constant::SHOW);
         if ($request->expectsJson()) {
             $resumes = $this->resumes->fetchByPageInfo($resumes , $pageInfo , null , null , null , null , $pathUrl);
             return view('front.resume.load' , ['resumes' => $resumes])->render();
@@ -86,15 +87,15 @@ class ResumeController extends Controller
         if (Auth::check()) {
             $resume = $this->resumes->find($id);
 
-            foreach ( $resume->tags as $tag){
-                $resume['tag'] = $resume['tag'] . $tag->name.',';
+            foreach ($resume->tags as $tag) {
+                $resume['tag'] = $resume['tag'] . $tag->name . ',';
             }
             $medias = [];
-            foreach ( $resume->medias as $media){
-                $medias[$media->name] = $media->url ;
+            foreach ($resume->medias as $media) {
+                $medias[$media->name] = $media->url;
             }
 
-            return view('front.resume.edit' , compact('resume','medias'));
+            return view('front.resume.edit' , compact('resume' , 'medias'));
         } else return abort(401);
     }
 
@@ -123,7 +124,7 @@ class ResumeController extends Controller
 
             $resume = $this->resumes->save($data);
 
-            $this->relativeFunction($resume ,$data);
+            $this->relativeFunction($resume , $data);
 
             return redirect('resume-manage');
         } else
@@ -140,7 +141,7 @@ class ResumeController extends Controller
      */
     public function update(Request $request , $id)
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $data = $request->all();
 
             if ($request->hasFile('image')) {
@@ -155,12 +156,12 @@ class ResumeController extends Controller
             $data['education'] = DataUtility::requestDataReset($data['education']);
             $data['experience'] = DataUtility::requestDataReset($data['experience']);
             $data['skill'] = DataUtility::requestDataReset($data['skill']);
-            $resume =  $this->resumes->find($id);
-
-            $this->relativeFunction($resume ,$data);
+//            dd($data['skill']);
+            $resume = $this->resumes->find($id);
+            $this->relativeFunction($resume , $data);
             $this->resumes->update($data , $id);
-//         return redirect('resume-manage');
-            return back();
+         return redirect('resume-manage');
+//            return back();
         } else return abort(403);
     }
 
@@ -171,9 +172,9 @@ class ResumeController extends Controller
      */
     public function getDownload($file)
     {
-        if(isset($file)){
+        if (isset($file)) {
             $file = urldecode($file);
-            $file = public_path()."/".$file;
+            $file = public_path() . "/" . $file;
             return Response()->download($file);
         } else return abort('403');
     }
@@ -183,59 +184,69 @@ class ResumeController extends Controller
      * @param $data
      * @return mixed
      */
-    protected function relativeFunction(Resume $resume, $data)
-     {
-         if (isset($data['tags'])) {
-             $tags = explode(',' , $data['tags']);
-             foreach ($tags as $tag) {
-                 $resume->tags()->save(new Tag(['name' => $tag]));
-             }
-         }
+    protected function relativeFunction(Resume $resume , $data)
+    {
+        if (isset($data['tags'])) {
+            $tags = explode(',' , $data['tags']);
+            foreach ($tags as $tag) {
+                $resume->tags()->save(new Tag(['name' => $tag]));
+            }
+        }
 
-         if (isset($data['medias'])) {
-             foreach ($data['medias'] as $key => $value) {
-                 if ($value != null) $resume->medias()->save(new Media(['name' => $key , 'url' => $value]));
-             }
-         }
+        if (isset($data['medias'])) {
+            foreach ($data['medias'] as $key => $value) {
+                if ($value != null) $resume->medias()->save(new Media(['name' => $key , 'url' => $value]));
+            }
+        }
 
-         if (isset($data['education'])) {
-             foreach ($data['education'] as $key => $item) {
-                 if ($item !== last($data['education']) and !isset($item['id'])) {
-                     if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'], Carbon::now()->format('hs').'edu'.$key);
-                     $resume->educations()->save(new Education($item));
-                 }
-                 else if(isset($item['id'])) {
-                     if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'], Carbon::now()->format('hs').'exp'.$key);
-                     $model = Education::find($item['id']);
-                     $model->update($item);
-                 }
-             }
-         }
+        if (isset($data['education'])) {
+            foreach ($data['education'] as $key => $item) {
+                $temp = $item;
+                $id = array_pull($temp, 'id');
+                if (implode($temp) == "" and isset($item['id']))  {
+                    Education::find($id)->delete();
+                }else if ($item !== last($data['education']) and !isset($item['id'])) {
+                    if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'] , Carbon::now()->format('hs') . 'edu' . $key);
+                    $resume->educations()->save(new Education($item));
+                } else if (isset($item['id'])) {
+                    if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'] , Carbon::now()->format('hs') . 'exp' . $key);
+                    $model = Education::find($item['id']);
+                    $model->update($item);
+                }
+            }
+        }
 
-         if (isset($data['experience'])) {
-             foreach ($data['experience'] as $key => $item) {
-                 if ($item !== last($data['experience']) and !isset($item['id'])) {
-                     if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'], Carbon::now()->format('hs').'exp'.$key);
-                     $resume->experiences()->save(new Experience($item));
-                 }
-                 else if(isset($item['id'])) {
-                     if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'], Carbon::now()->format('hs').'exp'.$key);
-                     $model = Experience::find($item['id']);
-                     $model->update($item);
-                 }
-             }
-         }
+        if (isset($data['experience'])) {
+            foreach ($data['experience'] as $key => $item) {
+                $temp = $item;
+                $id = array_pull($temp, 'id');
+                if (implode($temp) == "" and isset($item['id']))  {
+                    Experience::find($id)->delete();
+                }else if ($item !== last($data['experience']) and !isset($item['id'])) {
+                    if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'] , Carbon::now()->format('hs') . 'exp' . $key);
+                    $resume->experiences()->save(new Experience($item));
+                } else if (isset($item['id'])) {
+                    if (isset($item['image'])) $item['image'] = $this->resumes->fileUpload($item['image'] , Carbon::now()->format('hs') . 'exp' . $key);
+                    $model = Experience::find($item['id']);
+                    $model->update($item);
+                }
+            }
+        }
 
-         if (isset($data['skill'])) {
-             foreach ($data['skill'] as $item) {
-                 if ($item !== last($data['skill']) and !isset($item['id'])) {
-                     $resume->skills()->save(new Skill($item));
-                 }
-                 else if(isset($item['id'])) {
-                     $model = Skill::find($item['id']);
-                     $model->update($item);
-                 }
-             }
-         }
-     }
+        if (isset($data['skill'])) {
+
+            foreach ($data['skill'] as $item) {
+                $temp = $item;
+                $id = array_pull($temp, 'id');
+                if (implode($temp) == "" and isset($item['id']))  {
+                   Skill::find($id)->delete();
+                }else if ($item !== last($data['skill']) and !isset($item['id'])) {
+                    $resume->skills()->save(new Skill($item));
+                } else if (isset($item['id'])) {
+                    $model = Skill::find($item['id']);
+                    $model->update($item);
+                }
+            }
+        }
+    }
 }
