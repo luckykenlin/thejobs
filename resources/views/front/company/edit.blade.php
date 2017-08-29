@@ -31,7 +31,6 @@
                 </section>
                 <!-- END Company detail -->
 
-
                 <!-- Submit -->
                 <section>
                     <div class="container">
@@ -49,7 +48,6 @@
                     </div>
                 </section>
                 <!-- END Submit -->
-
 
             </main>
         @endsection

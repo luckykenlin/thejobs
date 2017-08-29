@@ -61,7 +61,7 @@ class ResumeController extends Controller
     {
         if (Auth::check()) {
             return view("front.resume.create");
-        } else return abort(403);
+        } else return abort(403 , 'Unauthorized action');
     }
 
     /**
@@ -128,7 +128,7 @@ class ResumeController extends Controller
 
             return redirect('resume-manage');
         } else
-            return abort('403');
+            return abort(403 , 'Unauthorized action');;
 
     }
 
@@ -176,7 +176,7 @@ class ResumeController extends Controller
             $file = urldecode($file);
             $file = public_path() . "/" . $file;
             return Response()->download($file);
-        } else return abort('403');
+        } else return abort('404' , 'file not found');
     }
 
     /**Function to relative

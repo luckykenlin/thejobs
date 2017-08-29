@@ -16,7 +16,7 @@
 
                     <div class="item-block">
                         <header>
-                            <img src="{{config('app.url')."/assets/img/job.png"}}" alt="">
+                            <img src="{{config('app.url').'/'.$job->companies->image}}" alt="">
                             <div class="hgroup">
                                 <h4>{{$job->job_name}}</h4>
                                 <h5><a href="tel:{{$job->phone}}">{{$job->job_contact}} : {{$job->phone}}</a></h5>
@@ -33,9 +33,7 @@
 
                             <div class="action-btn">
                                 <a class="btn btn-xs btn-gray" href="{{url('job/'.$job->id).'/edit'}}">Edit</a>
-                                <a class="btn btn-xs btn-success" href="#">Mark filled</a>
-                                <a class="btn btn-xs btn-danger" href="{{route('job.delete', $job->id)}}"
-                                >Delete</a>
+                                <a class="btn btn-xs btn-danger" href="{{url('company',$job->companies->id.'/'.$job->id)}}">Delete</a>
                             </div>
                         </footer>
                     </div>
@@ -49,8 +47,9 @@
                         <img src="{{config('app.url').'/'.$job->companies->image}}" alt="logo">
                         <div class="hgroup">
                             <h4>{{$job->job_name}}</h4>
-                            <h5>{{$job->companies->name}} <span
-                                        class="label label-success">{{$job->job_type == \App\Contracts\Constant::FULL_TIME? "FULL TIME" : "PART TIME"}}</span>
+                            <h5>{{$job->companies->name}}
+                                <span class="{{   \App\Utility\DataUtility::jobType($job->job_type)['lable_style'] }}">
+                                        {{  \App\Utility\DataUtility::jobType($job->job_type)['lable']}}</span>
                             </h5>
                         </div>
                         <time datetime="2016-03-10 20:00">34 min ago</time>
@@ -89,3 +88,4 @@
         {{$jobs->links()}}
     </nav>
 </div>
+<script src="{{asset('js/dataUtility.js')}}"></script>

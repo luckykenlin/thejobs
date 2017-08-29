@@ -1,4 +1,4 @@
-<header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg);">
+<header class="page-header bg-img" style="background-image: url({{asset('assets/img/bg-banner1.jpg')}})">
     <div class="container page-name">
         <h1 class="text-center">Browse companies</h1>
         <p class="lead text-center">Use following search box to find companies that fits you better</p>

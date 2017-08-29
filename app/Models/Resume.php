@@ -12,12 +12,12 @@ class Resume extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'job_title','short_desc','image', 'location', 'website_url' ,'status' ,'hourly_rate', 'age' ,'phone' ,'email' ,'cv_url' ,'user_id' ,
+        'job_id' , 'name' , 'job_title' , 'short_desc' , 'image' , 'location' , 'website_url' , 'status' , 'hourly_rate' , 'age' , 'phone' , 'email' , 'cv_url' , 'user_id' ,
     ];
 
     public function users()
     {
-        return $this->belongsTo('App\Models\User','user_id');
+        return $this->belongsTo('App\Models\User' , 'user_id');
     }
 
     public function educations()
@@ -45,6 +45,14 @@ class Resume extends Model
     public function medias()
     {
         return $this->hasMany('App\Models\Media');
+    }
+
+    public function jobs()
+    {
+        $this->belongsToMany('App\Models\Job' , 'job_resume')
+                            ->withTimestamps()
+                            ->using('App\Models\JobResume')
+                            ->withPivot('id' , 'status');
     }
 
 }

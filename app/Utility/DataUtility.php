@@ -122,11 +122,11 @@ class DataUtility
         switch ($job_type){
             case Constant::JOB_TYPE['FULL_TIME']:
                 $jobType['lable_style'] = 'label label-success';
-                $jobType['lable'] = 'FULL_TIME';
+                $jobType['lable'] = 'FULL TIME';
                 break;
             case Constant::JOB_TYPE['PART_TIME']:
                 $jobType['lable_style'] = 'label label-warning';
-                $jobType['lable'] = 'PART_TIME';
+                $jobType['lable'] = 'PART TIME';
                 break;
             case Constant::JOB_TYPE['INTERNSHIP']:
                 $jobType['lable_style'] = 'label label-danger';
@@ -138,7 +138,7 @@ class DataUtility
                 break;
             case Constant::JOB_TYPE['REMOTE']:
                 $jobType['lable_style'] = 'label label-success';
-                $jobType['lable'] = 'label label-success';
+                $jobType['lable'] = 'REMOTE';
                 break;
         }
         return $jobType;

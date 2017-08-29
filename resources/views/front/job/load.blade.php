@@ -11,7 +11,7 @@
                 <div class="col-xs-12">
                     <a class="item-block" href="{{url('job/'.$job->id)}}">
                         <header>
-                            <img src="{{config('app.url')."/assets/img/job.png"}}" alt="job_logo">
+                            <img src="{{config('app.url').'/'.$job->companies->image}}" alt="job_logo">
                             <div class="hgroup">
                                 <h4>{{$job->job_name}}</h4>
                                 <h5>{{$job->companies->name}} <span class="{{   \App\Utility\DataUtility::jobType($job->job_type)['lable_style'] }}">
@@ -51,7 +51,7 @@
                 <div class="col-xs-12">
                     <div class="item-block" style="cursor: pointer" onclick="window.location.href = '{{url('job/'.$job->id)}}'">
                         <header>
-                            <img src="{{config('app.url')."/assets/img/job.png"}}" alt="job_logo">
+                            <img src="{{config('app.url') . '/' . $job->companies->image}}" alt="job_logo">
                             <div class="hgroup">
                                 <h4>{{$job->job_name}}</h4>
                                 <h5><a href="tel:{{$job->phone}}">{{$job->job_contact}} : {{$job->phone}}</a></h5>
@@ -71,10 +71,10 @@
             <div class="col-xs-12">
                 <div class="item-block" style="cursor: pointer" onclick="window.location.href = '{{url('job/'.$job->id)}}'">
                     <header>
-                        <img src="{{config('app.url')."/assets/img/job.png"}}" alt="job_logo">
+                        <img src="{{config('app.url').'/'.$job->companies->image}}" alt="job_logo">
                         <div class="hgroup">
                             <h4>{{$job->job_name}}</h4>
-                            <h5><a href="tel:{{$job->phone}}">{{$job->job_contact}} : {{$job->phone}}</a></h5>
+                            <h5><a href="tel:{{$job->phone}}">{{$job->companies->name}} : {{$job->phone}}</a></h5>
                         </div>
                         <div class="header-meta">
                             <span class="location">{{$job->job_place}}</span>

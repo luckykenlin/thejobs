@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Contracts\Company\CompanyRepository;
+use App\Contracts\Constant;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Job;
 use App\Utility\DataUtility;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -55,7 +57,7 @@ class CompanyController extends Controller
         if (Auth::check()) {
             $categories = Category::where('name' , '=' , 'Root Category')->first();
             return view("front.company.create" , compact('categories'));
-        } else return abort(403);
+        } else return abort(403 , 'Unauthorized action');
     }
 
     /**
@@ -85,12 +87,13 @@ class CompanyController extends Controller
 
             return redirect('company');
         } else
-            return abort('403');
+            return abort(403 , 'Unauthorized action');
     }
 
     /**
      * Display the specified resource.
      *
+     * @param Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
@@ -98,10 +101,24 @@ class CompanyController extends Controller
     {
         $company = $this->companies->find($id);
         $jobs = $company->jobs()->orderBy('updated_at' , 'desc')->paginate(5);
-        if ($request->ajax()) {
+        if ($request->expectsJson()) {
             return view('front.company.jobload' , ['jobs' => $jobs])->render();
         }
         return view('front.company.show' , compact('company' , 'jobs'));
+    }
+
+    public function jobDestroy(Request $request , $companyId , $jobId)
+    {
+        if (isset($jobId)) $result = Job::destroy($jobId);
+        if ($result) {
+            $jobs = $this->companies->find($companyId)->jobs()->orderBy('updated_at' , 'desc')->paginate(5);
+            $jobs->withPath($companyId);
+            if ($request->expectsJson()) {
+                return view('front.company.jobload' , ['jobs' => $jobs])->render();
+            }
+        } else {
+            return abort('403');
+        }
     }
 
     /**

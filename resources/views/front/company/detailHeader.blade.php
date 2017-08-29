@@ -50,7 +50,7 @@
 
                 <div class="action-buttons">
                     <a class="btn btn-gray" href="#">Favorite</a>
-                    <a class="btn btn-success" href="#">Contact</a>
+                    <a class="btn btn-success" data-toggle="modal" data-target="#modal-contact" href="#">Contact me</a>
                 </div>
             </div>
 

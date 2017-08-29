@@ -1,11 +1,11 @@
 @foreach($jobs as $job)
     <!-- Job item -->
-    <a href="{{url('job/'.$job->id)}}">
+    <a href="{{url('job-candidates' , $job->id)}}">
         <div class="col-xs-12">
 
             <div class="item-block">
                 <header>
-                    <img src="{{config('app.url')."/assets/img/job.png"}}" alt="">
+                    <img src="{{config('app.url').'/'.$job->companies->image}}" alt="job_logo">
                     <div class="hgroup">
                         <h4>{{$job->job_name}}</h4>
                         <h5>

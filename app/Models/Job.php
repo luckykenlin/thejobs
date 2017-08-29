@@ -12,7 +12,7 @@ class Job extends Model
      * @var array
      */
     protected $fillable = [
-    'short_desc', 'company_id','category_id', 'click_count', 'job_name' ,'job_place', 'job_type' ,'job_status' ,'job_salary' ,'distance' ,'job_desc' ,'job_category' ,'job_level' , 'job_contact', 'phone', 'working_days'
+        'resume_id' , 'short_desc' , 'company_id' , 'category_id' , 'click_count' , 'job_name' , 'job_place' , 'job_type' , 'job_status' , 'job_salary' , 'distance' , 'job_desc' , 'job_category' , 'job_level' , 'job_contact' , 'phone' , 'working_days'
     ];
 
 //    public function users()
@@ -26,7 +26,15 @@ class Job extends Model
 //    }
     public function companies()
     {
-        return $this->belongsTo('App\Models\Company','company_id');
+        return $this->belongsTo('App\Models\Company' , 'company_id');
+    }
+
+    public function resumes()
+    {
+        return $this->belongsToMany('App\Models\Resume' , 'job_resume')
+                                    ->withTimestamps()
+                                    ->using('App\Models\JobResume')
+                                    ->withPivot('id','status');
     }
 
 }

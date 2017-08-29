@@ -49,7 +49,7 @@ class UserManageController extends Controller
             $jobs = $this->users->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
             return view('front.job.jobManage' , compact('jobs'));
 
-        } else return abort(403);
+        } else return abort(403 , 'Unauthorized action');;
     }
 
     public function resumeManage(Request $request)
@@ -70,7 +70,7 @@ class UserManageController extends Controller
 
             return view('front.resume.resumeManage' , compact('resumes'));
 
-        } else return abort(403);
+        } else return abort(403 , 'Unauthorized action');;
     }
 
     /**
@@ -93,7 +93,7 @@ class UserManageController extends Controller
             $companies = $this->users->fetchByPageInfo($companies, $pageInfo,null,null, null, null, $pathUrl);
             return view('front.company.companyManage' , compact('companies'));
 
-        } else return abort(403);
+        } else return abort(403 , 'Unauthorized action');;
     }
 
     /**
@@ -181,7 +181,7 @@ class UserManageController extends Controller
 
 
     /**
-     * Mark job_status to be available for can
+     * Mark job_status to be available for company
      * @param Request $request
      * @param $id
      * @return view
@@ -232,5 +232,7 @@ class UserManageController extends Controller
         }
 
     }
+
+
 
 }

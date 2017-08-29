@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Pages;
 
 use App\Contracts\Constant;
 use App\Models\Job;
+use App\Models\JobResume;
 use App\Utility\DataUtility;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Contracts\Job\JobRepository;
 use App\Utility\DateUtility;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class JobController extends Controller
 {
@@ -57,7 +60,7 @@ class JobController extends Controller
     {
         if (Auth::check()) {
             return view("front.job.create");
-        } else return abort(403);
+        } else return abort(403 , 'Unauthorized action');
     }
 
 
@@ -75,7 +78,7 @@ class JobController extends Controller
             $this->jobs->save($data);
             return redirect('job-manage');
         } else
-            return abort('403');
+            return abort(403 , 'Unauthorized action');
 
     }
 
@@ -115,7 +118,7 @@ class JobController extends Controller
      */
     public function update(Request $request , $id)
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $data = $request->all();
             $data['job_desc'] = htmlspecialchars($data['job_desc']);
             $this->jobs->update($data , $id);
@@ -123,5 +126,59 @@ class JobController extends Controller
         } else abort(403);
     }
 
+    /**
+     * Job apply with a resume
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function jobApply($id , Request $request)
+    {
+        $job = $this->jobs->find($id);
+        $resumes = Auth::user()->resumes()->latest('created_at')->paginate(5);
+        if ($request->expectsJson()) {
+            return view('front.job.resumeLoad' , ['resumes' => $resumes])->render();
+        }
+        return view('front.job.job-apply' , compact('job' , 'resumes'));   //  Apply for job
+    }
+
+    /**
+     * show candidates list of job
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function jobCandidates($id , Request $request)
+    {
+        $job = $this->jobs->find($id);
+        $resumes = $job->resumes()->latest('created_at')->paginate(5);;
+        if ($request->expectsJson()) {
+            return view('front.job.candidateLoad' , ['resumes' => $resumes])->render();
+        }
+        return view('front.job.job-candidates' , compact('job' , 'resumes'));
+    }
+
+    /**
+     * @param Request $request
+     * @param $jobId
+     * @param $id
+     * @return View||Illuminate\Http\Response
+     */
+    public function resumeDestroy(Request $request ,$jobId ,$id)
+    {
+        if (isset($id) and Auth::check()) {
+            $result = DB::table('job_resume')->where('id' , $id)->delete();
+            if ($result) {
+
+                $resumes = $this->jobs->find($jobId)->resumes()->orderBy('updated_at' , 'desc')->paginate(5);
+                $resumes->withPath($jobId);
+                if ($request->expectsJson()) {
+                    return view('front.job.candidateLoad' , ['resumes' => $resumes])->render();
+                }
+            }
+        }else {
+            return abort('403');
+        }
+    }
 
 }

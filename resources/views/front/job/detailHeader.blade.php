@@ -1,10 +1,10 @@
 <header class="page-header bg-img" style="background-image: url({{asset('assets/img/bg-banner1.jpg')}})">
     <div class="container">
         <div class="header-detail">
-            <img class="logo" src="{{config('app.url')."/assets/img/job.png"}}" alt="logo">
+            <img class="logo" src="{{config('app.url').'/'.$job->companies->image}}" alt="logo">
             <div class="hgroup">
                 <h1>{{$job->job_name}}</h1>
-                <h3><a href="#">{{$job->companies->name}}</a></h3>
+                <h3><a href="{{url('company' , $job->companies->id)}}">{{$job->companies->name}}</a></h3>
             </div>
             <time datetime="{{$job->updated_at}}">{{$job->time}}</time>
             <hr>
@@ -53,7 +53,7 @@
 
                 <div class="action-buttons">
                     <a class="btn btn-primary" href="#">Apply with linkedin</a>
-                    <a class="btn btn-success" href="job-apply.html">Apply now</a>
+                    <a class="btn btn-success" href="{{url('job-apply' , $job->id)}}">Apply now</a>
                 </div>
             </div>
 

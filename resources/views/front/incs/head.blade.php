@@ -10,7 +10,6 @@
     <meta id="cdn_url" name="token" content="{{ url("/") }}">
     <meta id="version" name="version" content="{{ config("app.version") }}">
     <meta id="app_name" name="version" content="{{ config("app.name") }}">
-    <title>TheJobs</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">

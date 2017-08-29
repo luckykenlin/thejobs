@@ -1703,7 +1703,8 @@ var axios = __webpack_require__(199);
 $(document).ready(function () {
     $('body').delegate(".btn-danger", "click", function (e) {
         e.preventDefault();
-        datadelete($('.btn-danger').attr('href'));
+        console.log($(this).attr('href'));
+        datadelete($(this).attr('href'));
     });
 });
 function datadelete(url) {

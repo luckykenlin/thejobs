@@ -88,3 +88,4 @@
         {{$jobs->links()}}
     </nav>
 </div>
+<script src="{{asset('js/dataUtility.js')}}"></script>
