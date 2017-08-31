@@ -74,7 +74,6 @@
                     @if(Auth::check())
                         <li><a href="{{url('job-manage')}}">Manage jobs</a></li>
                     @endif
-                    <li><a href="#">Candidates</a></li>
                 </ul>
             </li>
             <li>

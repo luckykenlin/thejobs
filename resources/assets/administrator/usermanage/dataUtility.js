@@ -6,7 +6,66 @@ $(document).ready(function () {
         console.log($(this).attr('href'));
         datadelete($(this).attr('href'));
     })
+    //
+    // $('.statuspicker').delegate("select","change",function () {
+    //     let page = $('.pagination .active span').text();
+    //     let url = $(this).val();
+    //     let taken = document.querySelector("#token").getAttribute("content");
+    //     let status = $(this).find("option:selected").text();
+    //     jQuery("#load").show();
+    //     $.ajax({
+    //         method: "POST",
+    //         url: url+'?'+'&page='+page,
+    //         data: {_token: taken , status: status}
+    //     }).done(function (data) {
+    //         jQuery("#load").hide();
+    //         $('#loader').html(data);
+    //         $('.selectpicker').selectpicker('refresh');
+    //     }).fail(function () {
+    //         alert('Something wrong!');
+    //     });
+    // });
+
+    $('body').delegate(".select","click",function (e) {
+        e.preventDefault();
+        console.log($(this).attr('href'));
+        select($(this).attr('href'));
+    })
 })
+
+function select(url) {
+    swal({
+        text: "you wanna apply this job?",
+        type: 'question',
+        confirmButtonText: 'Submit',
+        showCancelButton: true,
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function () {
+            return new Promise(function (resolve, reject) {
+                axios.post(url).then((response) => {
+                    console.log(response);
+                    resolve(response);
+                }).catch((error) => {
+                    console.log("destroy error", error);
+                    swal(
+                        'Cancelled',
+                        'Your resume has been upload :)',
+                        )
+                });
+            })
+        }
+    }).then((response) => {
+        jQuery("#load").hide();
+        swal({
+            title: 'Good job',
+            text: "Your selection has been sent!",
+            type: 'success',
+        });
+
+    })
+}
+
 function datadelete(url) {
     let pageSize  =$('#numPicker').val();
     let page = $('.pagination .active span').text();

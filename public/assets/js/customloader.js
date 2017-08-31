@@ -5,46 +5,46 @@
 
 function initurl() {
     var url = '?';
-    if (typeof($('#numPicker').val()) != 'undefined') url = url +'pageSize=' + $('#numPicker').val();
-    if (typeof($('.pagination .active span').text()) != 'undefined')  url = url +'&page=' + $('.pagination .active span').text();
-    if (typeof($('#stylePicker').val()) != 'undefined')  url = url +"&show=" + $('#stylePicker').val();
+    if (typeof($('#numPicker').val()) != 'undefined') url = url + 'pageSize=' + $('#numPicker').val();
+    if (typeof($('.pagination .active span').text()) != 'undefined') url = url + '&page=' + $('.pagination .active span').text();
+    if (typeof($('#stylePicker').val()) != 'undefined') url = url + "&show=" + $('#stylePicker').val();
     return url;
 }
 
-$(function() {
-    $('body').delegate('.pagination a',"click",function (e) {
+$(function () {
+    $('body').delegate('.pagination a', "click", function (e) {
         e.preventDefault();
         $.pjax({
-            type:"GET",
-            dataType:"html",
-            url:$(this).attr('href'),
+            type: "GET",
+            dataType: "html",
+            url: $(this).attr('href'),
             scrollTo: false,
             container: '#loader',
             timeout: 2000,
         });
     });
 
-
     //选项卡实现异步刷新列表数据个数
-    $('#numPicker').change(function() {
+    $('#numPicker').change(function () {
         var url = '?';
-        if (typeof($('#numPicker').val()) != 'undefined') url = url +'pageSize=' + $('#numPicker').val();
-        if (typeof($('#stylePicker').val()) != 'undefined')  url = url +"&show=" + $('#stylePicker').val();
+        if (typeof($('#numPicker').val()) != 'undefined') url = url + 'pageSize=' + $('#numPicker').val();
+        if (typeof($('#stylePicker').val()) != 'undefined') url = url + "&show=" + $('#stylePicker').val();
         $.pjax({
-            type:"GET",
-            dataType:"html",
-            url:url,
+            type: "GET",
+            dataType: "html",
+            url: url,
             scrollTo: false,
             container: '#loader',
             timeout: 2000,
         });
     });
 
+
     //选项卡实现异步刷新列表数据个数
-    $('#stylePicker').change(function() {
+    $('#stylePicker').change(function () {
         $.pjax({
-            type:"GET",
-            dataType:"html",
+            type: "GET",
+            dataType: "html",
             url: initurl(),
             scrollTo: false,
             container: '#loader',
@@ -54,9 +54,10 @@ $(function() {
 
 })
 
-$(document).on('pjax:send', function() {
+$(document).on('pjax:send', function () {
     $('#load').show()
 })
-$(document).on('pjax:complete', function() {
+$(document).on('pjax:complete', function () {
+    $('.selectpicker').selectpicker('refresh');
     $('#load').hide()
 })

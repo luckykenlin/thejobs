@@ -9,13 +9,11 @@
     <main>
         <section class="no-padding-top bg-alt" id="sec-resume">
             <div class="container" id="loader">
-                <div class="row">
-
+                <!-- ajax --loader -->
                     @include('front.job.candidateLoad')
-
-                </div>
+                <!-- END loader -->
             </div>
         </section>
     </main>
+    @include('front.contact.message')
 @endsection
-@include('front.contact.message')

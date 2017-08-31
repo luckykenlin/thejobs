@@ -44,5 +44,12 @@ interface Constant
     //Resume
     const SHOW = 1;
     const HIDE = 0;
+    const RESUME_STATUS = [
+        "NEW" => 3,
+        "CONTACTED" => 4,
+        "INTERVIEWED" => 5,
+        "HIRED" => 6,
+        "ARCHIVED" => 7,
+    ];
 
 }

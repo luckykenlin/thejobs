@@ -1,6 +1,6 @@
 @extends('layouts.front')
 @section('title')
-    <title> job </title>
+    <title> Job </title>
 @endsection
 @section('header')
     @include('front.job.header')

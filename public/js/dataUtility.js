@@ -1706,7 +1706,62 @@ $(document).ready(function () {
         console.log($(this).attr('href'));
         datadelete($(this).attr('href'));
     });
+
+    $('.statuspicker').delegate("select", "change", function () {
+        var page = $('.pagination .active span').text();
+        var url = $(this).val();
+        var taken = document.querySelector("#token").getAttribute("content");
+        var status = $(this).find("option:selected").text();
+        jQuery("#load").show();
+        $.ajax({
+            method: "POST",
+            url: url + '?' + '&page=' + page,
+            data: { _token: taken, status: status }
+        }).done(function (data) {
+            jQuery("#load").hide();
+            $('#loader').html(data);
+            $('.selectpicker').selectpicker('refresh');
+        }).fail(function () {
+            alert('Something wrong!');
+        });
+    });
+
+    $('body').delegate(".select", "click", function (e) {
+        e.preventDefault();
+        console.log($(this).attr('href'));
+        select($(this).attr('href'));
+    });
 });
+
+function select(url) {
+    swal({
+        text: "you wanna apply this job?",
+        type: 'question',
+        confirmButtonText: 'Submit',
+        showCancelButton: true,
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function preConfirm() {
+            return new Promise(function (resolve, reject) {
+                axios.post(url).then(function (response) {
+                    console.log(response);
+                    resolve(response);
+                }).catch(function (error) {
+                    console.log("destroy error", error);
+                    swal('Cancelled', 'Your resume has been upload :)');
+                });
+            });
+        }
+    }).then(function (response) {
+        jQuery("#load").hide();
+        swal({
+            title: 'Good job',
+            text: "Your selection has been sent!",
+            type: 'success'
+        });
+    });
+}
+
 function datadelete(url) {
     var pageSize = $('#numPicker').val();
     var page = $('.pagination .active span').text();

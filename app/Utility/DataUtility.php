@@ -144,6 +144,35 @@ class DataUtility
         return $jobType;
     }
 
+
+    public static function resumeStatus($status)
+    {
+        $resumeStatus = [];
+        switch ($status){
+            case Constant::RESUME_STATUS['NEW']:
+                $resumeStatus['lable_style'] = 'label label-default';
+                $resumeStatus['lable'] = 'NEW';
+                break;
+            case Constant::RESUME_STATUS['CONTACTED']:
+                $resumeStatus['lable_style'] = 'label label-warning';
+                $resumeStatus['lable'] = 'CONTACTED';
+                break;
+            case Constant::RESUME_STATUS['INTERVIEWED']:
+                $resumeStatus['lable_style'] = 'label label-info';
+                $resumeStatus['lable'] = 'INTERVIEWED';
+                break;
+            case Constant::RESUME_STATUS['HIRED']:
+                $resumeStatus['lable_style'] = 'label label-success';
+                $resumeStatus['lable'] = 'HIRED';
+                break;
+            case Constant::RESUME_STATUS['ARCHIVED']:
+                $resumeStatus['lable_style'] = 'label label-danger';
+                $resumeStatus['lable'] = 'ARCHIVED';
+                break;
+        }
+        return $resumeStatus;
+    }
+
     /**
      * @param array $data
      * @return array|bool

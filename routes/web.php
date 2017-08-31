@@ -26,8 +26,11 @@ Route::group(/**
     Route::delete('job-manage/{id}' , 'UserManageController@jobDestroy')->name('job.delete');// Job's deletion by user
     Route::post('job-mark/{id}' , 'UserManageController@jobMark')->name('job.mark');  //  Mark a job's status
     Route::get('job-candidates/{id}','JobController@jobCandidates');
+    Route::post('job-candidates/{job}/{resume}','JobController@resumeStatus');
     Route::get('job-apply/{id}','JobController@jobApply');
-    Route::delete('job-delete/{job}/{id}' , 'JobController@resumeDestroy');// resumes's deletion by job
+    Route::post('job-apply/{id}','JobController@jobApplyWithoutResume');
+    Route::post('job-apply/{job}/{id}','JobController@jobResumeApply');
+    Route::delete('job-delete/{job}/{resume}' , 'JobController@resumeDestroy');// resumes's deletion by job
     //----------------   company ----------------------------
     Route::get('company-manage' , 'UserManageController@companyManage');
     Route::delete('company-manage/{id}' , 'UserManageController@companyDestroy')->name('company.delete');

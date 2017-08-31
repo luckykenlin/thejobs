@@ -22,7 +22,7 @@
 
                 <div class="action-btn">
                     <a class="btn btn-xs btn-gray" href="{{url('resume/'.$resume->id).'/edit'}}">Edit</a>
-                    <a class="btn btn-xs btn-success" href="#">Select</a>
+                    <a class="btn btn-xs btn-success select" href="{{url('job-apply').'/'.$job->id.'/'.$resume->id}}">Select</a>
                 </div>
             </footer>
         </div>
@@ -41,3 +41,4 @@
     {{$resumes->fragment('sec-resume')->links()}}
 </nav>
 <!-- End page navigation -->
+<script src="{{asset('js/dataUtility.js')}}"></script>

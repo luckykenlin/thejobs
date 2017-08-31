@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Contracts\Constant;
 use App\Models\Job;
 use App\Models\JobResume;
+use App\Models\Resume;
 use App\Utility\DataUtility;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -123,7 +124,8 @@ class JobController extends Controller
             $data['job_desc'] = htmlspecialchars($data['job_desc']);
             $this->jobs->update($data , $id);
             return redirect('job-manage');
-        } else abort(403);
+        } else
+            return abort(403 , 'Unauthorized action');
     }
 
     /**
@@ -134,12 +136,15 @@ class JobController extends Controller
      */
     public function jobApply($id , Request $request)
     {
-        $job = $this->jobs->find($id);
-        $resumes = Auth::user()->resumes()->latest('created_at')->paginate(5);
-        if ($request->expectsJson()) {
-            return view('front.job.resumeLoad' , ['resumes' => $resumes])->render();
-        }
-        return view('front.job.job-apply' , compact('job' , 'resumes'));   //  Apply for job
+        if (Auth::check()) {
+            $job = $this->jobs->find($id);
+            $resumes = Auth::user()->resumes()->latest('created_at')->paginate(5);
+            if ($request->expectsJson()) {
+                return view('front.job.resumeLoad' , ['resumes' => $resumes])->render();
+            }
+            return view('front.job.job-apply' , compact('job' , 'resumes'));   //  Apply for job
+        } else
+            return abort(403 , 'Unauthorized action');
     }
 
     /**
@@ -164,20 +169,80 @@ class JobController extends Controller
      * @param $id
      * @return View||Illuminate\Http\Response
      */
-    public function resumeDestroy(Request $request ,$jobId ,$id)
+    public function resumeDestroy(Request $request , $jobId , $id)
     {
         if (isset($id) and Auth::check()) {
             $result = DB::table('job_resume')->where('id' , $id)->delete();
             if ($result) {
-
-                $resumes = $this->jobs->find($jobId)->resumes()->orderBy('updated_at' , 'desc')->paginate(5);
-                $resumes->withPath($jobId);
                 if ($request->expectsJson()) {
+                    $resumes = $this->jobs->find($jobId)->resumes()->orderBy('updated_at' , 'desc')->paginate(5);
+                    $resumes->withPath($jobId);
                     return view('front.job.candidateLoad' , ['resumes' => $resumes])->render();
                 }
             }
-        }else {
+        } else {
             return abort('403');
+        }
+    }
+
+    /**
+     * Apply a job with a resume
+     * @param Request $request
+     * @param $jobId
+     * @param $resumeId
+     * @return mixed
+     */
+    public function jobResumeApply(Request $request , $jobId , $resumeId)
+    {
+        if ($request->expectsJson()) {
+            $job = $this->jobs->find($jobId);
+            $resume = Resume::find($resumeId);
+            if ($job->resumes->contains($resume))
+                return response('This resume has been upload!!' , 403);
+            else {
+                $job->resumes()->attach($resumeId);
+                return response('success!' , 200);
+            }
+        }
+        return abort(403);
+    }
+
+    /**
+     * Apply a job without a resume
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
+    public function jobApplyWithoutResume(Request $request , $id)
+    {
+        DB::table('job_resume')->insert(
+            ['name' => $request['name'],
+             'email' => $request['email'],
+             'message' => $request['message'],
+              'job_id' =>  $id]
+        );
+
+        return back();
+    }
+
+    /**
+     * Set resume's status
+     * @param Request $request
+     * @param $jobId
+     * @param $resumeId
+     * @return mixed
+     */
+    public function resumeStatus(Request $request , $jobId , $resumeId)
+    {
+        $job = $this->jobs->find($jobId);
+        $resume = Resume::find($resumeId);
+        if ($job->resumes->contains($resume))
+            $job->resumes()->updateExistingPivot($resumeId , ['status' => $request['status']]);
+
+        $resumes = $job->resumes()->latest('created_at')->paginate(5);
+        $resumes->withPath($jobId);
+        if ($request->expectsJson()) {
+            return view('front.job.candidateLoad' , ['resumes' => $resumes])->render();
         }
     }
 
