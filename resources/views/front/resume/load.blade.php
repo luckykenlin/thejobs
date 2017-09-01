@@ -24,10 +24,9 @@
                                 <p>{{$resume->short_desc}}</p>
 
                                 <div class="tag-list">
-                                    {{--<span>SKILL</span>--}}
-                                    {{--<span>SKILL</span>--}}
-                                    {{--<span>SKILL</span>--}}
-                                    {{--<span>SKILL</span>--}}
+                                    @foreach($resume->skills as $skill)
+                                        <span>{{$skill->name}}</span>
+                                    @endforeach
                                 </div>
                             </div>
 
@@ -64,10 +63,9 @@
                     <p>{{$resume->short_desc}}</p>
 
                     <div class="tag-list">
-                        <span>SKILL</span>
-                        <span>SKILL</span>
-                        <span>SKILL</span>
-                        <span>SKILL</span>
+                        @foreach($resume->skills as $skill)
+                            <span>{{$skill->name}}</span>
+                        @endforeach
                     </div>
                 </div>
 
@@ -109,10 +107,9 @@
                     <p>{{$resume->short_desc}}</p>
 
                     <div class="tag-list">
-                        <span>SKILL</span>
-                        <span>SKILL</span>
-                        <span>SKILL</span>
-                        <span>SKILL</span>
+                        @foreach($resume->skills as $skill)
+                            <span>{{$skill->name}}</span>
+                        @endforeach
                     </div>
                 </div>
 

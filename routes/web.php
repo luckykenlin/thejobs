@@ -19,7 +19,8 @@ Route::group(/**
     ['namespace' => 'Pages'] , function () {
     Route::get('/' , 'HomeController@index')->name('front.home');
     Route::get('home' , 'HomeController@index');
-
+    Route::get('contact/about' , function (){   return view('front.contact.about'); });
+    Route::get('contact' , function (){   return view('front.contact.contact'); });
     //---------- Usermanage action ------------------------------
     //----------------   Job -------------------------------
     Route::get('job-manage' , 'UserManageController@jobManage');  //  Job's management by user
@@ -39,7 +40,11 @@ Route::group(/**
     Route::get('resume-manage' , 'UserManageController@resumeManage');
     Route::delete('resume-manage/{id}' , 'UserManageController@resumeDestroy')->name('resume.delete');
     Route::post('resume-mark/{id}' , 'UserManageController@resumeMark')->name('resume.mark');  //  Mark a resume's status
-
+    //----------------   message ----------------------------
+    Route::post('message-resume/{id}','MessageController@resumeMessage');
+    Route::post('message-company/{id}','MessageController@companyMessage');
+    Route::get('message','MessageController@index');
+    Route::delete('message/{id}' , 'MessageController@destroy')->name('message.delete');// Job's deletion by user
     //----------- END ------------------------
 
     Route::resource('job' , 'JobController');

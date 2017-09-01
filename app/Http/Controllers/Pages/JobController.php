@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Contracts\Constant;
 use App\Models\Job;
 use App\Models\JobResume;
+use App\Models\Message;
 use App\Models\Resume;
 use App\Utility\DataUtility;
 use Illuminate\Http\Request;
@@ -215,14 +216,15 @@ class JobController extends Controller
      */
     public function jobApplyWithoutResume(Request $request , $id)
     {
-        DB::table('job_resume')->insert(
-            ['name' => $request['name'],
-             'email' => $request['email'],
-             'message' => $request['message'],
-              'job_id' =>  $id]
-        );
-
-        return back();
+        if (Auth::check()) {
+            $job = $this->jobs->find($id);
+            $message = $request->all();
+            if (isset($request['file_url'])) {
+                $message['file_url'] = $this->jobs->fileUpload($request['file_url'] , 'message_file');
+            }
+            $job->messages()->save(new Message($message));
+            return redirect('job/'.$id);
+        }else return abort(403);
     }
 
     /**

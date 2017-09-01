@@ -36,6 +36,11 @@ return [
         'repository' => 'App\Repositories\ResumeRepository'
     ],
 
+    'message' => [
+        'contracts' => 'App\Contracts\Message\MessageRepository' ,
+        'repository' => 'App\Repositories\MessageRepository'
+    ],
+
     'test' => [
         'contracts' => 'App\Contracts\Test\TestRepository' ,
         'repository' => 'App\Repositories\TestRepository'

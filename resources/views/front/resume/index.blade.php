@@ -26,8 +26,8 @@
             </div>
             <div class="container" id="loader">
                 <!-- ajax --loader -->
-            @include('front.resume.load')
-            <!-- END loader -->
+                 @include('front.resume.load')
+                <!-- END loader -->
             </div>
         </section>
     </main>

@@ -50,7 +50,7 @@
 
                 <div class="action-buttons">
                     <a class="btn btn-gray" href="#">Favorite</a>
-                    <a class="btn btn-success" data-toggle="modal" data-target="#modal-contact" href="#">Contact me</a>
+                    <a class="btn btn-success contact-message" data-url="{{url('message-company',$company->id)}}" data-toggle="modal" data-target="#modal-contact" href="#">Contact me</a>
                 </div>
             </div>
 

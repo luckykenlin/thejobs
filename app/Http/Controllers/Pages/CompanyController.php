@@ -34,6 +34,7 @@ class CompanyController extends Controller
      */
     public function index(Request $request , $pageinfo = [])
     {
+        $categories = Category::where('name' , '=' , 'Root Category')->first();
         $pageInfo = DataUtility::pageInfo(10 , $request->all());
         $pathUrl = $request->path();
         $pathUrl = DataUtility::pathUrl($pageInfo , $pathUrl);
@@ -44,7 +45,7 @@ class CompanyController extends Controller
         }
 
         $companies = $this->companies->fetchByPageInfo($jobs , $pageInfo , null , null , null , null , $pathUrl);
-        return view('front.company.index' , compact('companies'));
+        return view('front.company.index' , compact('companies' ,'categories'));
     }
 
     /**

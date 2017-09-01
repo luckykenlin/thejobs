@@ -30,5 +30,5 @@
         <!-- END Open positions -->
 
     </main>
-@include('front.contact.message')
+    @include('front.contact.message')
 @endsection

@@ -53,6 +53,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Resume');
     }
 
+    public function messages()
+    {
+        return $this->morphMany('App\Models\Message', 'messageable');
+    }
     /** Is User A Administrator
      * @return bool
      */

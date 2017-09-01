@@ -18,43 +18,15 @@
 
                 <div class="form-group col-xs-12 col-sm-4">
                     <div class="btn-group bootstrap-select show-tick form-control">
-                        <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown"
-                                title="All categories"><span class="filter-option pull-left">All categories</span>&nbsp;<span
-                                    class="bs-caret"><span class="caret"></span></span></button>
-                        <div class="dropdown-menu open">
-                            <ul class="dropdown-menu inner" role="menu">
-                                <li data-original-index="0" class="selected"><a tabindex="0" class="" style=""
-                                                                                data-tokens="null"><span class="text">All categories</span><span
-                                                class="fa fa-check check-mark"></span></a></li>
-                                <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span
-                                                class="text">Developer</span><span
-                                                class="fa fa-check check-mark"></span></a></li>
-                                <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span
-                                                class="text">Designer</span><span class="fa fa-check check-mark"></span></a>
-                                </li>
-                                <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span
-                                                class="text">Customer service</span><span
-                                                class="fa fa-check check-mark"></span></a></li>
-                                <li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span
-                                                class="text">Finance</span><span class="fa fa-check check-mark"></span></a>
-                                </li>
-                                <li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span
-                                                class="text">Healthcare</span><span
-                                                class="fa fa-check check-mark"></span></a></li>
-                                <li data-original-index="6"><a tabindex="0" class="" style="" data-tokens="null"><span
-                                                class="text">Sale</span><span class="fa fa-check check-mark"></span></a>
-                                </li>
-                                <li data-original-index="7"><a tabindex="0" class="" style="" data-tokens="null"><span
-                                                class="text">Marketing</span><span
-                                                class="fa fa-check check-mark"></span></a></li>
-                                <li data-original-index="8"><a tabindex="0" class="" style="" data-tokens="null"><span
-                                                class="text">Information technology</span><span
-                                                class="fa fa-check check-mark"></span></a></li>
-                                <li data-original-index="9"><a tabindex="0" class="" style="" data-tokens="null"><span
-                                                class="text">Others</span><span
-                                                class="fa fa-check check-mark"></span></a></li>
-                            </ul>
-                        </div>
+                        <select title="Category:&nbsp;&nbsp; Choose one of the following..."
+                                class="form-control selectpicker" id="category_id"
+                                name="category_id">
+                            @foreach($categories->getDescendants() as $category)
+                                <option value="{{$category->id}}">
+                                    {{$category->name}}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>

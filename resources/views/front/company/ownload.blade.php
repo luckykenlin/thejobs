@@ -6,7 +6,7 @@
                 <a href="{{url('company/'.$company->id)}}"><img src="{{config('app.url')."/".$company->image}}" alt=""></a>
                 <div class="hgroup">
                     <h4><a href="{{url('company/'.$company->id)}}">{{$company->name}}</a></h4>
-                    <h5>{{$company->categories->name}}<a href="{{route('company.show',$company->id)}}#open-positions"><span
+                    <h5>{{$company->categories->name}}<a href="{{url('company',$company->id)}}#open-positions"><span
                                     class="label label-info">{{count($company->jobs)}} jobs</span></a></h5>
                 </div>
                 <div class="action-btn">

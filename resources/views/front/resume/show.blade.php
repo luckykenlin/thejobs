@@ -114,8 +114,7 @@
                 </div>
             </section>
             <!-- END Skills -->
-        @endif
-
+    @endif
     </main>
-@include('front.contact.message')
+    @include('front.contact.message')
 @endsection

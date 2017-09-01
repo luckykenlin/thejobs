@@ -52,7 +52,7 @@
                         <div class="col-xs-6 col-md-3">
                             <div class="upload-button upload-button-block">
                                 <button class="btn btn-block btn-success">Attach your CV</button>
-                                <input name="cv_url" type="file">
+                                <input name="file_url" type="file">
                             </div>
                         </div>
 

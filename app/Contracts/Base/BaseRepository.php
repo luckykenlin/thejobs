@@ -106,4 +106,16 @@ interface BaseRepository
      */
     public function fileUpload(UploadedFile $file, $filename);
 
+    /**
+     * Gera a paginação dos itens de um array ou collection.
+     *
+     * @param array|Collection      $items
+     * @param int   $perPage
+     * @param int  $page
+     * @param array $options
+     *
+     * @return LengthAwarePaginator
+     */
+    public function paginate($items, $perPage = 15, $page = null, $options = []);
+
 }

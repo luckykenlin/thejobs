@@ -37,4 +37,9 @@ class Job extends Model
                                     ->withPivot('id','status');
     }
 
+    public function messages()
+    {
+        return $this->morphMany('App\Models\Message', 'messageable');
+    }
+
 }

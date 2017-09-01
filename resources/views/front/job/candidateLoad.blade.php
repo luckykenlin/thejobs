@@ -31,7 +31,7 @@
 
                 <div class="action-btn">
                     <a class="btn btn-xs btn-gray" href="{{$resume->cv_url? url('download' ,urlencode($resume->cv_url)) : '#'}}">Download CV</a>
-                    <a class="btn btn-xs btn-gray" data-toggle="modal" data-target="#modal-contact" href="#">Contact</a>
+                    <a class="btn btn-xs btn-gray contact-message" data-url="{{url('message-resume', $resume->id)}}" data-toggle="modal" data-target="#modal-contact" href="#">Contact</a>
                     <a class="btn btn-xs btn-danger" href="{{url('job-delete').'/'.$resume->pivot->job_id.'/'.$resume->pivot->id}}">Delete</a>
                 </div>
             </footer>
@@ -65,5 +65,5 @@
                 alert('Something wrong!');
             });
         });
-    </script>
+</script>
 </div>

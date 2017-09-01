@@ -8,11 +8,15 @@
 
 namespace App\Repositories;
 use \App\Contracts\Base\BaseRepository as BaseRepositoryImpl;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class BaseRepository implements BaseRepositoryImpl
 {
@@ -243,8 +247,25 @@ class BaseRepository implements BaseRepositoryImpl
     public function fileUpload(UploadedFile $file, $filename)
     {
         $file->storeAs(
-            'public/images/' . Auth::user()->id , $filename . '.' . $file->extension());
-        $url = 'storage/images/' .Auth::user()->id  . '/' . $filename . '.' . $file->extension();
+            'public/images/' . Auth::user()->id , Carbon::now()->format('hs') .$filename . '.' . $file->extension());
+        $url = 'storage/images/' .Auth::user()->id  . '/' .Carbon::now()->format('hs') . $filename . '.' . $file->extension();
         return $url;
+    }
+
+    /**
+     * Gera a paginação dos itens de um array ou collection.
+     *
+     * @param array|Collection      $items
+     * @param int   $perPage
+     * @param int  $page
+     * @param array $options
+     *
+     * @return LengthAwarePaginator
+     */
+    public function paginate($items, $perPage = 15, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }

@@ -1,35 +1,89 @@
-"use strict";
-
-$(function() {
-
-
-});
+/**
+ * Created by ken on 2017/8/5.
+ */
 
 
-//
-// Draw map in page-contact
-//
-function initMap() {
-  var mapDiv = document.getElementById('contact-map');
-  var map = new google.maps.Map(mapDiv, {
-    center: {lat: 44.540, lng: -78.546},
-    zoom: 14
-  });
-
-  var marker = new google.maps.Marker({
-    position: {lat: 44.540, lng: -78.546},
-    map: map
-  });
-
-  var infowindow = new google.maps.InfoWindow({
-    content: "<strong>Our office</strong><br>3652 Seventh Avenue, Los Angeles, CA"
-  });
-
-  marker.addListener('click', function() {
-    infowindow.open(map, marker);
-  });
-
-  infowindow.open(map,marker);
-
-  map.set('styles', [{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]);
+function initurl() {
+    var url = '?';
+    if (typeof($('#numPicker').val()) != 'undefined') url = url + 'pageSize=' + $('#numPicker').val();
+    if (typeof($('.pagination .active span').text()) != 'undefined') url = url + '&page=' + $('.pagination .active span').text();
+    if (typeof($('#stylePicker').val()) != 'undefined') url = url + "&show=" + $('#stylePicker').val();
+    return url;
 }
+
+$(function () {
+    $('body').delegate('.pagination a', "click", function (e) {
+        e.preventDefault();
+        $.pjax({
+            type: "GET",
+            dataType: "html",
+            url: $(this).attr('href'),
+            scrollTo: false,
+            container: '#loader',
+            timeout: 2000,
+        });
+    });
+    $('#modal-contact').on('shown.bs.modal', function (e) {
+        var button = $(e.relatedTarget);
+        formAction = button.attr('data-url');
+    })
+
+    $("#message-submit").click(function (e) {
+        var taken = document.querySelector("#token").getAttribute("content");
+        var subject = $('#modal-contact').find('#subject').val();
+        var message = $('#modal-contact').find('#message-text').val();
+        jQuery("#load").show();
+        $.ajax({
+            type: "POST",
+            data: {_token: taken, subject: subject, message: message},
+            url: formAction,
+            timeout: 2000,
+        }).then((response) => {
+            jQuery("#load").hide();
+            $('#modal-contact').modal('hide');
+        });
+    });
+
+    $('#modal-contact').on('hidden.bs.modal', function (e) {
+        $('#modal-contact').find('#subject').val('');
+        $('#modal-contact').find('#message-text').val('');
+    })
+
+
+    //选项卡实现异步刷新列表数据个数
+    $('#numPicker').change(function () {
+        var url = '?';
+        if (typeof($('#numPicker').val()) != 'undefined') url = url + 'pageSize=' + $('#numPicker').val();
+        if (typeof($('#stylePicker').val()) != 'undefined') url = url + "&show=" + $('#stylePicker').val();
+        $.pjax({
+            type: "GET",
+            dataType: "html",
+            url: url,
+            scrollTo: false,
+            container: '#loader',
+            timeout: 2000,
+        });
+    });
+
+
+    //选项卡实现异步刷新列表数据个数
+    $('#stylePicker').change(function () {
+        $.pjax({
+            type: "GET",
+            dataType: "html",
+            url: initurl(),
+            scrollTo: false,
+            container: '#loader',
+            timeout: 2000,
+        });
+    });
+
+})
+
+$(document).on('pjax:send', function () {
+    $('#load').show()
+})
+$(document).on('pjax:complete', function () {
+    $('.selectpicker').selectpicker('refresh');
+    $('#load').hide()
+})

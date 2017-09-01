@@ -34,4 +34,9 @@ class Company extends Model
     {
         return $this->hasMany('App\Models\Media');
     }
+
+    public function messages()
+    {
+        return $this->morphMany('App\Models\Message', 'messageable');
+    }
 }

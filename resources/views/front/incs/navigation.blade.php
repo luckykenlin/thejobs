@@ -46,7 +46,9 @@
                         <li><a href="{{url('job-manage')}}">Manage jobs</a></li>
                         <li><a href="{{url('company-manage')}}">Manage companies</a></li>
                         <li><a href="{{url('resume-manage')}}">Manage resumes</a></li>
-                        <li><a href="{{url('post-manage')}}">Manage Posts</a></li>
+                        <li><a href="{{url('message')}}">Manage messages</a></li>
+
+                        {{--<li><a href="{{url('post-manage')}}">Manage Posts</a></li>--}}
                         <li><a href="#">Setting</a></li>
                         <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
@@ -70,7 +72,6 @@
                 <ul>
                     <li><a href="{{url('job')}}">Browse jobs</a></li>
                     <li><a href="{{url('job/create')}}">Post a job</a></li>
-                    <li><a href="#">Apply for job</a></li>
                     @if(Auth::check())
                         <li><a href="{{url('job-manage')}}">Manage jobs</a></li>
                     @endif
@@ -97,13 +98,13 @@
                 </ul>
             </li>
             <li>
-                <a class="{{ Request::is('contact') ? 'active' : '' }}" href="#">Contact us</a>
+                <a class="{{ Request::is('contact') ? 'active' : '' }}" href="{{url('contact/about')}}">Contact us</a>
                 <ul>
-                    <li><a href="page-blog.html">Blog</a></li>
-                    <li><a href="page-about.html">About</a></li>
-                    <li><a href="page-contact.html">Contact</a></li>
-                    <li><a href="page-faq.html">FAQ</a></li>
-                    <li><a href="page-pricing.html">Pricing</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="{{url('contact/about')}}">About</a></li>
+                    <li><a href="{{url('contact')}}">Contact</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Pricing</a></li>
                 </ul>
             </li>
         </ul>
