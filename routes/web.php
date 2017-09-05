@@ -12,7 +12,7 @@
 */
 //** ------------------------------ ----------------------------------   front
 use Illuminate\Support\Facades\Route;
-Route::get('test' , 'TestController@index');
+//Route::get('test' , 'TestController@index');
 Route::group(/**
  *    namespace: namespace
  */
