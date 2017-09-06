@@ -9,7 +9,7 @@ use App\Models\Job;
 use App\Models\Resume;
 use App\Utility\DataUtility;
 use Illuminate\Http\Request;
-use \App\Contracts\User\UserRepository;
+use App\Contracts\User\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
