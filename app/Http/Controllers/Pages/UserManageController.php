@@ -43,7 +43,7 @@ class UserManageController extends Controller
             $jobs = $this->users->find(Auth::user()->id)->jobs();
             if ($request->expectsJson()) {
                 $jobs = $this->users->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
-                return view('front.job.ownload' , ['jobs' => $jobs])->render();
+                return view('front.job.ownLoad' , ['jobs' => $jobs])->render();
             }
 
             $jobs = $this->users->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
@@ -62,8 +62,7 @@ class UserManageController extends Controller
 
             if ($request->expectsJson()) {
                 $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
-                dd($resumes);
-                return view('front.resume.ownload' , ['resumes' => $resumes])->render();
+                return view('front.resume.ownLoad' , ['resumes' => $resumes])->render();
             }
 
             $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
@@ -87,7 +86,7 @@ class UserManageController extends Controller
             $companies = $this->users->find(Auth::user()->id)->companies();
             if ($request->expectsJson()) {
                 $companies = $this->users->fetchByPageInfo($companies, $pageInfo,null,null, null, null, $pathUrl);
-                return view('front.company.ownload' , ['companies' => $companies])->render();
+                return view('front.company.ownLoad' , ['companies' => $companies])->render();
             }
 
             $companies = $this->users->fetchByPageInfo($companies, $pageInfo,null,null, null, null, $pathUrl);
@@ -195,13 +194,13 @@ class UserManageController extends Controller
             else
                 Job::find($id)->update(['job_status' => Constant::JOB_EMPTY]);
         }
-        if ($request->ajax()) {
+        if ($request->expectsJson()) {
             $pageInfo = DataUtility::pageInfo(10 , $request->all());
             $pathUrl = explode('/', $request->path())[0];
             $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
             $jobs = $this->users->find(Auth::user()->id)->jobs();
             $jobs = $this->users->fetchByPageInfo($jobs, $pageInfo,null,null, null, null, $pathUrl);
-            return view('front.job.ownload' , ['jobs' => $jobs])->render();
+            return view('front.job.ownLoad' , ['jobs' => $jobs])->render();
         }
 
     }
@@ -222,13 +221,13 @@ class UserManageController extends Controller
             else
                 Resume::find($id)->update(['status' => Constant::SHOW]);
         }
-        if ($request->ajax()) {
+        if ($request->expectsJson()) {
             $pageInfo = DataUtility::pageInfo(10 , $request->all());
             $pathUrl = explode('/', $request->path())[0];
             $pathUrl = DataUtility::pathUrl($pageInfo, $pathUrl);
             $resumes = $this->users->find(Auth::user()->id)->resumes();
             $resumes = $this->users->fetchByPageInfo($resumes, $pageInfo,null,null, null, null, $pathUrl);
-            return view('front.resume.ownload' , ['resumes' => $resumes])->render();
+            return view('front.resume.ownLoad' , ['resumes' => $resumes])->render();
         }
 
     }

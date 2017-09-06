@@ -9,7 +9,6 @@
 namespace App\Contracts\Test;
 
 
-use App\Contracts\Base\BaseRepository;
 
 interface TestRepository
 {

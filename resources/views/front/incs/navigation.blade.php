@@ -7,15 +7,46 @@
 
             <div class="logo-wrapper">
                 <a class="logo" href="{{route('front.home')}}"><img src="{{config('app.url')."/assets/img/logo.png"}}"
-                                                       alt="logo"></a>
+                                                                    alt="logo"></a>
                 <a class="logo-alt" href="{{route('front.home')}}"><img src="{{config('app.url')."/assets/img/logo-alt.png"}}"
-                                                           alt="logo-alt"></a>
+                                                                        alt="logo-alt"></a>
             </div>
 
         </div>
         <!-- END Logo -->
+        @if(Auth::check())
+            <div class="pull-right">
+                <ul class="nav-menu">
+                    <li>
+                    <a href="#">{{Auth::user()->name}}</a>
+                    <img src="{{asset(Auth::user()->image)}}" class="user-image"
+                         alt="User Image">
+                    <ul>
+                        <li><a href="{{url('job-manage')}}">Manage jobs</a></li>
+                        <li><a href="{{url('company-manage')}}">Manage companies</a></li>
+                        <li><a href="{{url('resume-manage')}}">Manage resumes</a></li>
+                        <li><a href="{{url('message')}}">Manage messages</a></li>
 
-        <!-- User account -->
+                        {{--<li><a href="{{url('post-manage')}}">Manage Posts</a></li>--}}
+                        <li><a href="#">Setting</a></li>
+                        <li><a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">
+                                Sign out
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+
+                        </li>
+                    </ul>
+                    </li>
+                </ul>
+            </div>
+
+        @endif
+    <!-- User account -->
         @if(!Auth::check())
             <div class="pull-right user-login-custom ">
 
@@ -37,33 +68,6 @@
 
         <!-- Navigation menu -->
         <ul class="nav-menu">
-            @if(Auth::check())
-                <li class="pull-right">
-                    <a href="#">{{Auth::user()->name}}</a>
-                    <img src="{{asset(Auth::user()->image)}}" class="user-image"
-                         alt="User Image">
-                    <ul>
-                        <li><a href="{{url('job-manage')}}">Manage jobs</a></li>
-                        <li><a href="{{url('company-manage')}}">Manage companies</a></li>
-                        <li><a href="{{url('resume-manage')}}">Manage resumes</a></li>
-                        <li><a href="{{url('message')}}">Manage messages</a></li>
-
-                        {{--<li><a href="{{url('post-manage')}}">Manage Posts</a></li>--}}
-                        <li><a href="#">Setting</a></li>
-                        <li><a href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                               document.getElementById('logout-form').submit();">
-                               Sign out
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                  style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-
-                        </li>
-                    </ul>
-                </li>
-            @endif
             <li>
                 <a class="{{ (Request::is('/') or  Request::is('home')) ? 'active' : '' }}" href="{{url('/')}}">Home</a>
             </li>

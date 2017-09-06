@@ -15,7 +15,8 @@ class JobController extends Controller
 
     /**
      * UserController constructor.
-     * @param UserRepository $user
+     * @param JobRepository $jobs
+     * @internal param UserRepository $user
      */
     function __construct(JobRepository $jobs)
     {

@@ -15,7 +15,7 @@ use Illuminate\Support\ServiceProvider;
 class BaseServiceProvider extends ServiceProvider
 {
 
-    protected $defer = true;
+//    protected $defer = true;
     /**
      * Bootstrap the application services.
      *
@@ -43,13 +43,13 @@ class BaseServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * 获取提供者提供的服务
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [BaseRepository::class];
-    }
+//    /**
+//     * 获取提供者提供的服务
+//     *
+//     * @return array
+//     */
+//    public function provides()
+//    {
+//        return [BaseRepository::class];
+//    }
 }

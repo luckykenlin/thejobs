@@ -6,25 +6,6 @@ $(document).ready(function () {
         console.log($(this).attr('href'));
         datadelete($(this).attr('href'));
     })
-    //
-    // $('.statuspicker').delegate("select","change",function () {
-    //     let page = $('.pagination .active span').text();
-    //     let url = $(this).val();
-    //     let taken = document.querySelector("#token").getAttribute("content");
-    //     let status = $(this).find("option:selected").text();
-    //     jQuery("#load").show();
-    //     $.ajax({
-    //         method: "POST",
-    //         url: url+'?'+'&page='+page,
-    //         data: {_token: taken , status: status}
-    //     }).done(function (data) {
-    //         jQuery("#load").hide();
-    //         $('#loader').html(data);
-    //         $('.selectpicker').selectpicker('refresh');
-    //     }).fail(function () {
-    //         alert('Something wrong!');
-    //     });
-    // });
 
     $('body').delegate(".select","click",function (e) {
         e.preventDefault();
@@ -107,15 +88,22 @@ $(document).ready(function () {
         let pageSize  =$('#numPicker').val();
         let page = $('.pagination .active span').text();
         jQuery("#load").show();
-        $.ajax({
-            method: "POST",
-            url: url,
-            data: { status: value ,_token: taken ,pageSize: pageSize, page: page}
-        }).done(function (data) {
+        axios.post(url,{ status: value ,_token: taken ,pageSize: pageSize, page: page}).then((response) => {
+            console.log(response);
             jQuery("#load").hide();
-            $('#loader').html(data);
-        }).fail(function () {
-            alert('Jobs could not be loaded.');
+            $('#loader').html(response.data);
+        }).catch((error) => {
+            console.log("destroy error", error);
         });
+        // $.ajax({
+        //     method: "POST",
+        //     url: url,
+        //     data: { status: value ,_token: taken ,pageSize: pageSize, page: page}
+        // }).done(function (data) {
+        //     jQuery("#load").hide();
+        //     $('#loader').html(data);
+        // }).fail(function () {
+        //     alert('Jobs could not be loaded.');
+        // });
     })
 })
