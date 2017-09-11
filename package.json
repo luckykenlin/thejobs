@@ -34,5 +34,8 @@
     "redux-thunk": "^2.2.0",
     "sweetalert2": "^6.6.4",
     "webpack": "^2.3.0"
+  },
+  "dependencies": {
+    "react-autocomplete": "^1.7.1"
   }
 }

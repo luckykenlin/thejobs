@@ -4,33 +4,31 @@
         <p class="lead text-center">Use following search box to find jobs that fits you better</p>
     </div>
     <div class="container">
-        <form action="#">
+        <form action="{{url('job')}}" method="get">
 
             <div class="row">
                 <div class="form-group col-xs-12 col-sm-4">
-                    <input type="text" class="form-control" placeholder="Keyword: job title, skills, or company">
+                    <input type="text"  id="autocomplete-jobtitle" name="searchColumn[job_name]" class="form-control" placeholder="Job title, skills, or company">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
-                    <input type="text" class="form-control" placeholder="Location: city, state or zip">
+                    <input type="text"  id="autocomplete-city" name="searchColumn[job_place]" class="form-control" placeholder="City, state or zip">
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-4">
                     <div class="btn-group bootstrap-select show-tick form-control">
                         <div class="dropdown-menu open">
                         </div>
-                        <select class="form-control selectpicker" multiple="" tabindex="-98">
-                            <option selected="">All categories</option>
-                            <option>Developer</option>
-                            <option>Designer</option>
-                            <option>Customer service</option>
-                            <option>Finance</option>
-                            <option>Healthcare</option>
-                            <option>Sale</option>
-                            <option>Marketing</option>
-                            <option>Information technology</option>
-                            <option>Others</option>
-                        </select></div>
+                        <select title="Category:&nbsp;&nbsp; Choose one of the following..."
+                                class="form-control selectpicker" id="category_id"
+                                name="category_id">
+                            @foreach($categories->getDescendants() as $category)
+                                <option value="{{$category->id}}">
+                                    {{$category->name}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
 
@@ -38,33 +36,33 @@
                     <h6>Contract</h6>
                     <div class="checkall-group">
                         <div class="checkbox">
-                            <input type="checkbox" id="contract1" name="contract" checked="">
+                            <input type="checkbox" id="contract1" name="filterColumn[job_type]" checked="">
                             <label for="contract1">All types</label>
                         </div>
 
                         <div class="checkbox">
-                            <input type="checkbox" id="contract2" name="contract">
+                            <input type="checkbox" id="contract2" name="filterColumn[job_type][]" value="{{\App\Contracts\Constant::JOB_TYPE['FULL_TIME']}}">
                             <label for="contract2">Full-time
                                 <small>(354)</small>
                             </label>
                         </div>
 
                         <div class="checkbox">
-                            <input type="checkbox" id="contract3" name="contract">
+                            <input type="checkbox" id="contract3" name="filterColumn[job_type][]" value="{{\App\Contracts\Constant::JOB_TYPE['PART_TIME']}}">
                             <label for="contract3">Part-time
                                 <small>(284)</small>
                             </label>
                         </div>
 
                         <div class="checkbox">
-                            <input type="checkbox" id="contract4" name="contract">
+                            <input type="checkbox" id="contract4" name="filterColumn[job_type][]" value="{{\App\Contracts\Constant::JOB_TYPE['INTERNSHIP']}}">
                             <label for="contract4">Internship
                                 <small>(169)</small>
                             </label>
                         </div>
 
                         <div class="checkbox">
-                            <input type="checkbox" id="contract5" name="contract">
+                            <input type="checkbox" id="contract5" name="filterColumn[job_type][]" value="{{\App\Contracts\Constant::JOB_TYPE['FREELANCE']}}">
                             <label for="contract5">Freelance
                                 <small>(480)</small>
                             </label>
@@ -157,7 +155,7 @@
                     <a class="btn btn-primary" href="{{url('job/create')}}">Post A Job</a>
                 </div>
                 <div class="action-buttons">
-                    <button class="btn btn-primary">Apply filter</button>
+                    <button  type="submit" class="btn btn-primary">Apply filter</button>
                 </div>
             </div>
 
@@ -165,3 +163,16 @@
 
     </div>
 </header>
+<script src="{{asset('plugins/jQueryUI/jquery.autocomplete.js')}}"></script>
+<script>
+    $('#autocomplete-city').autocomplete({
+        serviceUrl: '/info/address',
+        onSelect: function (suggestion) {
+        }
+    });
+    $('#autocomplete-jobtitle').autocomplete({
+        serviceUrl: '/info/jobDetail',
+        onSelect: function (suggestion) {
+        }
+    });
+</script>

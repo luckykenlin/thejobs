@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Contracts\Constant;
+use App\Models\Category;
 use App\Models\Job;
 use App\Models\JobResume;
 use App\Models\Message;
@@ -42,14 +43,14 @@ class JobController extends Controller
         $pathUrl = DataUtility::pathUrl($pageInfo , $pathUrl);
         //show status  == unfill positions!  query built
         $jobs = Job::query()->where('job_status' , '=' , Constant::JOB_EMPTY);
-
         if ($request->expectsJson()) {
-            $jobs = $this->jobs->fetchByPageInfo($jobs , $pageInfo , null , null , null , null , $pathUrl);
+            $jobs = $this->jobs->fetchByPageInfo($jobs , $pageInfo , $request['filterColumn'] , null , $request['searchColumn'] , null , $pathUrl);
             return view('front.job.load' , ['jobs' => $jobs])->render();
-        }
+        };
+        $categories = Category::where('name' , '=' , 'Root Category')->first();
 
-        $jobs = $this->jobs->fetchByPageInfo($jobs , $pageInfo , null , null , null , null , $pathUrl);
-        return view('front.job.index' , compact('jobs'));
+        $jobs = $this->jobs->fetchByPageInfo($jobs , $pageInfo , $request['filterColumn'] , null , $request['searchColumn'] , null , $pathUrl);
+        return view('front.job.index' , compact('jobs' , 'categories'));
     }
 
 

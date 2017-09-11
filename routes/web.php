@@ -52,6 +52,9 @@ Route::group(/**
     Route::resource('comment' , 'CommentController');
     Route::resource('resume' , 'ResumeController');
     Route::get('/download/{file}', 'ResumeController@getDownload');
+
+    Route::get('info/jobDetail', 'SearchController@jobDetailResponse');
+    Route::get('info/address', 'SearchController@addressResponse');
 });
 
 

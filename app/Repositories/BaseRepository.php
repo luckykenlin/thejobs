@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use MongoDB\Driver\Query;
 
 class BaseRepository implements BaseRepositoryImpl
 {
@@ -224,7 +225,7 @@ class BaseRepository implements BaseRepositoryImpl
      * Search Columns :  Key : column's name, Value : search value
      * Order Columns : Key : column's name, Value : ordering type ("asc", or "desc")
      *
-     * @param $query collects
+     * @param Query $query
      * @param array $pageInfo
      * @param array $filterColumn
      * @param array $orderColumn
@@ -235,6 +236,22 @@ class BaseRepository implements BaseRepositoryImpl
      */
     public function fetchByPageInfo($query, $pageInfo = [], $filterColumn = [], $orderColumn = [], $searchColumn = [], $eagerLoading = [], $pathUrl)
     {
+        if (sizeof($searchColumn) > 0) {
+            $query->where(function ($q) use ($searchColumn) {
+                foreach ($searchColumn as $column => $search) {
+                    $q->where($column , 'like' , $search. '%');
+                }
+            });
+        };
+
+        if (sizeof($filterColumn) > 0) {
+            $query->where(function ($q) use ($filterColumn) {
+                foreach ($filterColumn as $column => $filter) {
+                    $q->where($column , '=' , $filter ,'or');
+                }
+            });
+        };
+
         $result = $query->latest('created_at')->paginate($pageInfo['pageSize']);
         $result->withPath($pathUrl);
         return $result;
@@ -243,6 +260,7 @@ class BaseRepository implements BaseRepositoryImpl
     /**
      * @param UploadedFile $file
      * @param $filename
+     * @return $url
      */
     public function fileUpload(UploadedFile $file, $filename)
     {

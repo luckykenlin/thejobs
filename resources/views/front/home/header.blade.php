@@ -8,18 +8,18 @@
             </h2>
             <h5 class="font-alt">Find your desire one in a minute</h5>
             <br><br><br>
-            <form class="header-job-search">
+            <form class="header-job-search" method="get" action="{{url('job')}}">
                 <div class="input-keyword">
-                    <input type="text"  id="autocomplete-jobtitle" class="form-control" placeholder="Job title, skills, or company">
+                    <input type="text"  id="autocomplete-jobtitle" name="searchColumn[job_name]" class="form-control" placeholder="Job title, skills, or company">
                 </div>
 
                 <div class="input-location">
-                    <input type="text"  id="autocomplete-city" name="country" class="form-control" placeholder="City, state or zip">
+                    <input type="text"  id="autocomplete-city" name="searchColumn[job_place]" class="form-control" placeholder="City, state or zip">
                 </div>
 
                 <div class="btn-search">
                     <button class="btn btn-primary" type="submit">Find jobs</button>
-                    <a href="job-list.html">Advanced Job Search</a>
+                    <a href="{{url('job')}}">Advanced Job Search</a>
                 </div>
             </form>
         </div>
@@ -27,23 +27,14 @@
 </header>
 <script src="{{asset('plugins/jQueryUI/jquery.autocomplete.js')}}"></script>
 <script>
-    var countries = [
-        { value: 'Andorra', data: 'AD' },
-        // ...
-        { value: 'Zimbabwe', data: 'ZZ' }
-
-    ];
-
     $('#autocomplete-city').autocomplete({
-        lookup: countries,
+        serviceUrl: '/info/address',
         onSelect: function (suggestion) {
-            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
         }
     });
     $('#autocomplete-jobtitle').autocomplete({
-        lookup: countries,
+        serviceUrl: '/info/jobDetail',
         onSelect: function (suggestion) {
-            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
         }
     });
 </script>
