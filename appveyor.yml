@@ -1,0 +1,5 @@
+version: 1.0.{build}
+environment:
+  GH_TOKEN: 9e4b47f1856f81c956d182296c550b3f4a1d0154
+build:
+  verbosity: minimal
